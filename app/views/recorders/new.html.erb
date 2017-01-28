@@ -3,11 +3,22 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@recorder) do |f| %>
-      <%= f.label :titel %>
-      <%= f.text_field :title %>
+    <%= nested_form_for(@recorder) do |f| %>
+      <div class="field">
+        <%= f.label :titel %>
+        <%= f.text_field :title %>
+      </div>
 
-      <f.submit "Create recorder", class: "btn btn-primary" %>
+#TODO modify design
+      <%= f.fields_for :options do |option_form| %>
+        <%= option_form.text_field :name %>
+        <%= option_form.link_to_remove "Remove this" %>
+      <% end %>
+      <%= f.link_to_add "Add option", :options %>
+
+      <div class="actions">
+        <%= f.submit "Create recorder", class: "btn btn-primary" %>
+      </div>
     <% end %>
   </div>
 </div>
