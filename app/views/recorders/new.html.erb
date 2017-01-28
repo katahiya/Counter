@@ -1,2 +1,13 @@
-<h1>Recorders#new</h1>
-<p>Find me in app/views/recorders/new.html.erb</p>
+<% provide(:title, 'Set up')%>
+<h1>Set up</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@recorder) do |f| %>
+      <%= f.label :titel %>
+      <%= f.text_field :title %>
+
+      <f.submit "Create recorder", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
