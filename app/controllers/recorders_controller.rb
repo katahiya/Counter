@@ -8,6 +8,15 @@ class RecordersController < ApplicationController
     @recorder = Recorder.find(params[:id])
   end
 
+  def create
+    @recorder = Recorder.new(recorder_params)
+    if @recorder.save
+      redirect_to @recorder
+    else
+      render 'new'
+    end
+  end
+
   private
     def recorder_params
       params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
