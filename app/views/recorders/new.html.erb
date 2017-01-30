@@ -3,20 +3,24 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= nested_form_for(@recorder) do |f| %>
+    <%= form_for(@recorder) do |f| %>
       <div class="field">
         <%= f.label :titel %>
         <%= f.text_field :title %>
       </div>
 
 <!TODO modify design!>
-      <table id="options">
-        <%= f.fields_for :options, wrapper: false %>
-      </table>
-      <%= f.link_to_add "Add option", :options, data: {target: "#options"} %>
-
+      <div id="options" class="form-group">
+        <label>Options</label>
+        <%= f.fields_for :options do |option_form| %>
+          <%= render 'option_fields', f: option_form %>
+          <div id="links">
+            <%= link_to_add_association "Add option", f, :options %>
+          </div>
+        <% end %>
+      </div>
       <div class="actions">
-        <%= f.submit "Create recorder", class: "btn btn-primary" %>
+        <%= f.submit"Create recorder", class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
