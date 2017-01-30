@@ -9,12 +9,11 @@
         <%= f.text_field :title %>
       </div>
 
-#TODO modify design
-      <%= f.fields_for :options do |option_form| %>
-        <%= option_form.text_field :name %>
-        <%= option_form.link_to_remove "Remove this" %>
-      <% end %>
-      <%= f.link_to_add "Add option", :options %>
+<!TODO modify design!>
+      <table id="options">
+        <%= f.fields_for :options, wrapper: false %>
+      </table>
+      <%= f.link_to_add "Add option", :options, data: {target: "#options"} %>
 
       <div class="actions">
         <%= f.submit "Create recorder", class: "btn btn-primary" %>
