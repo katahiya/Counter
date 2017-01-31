@@ -27,6 +27,7 @@ class RecordersSetupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'recorders/show'
+    assert_not flash.empty?
   end
 
   test "register multiple options" do
@@ -44,5 +45,6 @@ class RecordersSetupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'recorders/show'
+    assert_not flash.empty?
   end
 end
