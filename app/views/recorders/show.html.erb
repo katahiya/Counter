@@ -1,2 +1,5 @@
 <% provide(:title, @recorder.title) %>
 <h1><%= @recorder.title %></h1>
+<% @recorder.options.each do |option| %>
+  <h2><%= option.name %></h2>
+<% end %>

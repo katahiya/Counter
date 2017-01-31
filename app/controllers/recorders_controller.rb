@@ -11,6 +11,7 @@ class RecordersController < ApplicationController
   def create
     @recorder = Recorder.new(recorder_params)
     if @recorder.save
+      flash[:success] = "new recorder successfully created!"
       redirect_to @recorder
     else
       render 'new'

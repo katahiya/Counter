@@ -1,5 +1,5 @@
 class Recorder < ApplicationRecord
-  has_many :options, dependent: :destroy
+  has_many :options, dependent: :destroy, inverse_of: :recorder
   accepts_nested_attributes_for :options, allow_destroy: true
   validates :title, presence: true,
             length: { maximum: 255 }
