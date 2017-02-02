@@ -18,6 +18,20 @@ class RecordersController < ApplicationController
     end
   end
 
+  def edit
+    @recorder = Recorder.find(params[:id])
+  end
+
+  def update
+    @recorder = Recorder.find(params[:id])
+    if @recorder.update_attributes(recorder_params)
+      flash[:succes] = "Counter updated"
+      redirect_to @recorder
+    else
+      render 'edit'
+    end
+  end
+
   private
     def recorder_params
       params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])

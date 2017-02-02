@@ -129,3 +129,13 @@ input {
     color: $state-danger-text;
   }
 }
+
+/* recorder */
+.recorders {
+  list-style: none;
+  padding: 0;
+  .title {
+    display: block;
+    margin-left: 60px;
+  }
+}

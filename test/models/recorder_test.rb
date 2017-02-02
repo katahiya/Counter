@@ -19,6 +19,13 @@ class RecorderTest < ActiveSupport::TestCase
     assert_not @recorder.valid?
   end
 
+  test "associated microposts should be destroyd" do
+    @recorder.save
+    @recorder.options.create!(name: "onion")
+    assert_difference 'Option.count', -1 do
+      @recorder.destroy
+    end
+  end
 =begin
   test "title should be unique" do
     duplicate_recorder = @recorder.dup

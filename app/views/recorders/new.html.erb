@@ -1,29 +1,9 @@
 <% provide(:title, 'Set up')%>
+<% provide(:button_text, 'Create counter') %>
 <h1>Set up</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@recorder) do |f| %>
-      <%= render 'shared/error_messages' %>
-
-      <div class="field">
-        <%= f.label :title %>
-        <%= f.text_field :title, class: "form-control" %>
-      </div>
-
-<!TODO modify design!>
-      <div id="options" class="form-group">
-        <label>Options</label>
-        <%= f.fields_for :options do |option_form| %>
-          <%= render 'option_fields', f: option_form %>
-          <div id="links">
-            <%= link_to_add_association "Add option", f, :options %>
-          </div>
-        <% end %>
-      </div>
-      <div class="actions">
-        <%= f.submit"Create recorder", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+    <%= render 'form' %>
   </div>
 </div>

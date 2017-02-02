@@ -1,0 +1,19 @@
+<%= form_for(@recorder) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div id="options" class="form-group">
+    <label>Options</label>
+    <%= f.fields_for :options do |option_form| %>
+      <%= render 'option_fields', f: option_form %>
+      <div id="links">
+        <%= link_to_add_association "Add option", f, :options %>
+      </div>
+    <% end %>
+  </div>
+  <div class="actions">
+<% end %>
