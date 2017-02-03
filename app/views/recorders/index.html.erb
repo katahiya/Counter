@@ -1,0 +1,14 @@
+<% provide(:title, 'All counters') %>
+<h1>All counters</h1>
+
+<%= will_paginate %>
+
+<ul class="recorders">
+  <% @recorders.each do |recorder| %>
+    <li>
+      <%= link_to recorder.title, recorder %>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

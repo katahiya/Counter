@@ -5,3 +5,8 @@ hoge:
 
 two:
   title: MyString
+
+<% 30.times do |n| %>
+counter_<%= n %>:
+  title: <%= "Counter#{n}" %>
+<% end %>

@@ -32,6 +32,10 @@ class RecordersController < ApplicationController
     end
   end
 
+  def index
+    @recorders = Recorder.paginate(page: params[:page])
+  end
+
   private
     def recorder_params
       params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
