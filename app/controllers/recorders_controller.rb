@@ -6,6 +6,7 @@ class RecordersController < ApplicationController
 
   def show
     @recorder = Recorder.find(params[:id])
+    @records = @recorder.records.all
   end
 
   def create
