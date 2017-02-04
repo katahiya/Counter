@@ -26,6 +26,15 @@ class RecorderTest < ActiveSupport::TestCase
       @recorder.destroy
     end
   end
+
+  test "associated records should be destroyed" do
+    @recorder.save
+    @recorder.records.create!(data: "gravity")
+    assert_difference 'Record.count', -1 do
+      @recorder.destroy
+    end
+  end
+
 =begin
   test "title should be unique" do
     duplicate_recorder = @recorder.dup
