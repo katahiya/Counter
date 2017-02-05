@@ -1,0 +1,10 @@
+<%= form_for(@record) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class= "col-xs-8 col-xs-offset-2">
+    <div class="form-inline">
+        <% @recorder.options.each do |option| %>
+          <%= submit_tag option.name, class: "form-control btn btn-primary" %>
+        <% end %>
+    </div>
+  </div>
+<% end %>

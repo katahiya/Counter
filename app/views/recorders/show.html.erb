@@ -1,26 +1,18 @@
 <% provide(:title, @recorder.title) %>
 <h1><%= @recorder.title %></h1>
-<div class="row">
-  <% @recorder.options.each do |option| %>
-    <h2><%= option.name %></h2>
-  <% end %>
-</div>
+<% if @recorder.options.any? %>
+  <div class="row">
+    <section class="record_form">
+      <%= render 'shared/record_form' %>
+    </section>
+  </div>
+<% end %>
 <hr>
 <% if @recorder.records.any? %>
   <h2>Records</div>
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
-      <div class="table-responsive records">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>record</th>
-              <th>timestamp</th>
-            </tr>
-          </thead>
-          <%= render @records %>
-        </table>
-      </div>
+      <%= render 'shared/records_table' %>
     </div>
   </div>
 <% end %>

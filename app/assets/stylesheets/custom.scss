@@ -103,7 +103,7 @@ footer {
   @include box_sizing;
 }
 
-/* forms */
+/* setup forms */
 input, textarea, select, .uneditable-input {
   border: 1px, solid #bbb;
   width: 100%;
@@ -129,6 +129,8 @@ input {
     color: $state-danger-text;
   }
 }
+
+/* record form */
 
 /* recorder */
 .recorders {
