@@ -12,6 +12,10 @@ class RecordsController < ApplicationController
   end
 
   def destroy
+    @record = Record.find(params[:id])
+    @record.destroy
+    flash[:succes] = "deleted!"
+    redirect_to @recorder
   end
 
   private

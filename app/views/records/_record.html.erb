@@ -4,5 +4,6 @@
     <td class="timestamp">
       Posted <%= time_ago_in_words(record.created_at) %> ago.
     </td>
+    <td><%= link_to "delete", record, method: :delete, data: { confirm: "You sure?" } %>
   </tr>
 </tbody>
