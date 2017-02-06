@@ -1,10 +1,9 @@
 <%= form_for(@record) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class= "col-xs-8 col-xs-offset-2">
+    <input type="hidden" name="parent_id" value=<%= params[:id] %>>
     <div class="form-inline">
-        <% @recorder.options.each do |option| %>
-          <%= submit_tag option.name, class: "form-control btn btn-primary" %>
-        <% end %>
+      <% @recorder.options.each do |option| %>
+        <%= f.submit option.name, class: "form-control btn btn-primary" %>
+      <% end %>
     </div>
-  </div>
 <% end %>

@@ -1,12 +1,13 @@
 class RecordsController < ApplicationController
 
   def create
-    @record = @recorder.records.build(record_params)
+    @recorder = Recorder.find(params[:parent_id])
+    @record = @recorder.records.build(data: params[:commit])
     if @record.save
       flash[:success] = "saved!"
-      @recorder.reload
-    else
       redirect_to @recorder
+    else
+      @recorder.reload
     end
   end
 
@@ -16,6 +17,6 @@ class RecordsController < ApplicationController
   private
 
     def record_params
-      params.require(:record).permit(:data)
+      params.require(:record).permit(:commit)
     end
 end
