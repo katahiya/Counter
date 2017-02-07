@@ -12,6 +12,7 @@ class RecordsController < ApplicationController
   end
 
   def destroy
+    @recorder = Recorder.find(params[:parent_id])
     @record = Record.find(params[:id])
     @record.destroy
     flash[:succes] = "deleted!"
