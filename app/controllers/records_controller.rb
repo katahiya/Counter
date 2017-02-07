@@ -18,10 +18,4 @@ class RecordsController < ApplicationController
     flash[:succes] = "deleted!"
     redirect_to @recorder
   end
-
-  private
-
-    def record_params
-      params.require(:record).permit(:commit)
-    end
 end
