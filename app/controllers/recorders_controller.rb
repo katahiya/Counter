@@ -22,6 +22,7 @@ class RecordersController < ApplicationController
 
   def edit
     @recorder = Recorder.find(params[:id])
+    @recorder.options.build
   end
 
   def update
