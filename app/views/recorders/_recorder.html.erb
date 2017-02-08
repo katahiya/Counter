@@ -1,3 +1,4 @@
 <li id="recorder-<%= recorder.id %>">
-  <span class="title"><%= recorder.title %></span>
+  <span class="title"><%= link_to recorder.title, recorder %></span>
+   | <%= link_to "delete", recorder, method: :delete, data: { confirm: "You sure?" } %>
 <li>

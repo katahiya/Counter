@@ -5,9 +5,7 @@
 
 <ul class="recorders">
   <% @recorders.each do |recorder| %>
-    <li>
-      <%= link_to recorder.title, recorder %>
-    </li>
+    <%= render recorder %>
   <% end %>
 </ul>
 

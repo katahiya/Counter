@@ -38,6 +38,12 @@ class RecordersController < ApplicationController
     @recorders = Recorder.paginate(page: params[:page])
   end
 
+  def destroy
+    Recorder.find(params[:id]).destroy
+    flash[:success] = "Recorder deleted!"
+    redirect_to recorders_url
+  end
+
   private
     def recorder_params
       params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
