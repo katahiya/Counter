@@ -9,6 +9,6 @@ recorder.records.create!(data: "sr")
 recorder.records.create!(data: "r")
 
 49.times do |n|
-  title = Faker::Name.name
+  title = Faker::Pokemon.name
   Recorder.create!(title: title)
 end

@@ -3,8 +3,8 @@
 hoge:
   title: hoge
 
-two:
-  title: MyString
+isolated:
+  title: isolated
 
 <% 30.times do |n| %>
 counter_<%= n %>:

@@ -13,7 +13,7 @@ class RecordersProfileTest < ActionDispatch::IntegrationTest
     assert_select 'title', full_title(@recorder.title)
     assert_select 'h1', text: @recorder.title
     @recorder.options.each do |option|
-      assert_match option.data, response.body
+      assert_match option.name, response.body
     end
     @recorder.records.each do |record|
       assert_match record.data, response.body

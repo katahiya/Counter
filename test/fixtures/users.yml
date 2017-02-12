@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+hoge:
+  email: "hoge@example.com"
+  created_at: <%= 10.years.ago%>
+
+most_recent:
+  email: "latest@example.com"
+  created_at: <%= 10.minutes.ago%>
+
