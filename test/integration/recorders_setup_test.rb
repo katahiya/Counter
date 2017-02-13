@@ -4,6 +4,7 @@ class RecordersSetupTest < ActionDispatch::IntegrationTest
 
   test "invalid setup information" do
     get setup_path
+    assert_select 'form[action="/setup"]'
     assert_no_difference 'Recorder.count' do
       assert_no_difference 'Option.count' do
         post setup_path, params: { recorder: { title: "",
@@ -18,6 +19,7 @@ class RecordersSetupTest < ActionDispatch::IntegrationTest
 
   test "valid setup information" do
     get setup_path
+    assert_select 'form[action="/setup"]'
     assert_difference 'Recorder.count', 1 do
       assert_difference 'Option.count', 1 do
         post setup_path, params: { recorder: { title: "example",
