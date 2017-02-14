@@ -2,9 +2,11 @@
 
 hoge:
   email: "hoge@example.com"
+  password_digest: <%= User.digest('password') %>
   created_at: <%= 10.years.ago%>
 
 most_recent:
   email: "latest@example.com"
+  password_digest: <%= User.digest('password') %>
   created_at: <%= 10.minutes.ago%>
 
