@@ -5,14 +5,20 @@ hoge:
   password_digest: <%= User.digest('password') %>
   created_at: <%= 10.years.ago%>
 
-
 lenneth:
   email: "lenneth@example.com"
   password_digest: <%= User.digest('password') %>
   created_at: <%= 5.years.ago%>
+  admin: true
 
 most_recent:
   email: "latest@example.com"
   password_digest: <%= User.digest('password') %>
-  created_at: <%= 10.minutes.ago%>
+  created_at: <%= 10.seconds.ago%>
 
+<% 30.times do |n| %>
+user_<%= n %>:
+  email: <%= "Email#{n}@example.com" %>
+  password_digest: <%= User.digest('password') %>
+  created_at: <%= 5.minutes.ago%>
+<% end %>

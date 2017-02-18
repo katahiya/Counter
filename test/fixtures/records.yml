@@ -22,7 +22,7 @@ piyo:
 
 <% 30.times do |n| %>
 record_<%= n %>:
-  data: <%= Faker::Pokemon.name %>
+  data: "data#{n}"
   created_at: <%= 40.days.ago %>
   recorder: hoge
 <% end %>
