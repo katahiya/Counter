@@ -1,7 +1,13 @@
 class RecordsController < ApplicationController
+  before_action :logged_in_user
+  before_action -> {
+    correct_user(user_id_of_create)
+  }, only: [:create]
+  before_action -> {
+    correct_user(user_id_of_destroy)
+  }, only: [:destroy]
 
   def create
-    @recorder = Recorder.find(params[:parent_id])
     @record = @recorder.records.build(data: params[:commit])
     if @record.save
       flash[:success] = "saved!"
@@ -12,10 +18,27 @@ class RecordsController < ApplicationController
   end
 
   def destroy
-    @recorder = Recorder.find(params[:parent_id])
-    @record = Record.find(params[:id])
     @record.destroy
     flash[:succes] = "deleted!"
     redirect_to @recorder
   end
+
+  private
+
+    def user_id_of_create
+      @recorder = Recorder.find(params[:parent_id])
+      @recorder.user_id
+    end
+
+    def user_id_of_destroy
+      @record = Record.find(params[:id])
+      @recorder = Recorder.find(@record.recorder_id)
+      @recorder.user_id
+    end
+
+    def correct_user(user_id)
+      @user = User.find(user_id)
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
 end

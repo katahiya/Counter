@@ -1,12 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 hoge:
-  title: hoge
+  title: "hoge"
+  user: hoge
 
 isolated:
-  title: isolated
+  title: "isolated"
+  user: hoge
 
 <% 30.times do |n| %>
 counter_<%= n %>:
   title: <%= "Counter#{n}" %>
+  user: hoge
 <% end %>

@@ -2,7 +2,8 @@ require 'test_helper'
 
 class RecorderTest < ActiveSupport::TestCase
   def setup
-    @recorder = Recorder.new(title: "Example")
+    @user = users(:hoge)
+    @recorder = @user.recorders.build(title: "Example")
   end
 
   test "should be valid" do

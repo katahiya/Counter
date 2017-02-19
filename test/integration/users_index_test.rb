@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersIndexTest < ActionDispatch::IntegrationTest
 
   def setup
-    @admin = users(:lenneth)
+    @admin = users(:hoge)
   end
 
   test "index including pagination and users links" do

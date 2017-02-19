@@ -24,7 +24,7 @@ class RecordsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'delete'
     first_record = @recorder.records.first
     assert_difference 'Record.count', -1 do
-      delete record_path(first_record), params: { parent_id: @recorder.id }
+      delete record_path(first_record)
     end
   end
 end

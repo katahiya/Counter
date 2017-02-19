@@ -3,8 +3,8 @@ require 'test_helper'
 class SiteLayoutTest < ActionDispatch::IntegrationTest
 
   def setup
-    @non_admin = users(:hoge)
-    @admin = users(:lenneth)
+    @admin = users(:hoge)
+    @non_admin = users(:lenneth)
   end
 
   test "layout links when not logged in" do
