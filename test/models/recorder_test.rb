@@ -15,6 +15,11 @@ class RecorderTest < ActiveSupport::TestCase
     assert_not @recorder.valid?
   end
 
+  test "user_id should be present" do
+    @recorder.user_id = nil
+    assert_not @recorder.valid?
+  end
+
   test "title should not be too long" do
     @recorder.title = "a" * 256
     assert_not @recorder.valid?
