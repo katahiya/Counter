@@ -8,7 +8,7 @@ class RecordersSetupTest < ActionDispatch::IntegrationTest
   test "invalid setup information" do
     log_in_as(@user)
     get user_setup_path(@user)
-    assert_select 'form[action="/users/' << @user.id.to_s << '/setup"]'
+    assert_select "form[action=?]", user_setup_path(@user)
     assert_no_difference 'Recorder.count' do
       assert_no_difference 'Option.count' do
         post user_setup_path(@user), params: { recorder: { title: "",
@@ -21,10 +21,12 @@ class RecordersSetupTest < ActionDispatch::IntegrationTest
     assert_select 'div.field_with_errors'
   end
 
-  test "valid setup information" do
-    log_in_as(@user)
+  test "valid setup information with friendly forwarding" do
     get user_setup_path(@user)
-    assert_select 'form[action="/users/' << @user.id.to_s << '/setup"]'
+    log_in_as(@user)
+    assert_redirected_to user_setup_url(@user)
+    follow_redirect!
+    assert_select "form[action=?]", user_setup_path(@user)
     assert_difference 'Recorder.count', 1 do
       assert_difference 'Option.count', 1 do
         post user_setup_path(@user), params: { recorder: { title: "example",

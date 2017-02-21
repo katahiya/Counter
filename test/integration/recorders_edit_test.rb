@@ -11,16 +11,20 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get edit_recorder_path(@recorder)
     assert_template 'recorders/edit'
+    assert_select "form[action=?]", recorder_path(@recorder)
     patch recorder_path(@recorder), params: { recorder: { title: "",
                                               options_attributes: { "0" => { name: "hoge",
                                                                              _destroy: false } } } }
     assert_template 'recorders/edit'
   end
 
-  test "successful edit" do
-    log_in_as(@user)
+  test "successful edit with friendly forwarding" do
     get edit_recorder_path(@recorder)
+    log_in_as(@user)
+    assert_redirected_to edit_recorder_url(@recorder)
+    follow_redirect!
     assert_template 'recorders/edit'
+    assert_select "form[action=?]", recorder_path(@recorder)
     title = "onion"
     option_name = "kinoko"
     patch recorder_path(@recorder), params: { recorder: { title: title,

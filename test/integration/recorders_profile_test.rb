@@ -9,9 +9,11 @@ class RecordersProfileTest < ActionDispatch::IntegrationTest
     @isolated_recorder = recorders(:isolated)
   end
 
-  test "profile display with any records" do
-    log_in_as(@user)
+  test "profile display with any records with friendly forwarding" do
     get recorder_path(@recorder)
+    log_in_as(@user)
+    assert_redirected_to recorder_url(@recorder)
+    follow_redirect!
     assert_template 'recorders/show'
     assert_select 'title', full_title(@recorder.title)
     assert_select 'h1', text: @recorder.title

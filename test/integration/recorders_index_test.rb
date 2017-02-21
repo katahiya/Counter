@@ -7,9 +7,11 @@ class RecordersIndexTest < ActionDispatch::IntegrationTest
     @recorder = recorders(:hoge)
   end
 
-  test "index including pagination and recorders links" do
-    log_in_as(@user)
+  test "index including pagination and recorders links with friendly forwarding" do
     get user_recorders_path(@user)
+    log_in_as(@user)
+    assert_redirected_to user_recorders_url(@user)
+    follow_redirect!
     assert_template 'recorders/index'
     assert_select 'div.pagination', 2
     assert_select 'a[href=?]', user_setup_path(@user), count: 2, text: 'create new'

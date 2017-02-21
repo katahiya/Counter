@@ -7,9 +7,11 @@ class RecordsInterfaceTest < ActionDispatch::IntegrationTest
     @recorder = recorders(:hoge)
   end
 
-  test "record interface" do
-    log_in_as(@user)
+  test "record interface with friendly forwarding" do
     get recorder_path(@recorder)
+    log_in_as(@user)
+    assert_redirected_to recorder_url(@recorder)
+    follow_redirect!
     #invalid
     assert_no_difference 'Record.count' do
       post recorder_records_path(@recorder), params: { commit: "" }
