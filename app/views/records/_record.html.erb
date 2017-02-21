@@ -4,6 +4,6 @@
     <td class="timestamp">
       Posted <%= time_ago_in_words(record.created_at) %> ago.
     </td>
-    <td><%= link_to "delete", record_path(record, parent_id: params[:id]), method: :delete, data: { confirm: "You sure?" } %>
+    <td><%= link_to "delete", record_path(record), method: :delete, data: { confirm: "You sure?" } %>
   </tr>
 </tbody>

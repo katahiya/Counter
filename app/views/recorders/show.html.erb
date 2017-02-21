@@ -8,7 +8,9 @@
   </div>
 <% end %>
 <hr>
-<% if @recorder.records.any? %>
+<% if @recorder.records.count == 0 %>
+  <h2>no records</h2>
+<% else %>
   <h2>Records</div>
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
