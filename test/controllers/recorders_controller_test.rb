@@ -8,19 +8,35 @@ class RecordersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect setup when not logged in" do
-    get setup_path
+    get user_setup_path(@user)
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test "should redirect create when not logged in" do
     assert_no_difference 'Recorder.count' do
-      post setup_path, params: { recorder: { title: "example",
+      post user_setup_path(@user), params: { recorder: { title: "example",
                                              options_attributes: { "0" => { name: "hoge",
                                                                             _destroy: false } } } }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
+  end
+
+  test "should redirect setup when logged in as wrong user" do
+    log_in_as(@other_user)
+    get user_setup_path(@user)
+    assert_redirected_to root_url
+  end
+
+  test "should redirect create when logged in as wrong user" do
+    log_in_as(@other_user)
+    assert_no_difference 'Recorder.count' do
+      post user_setup_path(@user), params: { recorder: { title: "example",
+                                             options_attributes: { "0" => { name: "hoge",
+                                                                            _destroy: false } } } }
+    end
+    assert_redirected_to root_url
   end
 
   test "should redirect edit when not logged in" do
@@ -68,20 +84,32 @@ class RecordersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect index when not logged in" do
-    get recorders_path
+    get user_recorders_path(@user)
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test "should redirect index when logged in as wrong user" do
     log_in_as(@other_user)
-    get recorders_path
+    get user_recorders_path(@user)
+    assert_redirected_to root_url
+  end
+
+  test "should redirect show when not logged in" do
+    get recorder_path(@recorder)
+    assert_not flash.empty?
+    assert_redirected_to login_url
+  end
+
+  test "should redirect show when logged in as wrong user" do
+    log_in_as(@other_user)
+    get recorder_path(@recorder)
     assert_redirected_to root_url
   end
 
   test "should get new" do
     log_in_as(@user)
-    get setup_path
+    get user_setup_path(@user)
     assert_response :success
   end
 

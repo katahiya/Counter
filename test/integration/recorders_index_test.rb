@@ -3,15 +3,17 @@ require 'test_helper'
 class RecordersIndexTest < ActionDispatch::IntegrationTest
 
   def setup
+    @user = users(:hoge)
     @recorder = recorders(:hoge)
   end
 
   test "index including pagination and recorders links" do
-    get recorders_path
+    log_in_as(@user)
+    get user_recorders_path(@user)
     assert_template 'recorders/index'
     assert_select 'div.pagination', 2
-    assert_select 'a[href=?]', setup_path, count: 2, text: 'create new'
-    first_page_of_recorders = Recorder.paginate(page: 1)
+    assert_select 'a[href=?]', user_setup_path(@user), count: 2, text: 'create new'
+    first_page_of_recorders = @user.recorders.paginate(page: 1)
     first_page_of_recorders.each do |recorder|
       assert_select 'a[href=?]', recorder_path(recorder), title: recorder.title
       assert_select 'a[href=?]', edit_recorder_path(recorder), text: 'edit'

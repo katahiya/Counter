@@ -1,6 +1,5 @@
-<%= form_for(@record) do |f| %>
+<%= form_for(@record, url: recorder_records_path(@recorder)) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-    <input type="hidden" name="parent_id" value=<%= params[:id] %>>
     <div class="form-inline">
       <% @recorder.options.each do |option| %>
         <%= f.submit option.name, class: "form-control btn btn-primary" %>

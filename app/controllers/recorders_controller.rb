@@ -3,9 +3,12 @@ class RecordersController < ApplicationController
   before_action -> {
     correct_user(parent_user_id)
   }, only: [:show, :edit, :update, :destroy]
+  before_action -> {
+    correct_user(params[:user_id])
+  }, only: [:index, :create, :new]
 
   def new
-    @recorder = current_user.recorders.build
+    @recorder = @user.recorders.build
     @recorder.options.build
   end
 
@@ -15,7 +18,7 @@ class RecordersController < ApplicationController
   end
 
   def create
-    @recorder = current_user.recorders.build(recorder_params)
+    @recorder = @user.recorders.build(recorder_params)
     if @recorder.save
       flash[:success] = "new recorder successfully created!"
       redirect_to @recorder
@@ -38,13 +41,13 @@ class RecordersController < ApplicationController
   end
 
   def index
-    @recorders = Recorder.paginate(page: params[:page])
+    @recorders = @user.recorders.paginate(page: params[:page])
   end
 
   def destroy
     @recorder.destroy
     flash[:success] = "Recorder deleted!"
-    redirect_to recorders_url
+    redirect_to user_recorders_url(@user)
   end
 
   private

@@ -4,10 +4,12 @@ class RecordersProfileTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
 
   def setup
+    @user = users(:hoge)
     @recorder = recorders(:hoge)
   end
 
   test "profile display" do
+    log_in_as(@user)
     get recorder_path(@recorder)
     assert_template 'recorders/show'
     assert_select 'title', full_title(@recorder.title)

@@ -13,7 +13,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", root_path, count: 2
     assert_select "a[href=?]", help_path
     assert_select "a[href=?]", users_path, count: 0
-    assert_select "a[href=?]", recorders_path, count: 0
+    assert_select "a[href=?]", user_recorders_path(@admin), count: 0
+    assert_select "a[href=?]", user_recorders_path(@non_admin), count: 0
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path, count: 0
   end
@@ -25,7 +26,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", root_path, count: 2
     assert_select "a[href=?]", help_path
     assert_select "a[href=?]", users_path, count: 0
-    assert_select "a[href=?]", recorders_path
+    assert_select "a[href=?]", user_recorders_path(@admin), count: 0
+    assert_select "a[href=?]", user_recorders_path(@non_admin)
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
   end
@@ -37,7 +39,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", root_path, count: 2
     assert_select "a[href=?]", help_path
     assert_select "a[href=?]", users_path
-    assert_select "a[href=?]", recorders_path
+    assert_select "a[href=?]", user_recorders_path(@admin)
+    assert_select "a[href=?]", user_recorders_path(@non_admin), count: 0
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
   end

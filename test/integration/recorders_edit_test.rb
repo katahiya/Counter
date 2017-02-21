@@ -3,10 +3,12 @@ require 'test_helper'
 class RecordersEditTest < ActionDispatch::IntegrationTest
 
   def setup
+    @user = users(:hoge)
     @recorder = recorders(:hoge)
   end
 
   test "unsuccessful edit" do
+    log_in_as(@user)
     get edit_recorder_path(@recorder)
     assert_template 'recorders/edit'
     patch recorder_path(@recorder), params: { recorder: { title: "",
@@ -16,6 +18,7 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
   end
 
   test "successful edit" do
+    log_in_as(@user)
     get edit_recorder_path(@recorder)
     assert_template 'recorders/edit'
     title = "onion"

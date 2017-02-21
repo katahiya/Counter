@@ -11,7 +11,7 @@ class RecordsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect create when not logged in" do
     assert_no_difference 'Record.count' do
-      post records_path, params: { commit: "data", parent_id: @recorder.id }
+      post recorder_records_path(@recorder), params: { commit: "data" }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
@@ -28,7 +28,7 @@ class RecordsControllerTest < ActionDispatch::IntegrationTest
   test "should redirect create when logged in as wrong user" do
     log_in_as(@other_user)
     assert_no_difference 'Record.count' do
-      post records_path, params: { commit: "data", parent_id: @recorder.id }
+      post recorder_records_path(@recorder), params: { commit: "data" }
     end
     assert_redirected_to root_url
   end

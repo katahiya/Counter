@@ -26,7 +26,7 @@ class RecordsController < ApplicationController
   private
 
     def user_id_of_create
-      @recorder = Recorder.find(params[:parent_id])
+      @recorder = Recorder.find(params[:recorder_id])
       @recorder.user_id
     end
 
