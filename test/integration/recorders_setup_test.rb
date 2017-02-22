@@ -39,7 +39,7 @@ class RecordersSetupTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-  test "register multiple options" do
+  test "setup multiple options with blank option" do
     log_in_as(@user)
     get user_setup_path(@user)
     assert_difference 'Recorder.count', 1 do
@@ -47,9 +47,13 @@ class RecordersSetupTest < ActionDispatch::IntegrationTest
         post user_setup_path(@user), params: { recorder: { title: "example",
                                                options_attributes: { "0" => { name: "hoge",
                                                                           _destroy: false },
-                                                                     "1" => { name: "piyo",
+                                                                     "1" => { name: "",
                                                                           _destroy: false },
-                                                                     "2" => { name: "fuga",
+                                                                     "2" => { name: "piyo",
+                                                                          _destroy: false },
+                                                                     "3" => { name: "      ",
+                                                                          _destroy: false },
+                                                                     "4" => { name: "fuga",
                                                                           _destroy: false } } } }
       end
     end

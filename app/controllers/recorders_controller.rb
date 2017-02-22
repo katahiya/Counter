@@ -53,7 +53,9 @@ class RecordersController < ApplicationController
   private
 
     def recorder_params
-      params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
+      strong = params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
+      strong[:options_attributes] = strong[:options_attributes].select {|n, options_attribute| !options_attribute[:name].blank?}
+      return strong
     end
 
     def parent_user_id

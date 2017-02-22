@@ -5,6 +5,7 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:hoge)
     @recorder = recorders(:hoge)
+    @isolated_recorder = recorders(:isolated)
   end
 
   test "unsuccessful edit" do
@@ -25,6 +26,7 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'recorders/edit'
     assert_select "form[action=?]", recorder_path(@recorder)
+    assert_select "div#links a.add_fields", count: 1
     title = "onion"
     option_name = "kinoko"
     patch recorder_path(@recorder), params: { recorder: { title: title,
@@ -36,4 +38,23 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
     assert_equal title, @recorder.title
     assert_equal option_name, @recorder.options.last.name
   end
+
+  test "successful edit for no option recorder" do
+    log_in_as(@user)
+    get edit_recorder_path(@isolated_recorder)
+    assert_template 'recorders/edit'
+    assert_select "form[action=?]", recorder_path(@isolated_recorder)
+    assert_select "div#links a.add_fields", count: 1
+    title = "onion"
+    option_name = "kinoko"
+    patch recorder_path(@recorder), params: { recorder: { title: title,
+                                                          options_attributes: { "0" => { name: option_name,
+                                                                                         _destroy: false } } } }
+    assert_not flash.empty?
+    assert_redirected_to @recorder
+    @recorder.reload
+    assert_equal title, @recorder.title
+    assert_equal option_name, @recorder.options.last.name
+  end
+
 end
