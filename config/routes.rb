@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   resources :users, shallow: true do
     get '/setup', to: 'recorders#new'
     post '/setup', to: 'recorders#create'
-    resources :recorders, shallow: true do
+    resources :recorders, except: [:new, :create], path_names: {edit: "edit_title"}, shallow: true do
+      get '/add_options', to: 'options#new'
+      post '/add_options', to: 'options#create'
+      get '/edit_options', to: 'options#edit'
+      patch '/edit_options', to: 'options#update'
+      resources :options, except: [:show, :new, :create, :edit, :update]
       resources :records, only: [:create, :destroy]
     end
   end

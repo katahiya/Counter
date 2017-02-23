@@ -1,6 +1,8 @@
 <li id="recorder-<%= recorder.id %>">
   <div class="row">
-    <div class="title col-md-6"><%= link_to recorder.title, recorder %></div>
-    <div class="col-md-2"><%= link_to "edit", edit_recorder_path(recorder) %></div>
+    <div class="title col-md-4"><%= link_to recorder.title, recorder %></div>
+    <div class="col-md-2"><%= link_to "edit title", edit_recorder_path(recorder) %></div>
+    <div class="col-md-2"><%= link_to "edit options", edit_options_path(recorder) %></div>
+    <div class="col-md-2"><%= link_to "add options", add_options_path(recorder) %></div>
     <div class="col-md-2"><%= link_to "delete", recorder, method: :delete, data: { confirm: "You sure?" } %></div>
 <li>
