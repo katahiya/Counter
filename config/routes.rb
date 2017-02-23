@@ -14,9 +14,7 @@ Rails.application.routes.draw do
     resources :recorders, except: [:new, :create], path_names: {edit: "edit_title"}, shallow: true do
       get '/add_options', to: 'options#new'
       post '/add_options', to: 'options#create'
-      get '/edit_options', to: 'options#edit'
-      patch '/edit_options', to: 'options#update'
-      resources :options, except: [:show, :new, :create, :edit, :update]
+      resources :options, except: [:show, :new, :create]
       resources :records, only: [:create, :destroy]
     end
   end

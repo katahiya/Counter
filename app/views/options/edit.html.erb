@@ -1,0 +1,10 @@
+<% provide(:title, 'Edit option')%>
+<% provide(:submit_url, option_path(@option)) %>
+<% provide(:button_text, 'Save changes') %>
+<h1>Update <%= @option.name %></h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render 'edit_form' %>
+  </div>
+</div>

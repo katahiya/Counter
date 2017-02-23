@@ -15,6 +15,18 @@ class OptionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+  test "should redirect index when not logged in" do
+    get recorder_options_path(@recorder)
+    assert_not flash.empty?
+    assert_redirected_to login_url
+  end
+
+  test "should redirect index when logged in as wrong user" do
+    log_in_as(@other_user)
+    get recorder_options_path(@recorder)
+    assert_redirected_to root_url
+  end
+
   test "should redirect create when not logged in" do
     assert_no_difference 'Option.count' do
       post recorder_add_options_path(@recorder), params: { recorder: { title: "example",
@@ -42,14 +54,14 @@ class OptionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect edit when not logged in" do
-    get recorder_edit_options_path(@recorder)
+    get edit_option_path(@recorder)
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test "should redirect update when not logged in" do
     assert_no_difference 'Option.count' do
-      patch recorder_edit_options_path(@recorder), params: { recorder: { title: "example",
+      patch option_path(@recorder), params: { recorder: { title: "example",
                                              options_attributes: { "0" => { name: "hoge",
                                                                             _destroy: false } } } }
     end
@@ -59,14 +71,14 @@ class OptionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect edit when logged in as wrong user" do
     log_in_as(@other_user)
-    get recorder_edit_options_path(@recorder)
+    get edit_option_path(@recorder)
     assert_redirected_to root_url
   end
 
   test "should redirect update when logged in as wrong user" do
     log_in_as(@other_user)
     assert_no_difference 'Option.count' do
-      patch recorder_edit_options_path(@recorder), params: { recorder: { title: "example",
+      patch option_path(@recorder), params: { recorder: { title: "example",
                                              options_attributes: { "0" => { name: "hoge",
                                                                             _destroy: false } } } }
     end

@@ -1,0 +1,8 @@
+<tbody>
+  <tr id="option-<%= option.id %>">
+    <td class="name"><%= option.name %></td>
+    <td><%= link_to "edit", edit_option_path(option) %>
+    , <%= link_to "delete", option, method: :delete, data: { confirm: "You sure?" } %></td>
+  </tr>
+</tbody>
+
