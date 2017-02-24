@@ -12,11 +12,10 @@ Rails.application.routes.draw do
     get '/setup', to: 'recorders#new'
     post '/setup', to: 'recorders#create'
     resources :recorders, except: [:new, :create], path_names: {edit: "edit_title"}, shallow: true do
-      get '/add_options', to: 'options#new'
-      post '/add_options', to: 'options#create'
       resources :options, except: [:show, :new, :create]
       resources :records, only: [:create, :destroy]
     end
   end
+  get 'recorders/:id/add_options', to: 'recorders#add_options', as: :recorder_add_options
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

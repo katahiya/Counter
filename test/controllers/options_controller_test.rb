@@ -9,12 +9,6 @@ class OptionsControllerTest < ActionDispatch::IntegrationTest
     @option = options(:hoge)
   end
 
-  test "should redirect new when not logged in" do
-    get recorder_add_options_path(@recorder)
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
   test "should redirect index when not logged in" do
     get recorder_options_path(@recorder)
     assert_not flash.empty?
@@ -27,31 +21,6 @@ class OptionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  test "should redirect create when not logged in" do
-    assert_no_difference 'Option.count' do
-      post recorder_add_options_path(@recorder), params: { recorder: { title: "example",
-                                             options_attributes: { "0" => { name: "hoge",
-                                                                            _destroy: false } } } }
-    end
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test "should redirect new when logged in as wrong user" do
-    log_in_as(@other_user)
-    get recorder_add_options_path(@recorder)
-    assert_redirected_to root_url
-  end
-
-  test "should redirect create when logged in as wrong user" do
-    log_in_as(@other_user)
-    assert_no_difference 'Option.count' do
-      post recorder_add_options_path(@recorder), params: { recorder: { title: "example",
-                                             options_attributes: { "0" => { name: "hoge",
-                                                                            _destroy: false } } } }
-    end
-    assert_redirected_to root_url
-  end
 
   test "should redirect edit when not logged in" do
     get edit_option_path(@recorder)

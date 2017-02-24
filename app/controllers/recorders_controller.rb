@@ -2,7 +2,7 @@ class RecordersController < ApplicationController
   before_action :logged_in_user
   before_action -> {
     correct_user(parent_user_id)
-  }, only: [:show, :edit, :update, :destroy]
+  }, only: [:show, :edit, :add_options, :update, :destroy]
   before_action -> {
     correct_user(params[:user_id])
   }, only: [:index, :create, :new]
@@ -28,6 +28,10 @@ class RecordersController < ApplicationController
   end
 
   def edit
+    @recorder.options.build
+  end
+
+  def add_options
     @recorder.options.build
   end
 
