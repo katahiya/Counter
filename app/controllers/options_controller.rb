@@ -11,21 +11,6 @@ class OptionsController < ApplicationController
     @options = @recorder.options
   end
 
-  def new
-    @recorder = @user.recorders.build
-    @recorder.options.build
-  end
-
-  def create
-    @recorder = @user.recorders.build(recorder_params)
-    if @recorder.save
-      flash[:success] = "new recorder successfully created!"
-      redirect_to @recorder
-    else
-      render 'new'
-    end
-  end
-
   def edit
   end
 

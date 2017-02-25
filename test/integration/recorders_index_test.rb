@@ -18,7 +18,8 @@ class RecordersIndexTest < ActionDispatch::IntegrationTest
     first_page_of_recorders = @user.recorders.paginate(page: 1)
     first_page_of_recorders.each do |recorder|
       assert_select 'a[href=?]', recorder_path(recorder), title: recorder.title
-      assert_select 'a[href=?]', edit_recorder_path(recorder), text: 'edit'
+      assert_select 'a[href=?]', edit_recorder_path(recorder), text: 'edit title'
+      assert_select 'a[href=?]', recorder_options_path(recorder), text: 'edit options'
       assert_select 'a[href=?]', recorder_path(recorder), text: 'delete'
     end
     assert_difference 'Recorder.count', -1 do
