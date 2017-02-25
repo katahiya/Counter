@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20170218053555) do
   end
 
   create_table "records", force: :cascade do |t|
-    t.string   "data"
     t.integer  "recorder_id"
+    t.integer  "option_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["option_id"], name: "index_records_on_option_id"
     t.index ["recorder_id", "created_at"], name: "index_records_on_recorder_id_and_created_at"
     t.index ["recorder_id"], name: "index_records_on_recorder_id"
   end

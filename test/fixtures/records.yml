@@ -1,28 +1,28 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 hoge:
-  data: "hoge"
-  created_at: <%= 10.minutes.ago%>
+  option: hoge
   recorder: hoge
+  created_at: <%= 10.minutes.ago%>
 
 fuga:
-  data: "fuga"
-  created_at: <%= 1.minutes.ago %>
+  option: fuga
   recorder: hoge
+  created_at: <%= 1.minutes.ago %>
 
 most_recent:
-  data: "latest"
-  created_at: <%= Time.zone.now %>
+  option: hoge
   recorder: hoge
+  created_at: <%= Time.zone.now %>
 
 piyo:
-  data: "piyo"
-  created_at: <%= 2.minutes.ago %>
+  option: piyo
   recorder: hoge
+  created_at: <%= 2.minutes.ago %>
 
 <% 30.times do |n| %>
 record_<%= n %>:
-  data: "data#{n}"
-  created_at: <%= 40.days.ago %>
+  option: hoge
   recorder: hoge
+  created_at: <%= 40.days.ago %>
 <% end %>

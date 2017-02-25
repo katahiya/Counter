@@ -21,6 +21,22 @@ class OptionTest < ActiveSupport::TestCase
     assert_not @option.valid?
   end
 
+  test "associated records should be destroyed" do
+    @option.save
+    @option.records.create!(recorder: @recorder)
+    assert_difference 'Record.count', -1 do
+      @option.destroy
+    end
+  end
+
+  test "associated records created by recorder should be destroyed" do
+    @option.save
+    @recorder.records.create!(option: @option)
+    assert_difference 'Record.count', -1 do
+      @option.destroy
+    end
+  end
+
   test "order should be most recent last" do
     assert_equal options(:most_recent), Option.last
   end

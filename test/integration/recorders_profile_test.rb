@@ -7,6 +7,7 @@ class RecordersProfileTest < ActionDispatch::IntegrationTest
     @user = users(:hoge)
     @recorder = recorders(:hoge)
     @isolated_recorder = recorders(:isolated)
+    @option = @recorder.options.first
   end
 
   test "profile display with any records with friendly forwarding" do
@@ -25,7 +26,7 @@ class RecordersProfileTest < ActionDispatch::IntegrationTest
     assert_select 'div.table-responsive'
     assert_select 'div.records'
     @recorder.records.each do |record|
-      assert_select "table td.data", text: record.data
+      assert_select "table td.record-data", text: record.option.name
       assert_select 'a[href=?]', record_path(record), text: 'delete'
     end
   end

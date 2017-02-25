@@ -1,4 +1,4 @@
-User.create!(email: "hoge@example.com",
+user = User.create!(email: "hoge@example.com",
              password: "hogehoge",
              password_confirmation: "hogehoge")
 User.create!(email: "Lenneth@example.com",
@@ -14,17 +14,19 @@ User.create!(email: "Lenneth@example.com",
                password_confirmation: password)
 end
 
-recorder = Recorder.create!(title: "hoge")
-recorder.options.create!(name: "ssr")
-recorder.options.create!(name: "sr")
+recorder = user.recorders.create!(title: "hoge")
+ssr = recorder.options.create!(name: "ssr")
+sr = recorder.options.create!(name: "sr")
 recorder.options.create!(name: "r")
-recorder.records.create!(data: "ssr")
-recorder.records.create!(data: "sr")
-recorder.records.create!(data: "r")
-recorder.records.create!(data: "sr")
-recorder.records.create!(data: "r")
+recorder.records.create!(option: ssr)
+recorder.records.create!(option: sr)
+recorder.records.create!(option: ssr)
+recorder.records.create!(option: sr)
+recorder.records.create!(option: sr)
+recorder.records.create!(option: ssr)
+recorder.records.create!(option: sr)
 
 49.times do |n|
   title = Faker::Pokemon.name
-  Recorder.create!(title: title)
+  user.recorders.create!(title: title)
 end

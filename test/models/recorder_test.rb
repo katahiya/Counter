@@ -25,7 +25,7 @@ class RecorderTest < ActiveSupport::TestCase
     assert_not @recorder.valid?
   end
 
-  test "associated microposts should be destroyd" do
+  test "associated options should be destroyd" do
     @recorder.save
     @recorder.options.create!(name: "onion")
     assert_difference 'Option.count', -1 do
@@ -35,7 +35,18 @@ class RecorderTest < ActiveSupport::TestCase
 
   test "associated records should be destroyed" do
     @recorder.save
-    @recorder.records.create!(data: "gravity")
+    @recorder.options.create!(name: "onion")
+    @recorder.records.create!(option: @recorder.options.first)
+    assert_difference 'Record.count', -1 do
+      @recorder.destroy
+    end
+  end
+
+  test "associated records created by option should be destroyed" do
+    @recorder.save
+    option = @recorder.options.build(name: "onion")
+    option.save
+    option.records.create!(recorder: @recorder)
     assert_difference 'Record.count', -1 do
       @recorder.destroy
     end

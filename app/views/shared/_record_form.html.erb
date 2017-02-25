@@ -1,8 +1,8 @@
-<%= form_for(@record, url: recorder_records_path(@recorder)) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-    <div class="form-inline">
       <% @recorder.options.each do |option| %>
+<%= form_for(@record, url: option_records_path(option)) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+    <div class="form">
         <%= f.submit option.name, class: "form-control btn btn-primary" %>
-      <% end %>
     </div>
 <% end %>
+      <% end %>

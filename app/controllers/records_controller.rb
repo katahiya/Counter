@@ -8,7 +8,7 @@ class RecordsController < ApplicationController
   }, only: [:destroy]
 
   def create
-    @record = @recorder.records.build(data: params[:commit])
+    @record = @recorder.records.build(option: @option)
     if @record.save
       flash[:success] = "saved!"
       redirect_to @recorder
@@ -26,13 +26,14 @@ class RecordsController < ApplicationController
   private
 
     def user_id_of_create
-      @recorder = Recorder.find(params[:recorder_id])
+      @option = Option.find(params[:option_id])
+      @recorder = @option.recorder
       @recorder.user_id
     end
 
     def user_id_of_destroy
       @record = Record.find(params[:id])
-      @recorder = Recorder.find(@record.recorder_id)
+      @recorder = @record.recorder
       @recorder.user_id
     end
 

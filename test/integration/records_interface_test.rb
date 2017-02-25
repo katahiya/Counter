@@ -5,6 +5,7 @@ class RecordsInterfaceTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:hoge)
     @recorder = recorders(:hoge)
+    @option = @recorder.options.first
   end
 
   test "record interface with friendly forwarding" do
@@ -12,18 +13,15 @@ class RecordsInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     assert_redirected_to recorder_url(@recorder)
     follow_redirect!
-    #invalid
-    assert_no_difference 'Record.count' do
-      post recorder_records_path(@recorder), params: { commit: "" }
-    end
     #valid
-    data = "test data"
+    before_count = @option.records.count
+    assert_select "table td.record-data", text: @option.name, count: before_count
     assert_difference 'Record.count', 1 do
-      post recorder_records_path(@recorder), params: { commit: data }
+      post option_records_path(@option)
     end
     assert_redirected_to recorder_url(@recorder)
     follow_redirect!
-    assert_match data, response.body
+    assert_select "table td.record-data", text: @option.name, count: before_count+1
     #destroy
     assert_select 'a', text: 'delete'
     first_record = @recorder.records.first

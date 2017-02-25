@@ -1,6 +1,6 @@
 <tbody>
   <tr id="record-<%= record.id %>">
-    <td class="data"><%= record.data %></td>
+    <td class="record-data"><%= record.option.name %></td>
     <td class="timestamp">
       Posted <%= time_ago_in_words(record.created_at) %> ago.
     </td>
