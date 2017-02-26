@@ -6,6 +6,9 @@
       <%= render 'shared/record_form' %>
     </section>
   </div>
+<% else %>
+  <h2>no options</h2>
+  <div><%= link_to "add options", recorder_add_options_path(@recorder) %></div>
 <% end %>
 <hr>
 <% if @recorder.records.count == 0 %>

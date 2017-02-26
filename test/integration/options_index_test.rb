@@ -20,6 +20,7 @@ class OptionsIndexTest < ActionDispatch::IntegrationTest
       assert_select 'td a[href=?]', edit_option_path(option), text: 'edit'
       assert_select 'td a[href=?]', option_path(option), text: 'delete'
     end
+    assert_select 'a[href=?]', recorder_path(@recorder), count: 1
     assert_difference 'Option.count', -1 do
       delete option_path(@option)
     end

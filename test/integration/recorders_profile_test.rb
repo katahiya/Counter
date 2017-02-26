@@ -18,6 +18,8 @@ class RecordersProfileTest < ActionDispatch::IntegrationTest
     assert_template 'recorders/show'
     assert_select 'title', full_title(@recorder.title)
     assert_select 'h1', text: @recorder.title
+    assert_select 'h2', text: "no options", count: 0
+    assert_select 'a[href=?]', recorder_add_options_path(@recorder), count: 0
     @recorder.options.each do |option|
       assert_select "form input[data-disable-with=?]", option.name
     end
@@ -31,15 +33,15 @@ class RecordersProfileTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "profile display with no records" do
+  test "profile nothing display" do
     log_in_as(@user)
     get recorder_path(@isolated_recorder)
     assert_template 'recorders/show'
     assert_select 'title', full_title(@isolated_recorder.title)
     assert_select 'h1', text: @isolated_recorder.title
-    @isolated_recorder.options.each do |option|
-      assert_select "form input[data-disable-with=?]", option.name
-    end
+    assert_select "section.record_form", count: 0
+    assert_select 'h2', text: "no options"
+    assert_select 'a[href=?]', recorder_add_options_path(@isolated_recorder)
     assert_select 'h2', text: "no records"
     assert_select 'h2', text: "Records", count: 0
     assert_select 'div.table-responsive', count: 0
