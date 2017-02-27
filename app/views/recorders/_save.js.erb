@@ -1,0 +1,6 @@
+<% if @recorder.errors.any? %>
+  $(".error_messages").html("<%= escape_javascript(render 'shared/error_messages') %>")
+<% else %>
+  $("#recorder-<%= @recorder.id %>").html("<%= escape_javascript(render 'recorder') %>")
+  $("#edit-recorder_title").modal("hide")
+<% end %>

@@ -36,9 +36,10 @@ class RecordersController < ApplicationController
   end
 
   def update
+    @recorders = @user.recorders.paginate(page: params[:page])
     if @recorder.update_attributes(recorder_params)
       flash[:succes] = "Counter updated"
-      redirect_to @recorder
+      redirect_to user_recorders_url(@user)
     else
       render 'edit'
     end
@@ -57,9 +58,14 @@ class RecordersController < ApplicationController
   private
 
     def recorder_params
+      return params.require(:recorder).permit(:title) unless params[:recorder][:options_attributes]
       strong = params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
       strong[:options_attributes] = strong[:options_attributes].select {|n, options_attribute| !options_attribute[:name].blank?}
       return strong
+    end
+
+    def recorder_title
+      params.require(:recorder).permit(:title)
     end
 
     def parent_user_id

@@ -1,0 +1,15 @@
+<%= form_for(@recorder, url: yield(:submit_url)) do |f| %>
+  <div class="error_messages">
+    <%= render 'shared/error_messages', object: f.object %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  </div>
+<% end %>
+
