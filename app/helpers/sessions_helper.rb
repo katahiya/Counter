@@ -42,7 +42,7 @@ module SessionsHelper
     redirect_to(session[:forwarding_url] || default)
   end
 
-  def store_location
-    session[:forwarding_url] = request.original_url if request.get?
+  def store_location(redirect_target=nil)
+    session[:forwarding_url] = redirect_target || request.original_url if request.get?
   end
 end
