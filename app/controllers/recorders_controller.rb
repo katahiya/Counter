@@ -2,7 +2,7 @@ class RecordersController < ApplicationController
   before_action :logged_in_user
   before_action -> {
     correct_user(parent_user_id)
-  }, only: [:show, :edit, :add_options, :update, :destroy]
+  }, only: [:show, :edit, :add_options, :update, :update_options, :destroy]
   before_action -> {
     correct_user(params[:user_id])
   }, only: [:index, :create, :new]
@@ -36,12 +36,16 @@ class RecordersController < ApplicationController
   end
 
   def update
+    @recorder.update_attributes(recorder_title)
     @recorders = @user.recorders.paginate(page: params[:page])
+  end
+
+  def update_options
     if @recorder.update_attributes(recorder_params)
-      flash[:succes] = "Counter updated"
-      redirect_to user_recorders_url(@user)
+      flash[:success] = "new recorder successfully created!"
+      redirect_to @recorder
     else
-      render 'edit'
+      render 'add_options'
     end
   end
 
@@ -57,8 +61,11 @@ class RecordersController < ApplicationController
 
   private
 
+    def recorder_title
+      params.require(:recorder).permit(:title)
+    end
+
     def recorder_params
-      return params.require(:recorder).permit(:title) unless params[:recorder][:options_attributes]
       strong = params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
       strong[:options_attributes] = strong[:options_attributes].select {|n, options_attribute| !options_attribute[:name].blank?}
       return strong

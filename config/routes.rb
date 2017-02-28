@@ -18,5 +18,6 @@ Rails.application.routes.draw do
     end
   end
   get 'recorders/:id/add_options', to: 'recorders#add_options', as: :recorder_add_options
+  patch 'recorders/:id/add_options', to: 'recorders#update_options'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

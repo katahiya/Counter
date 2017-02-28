@@ -12,10 +12,10 @@ class RecordersAddOptionsTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     assert_redirected_to recorder_add_options_path(@user)
     follow_redirect!
-    assert_select "form[action=?]", recorder_path(@recorder)
+    assert_select "form[action=?]", recorder_add_options_path(@recorder)
     assert_no_difference 'Recorder.count' do
       assert_difference '@recorder.options.count', 1 do
-        patch recorder_path(@recorder), params: { recorder: { title: @recorder.title,
+        patch recorder_add_options_path(@recorder), params: { recorder: { title: @recorder.title,
                                                               options_attributes: { "0" => { name: "hoge",
                                                                                              _destroy: false } } } }
       end
@@ -28,10 +28,10 @@ class RecordersAddOptionsTest < ActionDispatch::IntegrationTest
   test "setup multiple options with blank option" do
     log_in_as(@user)
     get recorder_add_options_path(@recorder)
-    assert_select "form[action=?]", recorder_path(@recorder)
+    assert_select "form[action=?]", recorder_add_options_path(@recorder)
     assert_no_difference 'Recorder.count' do
       assert_difference '@recorder.options.count', 3 do
-        patch recorder_path(@recorder), params: { recorder: { title: @recorder.title,
+        patch recorder_add_options_path(@recorder), params: { recorder: { title: @recorder.title,
                                                                          options_attributes: { "0" => { name: "hoge",
                                                                                                     _destroy: false },
                                                                                                "1" => { name: "",

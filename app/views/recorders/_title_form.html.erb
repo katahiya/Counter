@@ -1,4 +1,4 @@
-<%= form_for(@recorder, url: yield(:submit_url)) do |f| %>
+<%= form_for(@recorder, url: yield(:submit_url), remote: true) do |f| %>
   <div class="error_messages">
     <%= render 'shared/error_messages', object: f.object %>
   </div>
