@@ -1,0 +1,6 @@
+<% if object.errors.any? %>
+  $(".error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: object) %>")
+<% else %>
+  <%= render render_success %>
+<% end %>
+

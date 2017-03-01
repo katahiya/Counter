@@ -1,4 +1,4 @@
-<%= form_for(@option, url: yield(:submit_url)) do |f| %>
+<%= form_for(@option, url: yield(:submit_url), remote: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="field">

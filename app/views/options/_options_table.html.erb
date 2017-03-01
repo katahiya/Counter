@@ -6,6 +6,12 @@
         <th>actions</th>
       </tr>
     </thead>
-    <%= render @options %>
+    <% @options.each do |option| %>
+      <tbody>
+        <tr id="option-<%= option.id %>">
+          <%= render option %>
+        </tr>
+      </tbody>
+    <% end %>
   </table>
 </div>

@@ -31,7 +31,6 @@ class RecordersController < ApplicationController
   end
 
   def edit
-    @recorder.options.build
   end
 
   def add_options

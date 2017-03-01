@@ -15,7 +15,7 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
     assert_template 'recorders/edit'
     assert_match "action=\\\"#{recorder_path(@recorder)}\\\"", response.body
     patch recorder_path(@recorder), params: { recorder: { title: "" } }, xhr: true
-    assert_template 'recorders/update'
+    assert_template 'shared/_error_messages'
     assert_match 'error_explanation', response.body
   end
 
@@ -33,6 +33,7 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
     assert_template 'recorders/update'
     @recorder.reload
     assert_equal title, @recorder.title
+    assert_template 'recorders/_recorder'
     assert_match "#{@recorder.title}", response.body
   end
 end

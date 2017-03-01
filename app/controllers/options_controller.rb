@@ -1,10 +1,13 @@
 class OptionsController < ApplicationController
-  before_action :logged_in_user
+  before_action :logged_in_user, except: [:edit, :update]
   before_action -> {
-    correct_user(parent_user_id)
+    logged_in_user(recorder_options_url(parent_recorder))
+  }, only: [:edit, :update]
+  before_action -> {
+    correct_user(parent_user.id)
   }, only: [:index, :create, :new]
   before_action -> {
-    correct_user(grand_parent_user_id)
+    correct_user(grand_parent_user.id)
   }, only: [:destroy, :edit, :update]
 
   def index
@@ -15,12 +18,8 @@ class OptionsController < ApplicationController
   end
 
   def update
-    if @option.update_attributes(single_option_params)
-      flash[:succes] = "option updated"
-      redirect_to recorder_options_url(@recorder)
-    else
-      render 'edit'
-    end
+    @option.update_attributes(single_option_params)
+    @options = @recorder.options
   end
 
   def destroy
@@ -41,14 +40,17 @@ class OptionsController < ApplicationController
       params.require(:option).permit(:name)
     end
 
-    def parent_user_id
+    def parent_user
       @recorder = Recorder.find(params[:recorder_id])
-      @recorder.user_id
+      @user = @recorder.user
     end
 
-    def grand_parent_user_id
+    def grand_parent_user
+      @user = parent_recorder.user
+    end
+
+    def parent_recorder
       @option = Option.find(params[:id])
-      @recorder = Recorder.find(@option.recorder_id)
-      @recorder.user_id
+      @recorder = @option.recorder
     end
 end

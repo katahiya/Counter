@@ -1,0 +1,2 @@
+$("#recorder-<%= @recorder.id %>").html("<%= escape_javascript(render 'recorder.html', recorder: @recorder) %>")
+$("#edit-recorder_title").modal("hide")
