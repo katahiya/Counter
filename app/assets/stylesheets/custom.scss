@@ -10,6 +10,15 @@ $gray-medium-light: #eaeaea;
   box_sizing: border-box;
 }
 
+@mixin form_standard {
+  padding: 25px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 15px;
+  background-color: aliceblue;
+  border-radius: 4px;
+}
+
 body {
   padding-top: 60px;
 }
@@ -137,17 +146,30 @@ input {
   }
 }
 
-/* recorder */
-.recorders {
-  list-style: none;
-  padding: 0;
-  .title {
-    display: block;
-    margin-left: 60px;
+/* recorder form */
+.recorder-form {
+  @include form_standard;
+  h1 {
+    text-align: center;
+    font-size: 2.2em;
   }
 }
 
-/* session form */
+/* recorder form */
+.options-form {
+  @include form_standard;
+}
+
+/* users/sessioin form */
+.user-form {
+  @include form_standard;
+  max-width: 350px;
+  h1 {
+    text-align: center;
+    font-size: 1.8em;
+  }
+}
+
 .checkbox {
   margin-top: -10px;
   margin-bottom: 10px;

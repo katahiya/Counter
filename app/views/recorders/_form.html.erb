@@ -6,7 +6,9 @@
     <%= f.text_field :title, class: "form-control" %>
   </div>
 
-  <div id="options" class="form-group">
+  <hr>
+
+  <div id="options" class="form-group options-form">
     <label>Options</label>
     <%= f.fields_for :options do |option_form| %>
       <%= render 'option_fields', f: option_form %>
