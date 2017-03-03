@@ -1,22 +1,19 @@
 <% provide(:title, 'All counters') %>
 <h1>All counters</h1>
 
-<div class="row">
-  <div class="col-md-6"><%= will_paginate %></div>
-  <div class="col-md-2 col-md-offset-4"><%= link_to "create new", user_setup_path(@user), class: "btn btn-success" %></div>
-</div>
+<div class="setup-button"><%= link_to "create new", user_setup_path(@user), class: "btn btn-success" %></div>
+<%= will_paginate %>
 
-<ul class="recorders">
-  <% @recorders.each do |recorder| %>
-    <li id="recorder-<%= recorder.id %>">
-      <%= render recorder %>
-    </li>
-  <% end %>
-</ul>
+<div class="recorders">
+  <div class="row">
+    <% @recorders.each do |recorder| %>
+      <div id="recorder-<%= recorder.id %>" class="col-md-8">
+        <%= render recorder %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <%= will_paginate %>
-<div class="row">
-  <div class="col-md-2 col-md-offset-10"><%= link_to "create new", user_setup_path(@user), class: "btn btn-success" %></div>
-</div>
 
 <div id="edit-recorder_title" class="modal fade"></div>

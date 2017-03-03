@@ -78,6 +78,13 @@ p {
     text-decoration: none;
   }
 }
+/* hover dropdown */
+@media only screen and (min-width : 768px) {
+    /* デスクトップ表示ではホバー操作でドロップダウンを表示 */
+    nav .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+}
 
 /* footer */
 footer {
@@ -147,6 +154,12 @@ input {
 }
 
 /* recorder form */
+.setup-button{
+   position: fixed;
+   bottom: 40px;
+   right: 40px;
+}
+
 .recorder-form {
   @include form_standard;
   h1 {
@@ -155,7 +168,7 @@ input {
   }
 }
 
-/* recorder form */
+/* options form */
 .options-form {
   @include form_standard;
 }
@@ -192,5 +205,16 @@ input {
     overflow: auto;
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+/* recorders index */
+.recorders {
+  .title {
+    font-size: 1.4em;
+  }
+  .options-preview {
+    padding-top: 10px;
+    padding-left: 30px;
   }
 }
