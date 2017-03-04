@@ -80,10 +80,10 @@ p {
 }
 /* hover dropdown */
 @media only screen and (min-width : 768px) {
-    /* デスクトップ表示ではホバー操作でドロップダウンを表示 */
-    nav .dropdown:hover .dropdown-menu {
-        display: block;
-    }
+  /* デスクトップ表示ではホバー操作でドロップダウンを表示 */
+  nav .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
 
 /* footer */
@@ -210,11 +210,43 @@ input {
 
 /* recorders index */
 .recorders {
-  .title {
-    font-size: 1.4em;
-  }
-  .options-preview {
-    padding-top: 10px;
-    padding-left: 30px;
+  [id^="recorder-"] {
+    position: relative;
+    width: 100%;
+    .title {
+      font-size: 1.4em;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+    .btn-group {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+    }
+    .options-preview {
+      padding-top: 50px;
+      padding-left: 30px;
+    }
+    .updated {
+      position: absolute;
+      bottom: 20px;
+      right: 5px;
+    }
+    hr {
+      margin-bottom: -1px;
+      padding-bottom: 0px;
+      height: 10px;
+      border: 0;
+      box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    }
   }
 }
+

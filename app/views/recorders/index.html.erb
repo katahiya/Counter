@@ -7,8 +7,10 @@
 <div class="recorders">
   <div class="row">
     <% @recorders.each do |recorder| %>
-      <div id="recorder-<%= recorder.id %>" class="col-md-8">
-        <%= render recorder %>
+      <div class="col-xs-8 col-xs-offset-1">
+        <div id="recorder-<%= recorder.id %>">
+          <%= render recorder %>
+        </div>
       </div>
     <% end %>
   </div>

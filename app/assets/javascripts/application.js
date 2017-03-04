@@ -16,3 +16,8 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+$(function() {
+  $('#options-etc').popover({
+    trigger: 'hover', // click,hover,focus,manualを選択出来る
+  });
+});
