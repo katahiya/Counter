@@ -10,7 +10,7 @@ class RecordsController < ApplicationController
   def create
     @record = @recorder.records.build(option: @option)
     if @record.save
-      flash[:success] = "saved!"
+      flash[:side_success] = "saved!"
       redirect_to @recorder
     else
       @recorder.reload
@@ -19,7 +19,7 @@ class RecordsController < ApplicationController
 
   def destroy
     @record.destroy
-    flash[:succes] = "deleted!"
+    flash[:side_success] = "deleted!"
     redirect_to @recorder
   end
 

@@ -21,7 +21,7 @@ class RecordersProfileTest < ActionDispatch::IntegrationTest
     assert_select 'h2', text: "no options", count: 0
     assert_select 'a[href=?]', recorder_add_options_path(@recorder), count: 0
     @recorder.options.each do |option|
-      assert_select "form input[data-disable-with=?]", option.name
+      assert_select 'a[href=?]', option_records_path(option), text: option.name
     end
     assert_select 'h2', text: "no records", count: 0
     assert_select 'h2', text: "Records"

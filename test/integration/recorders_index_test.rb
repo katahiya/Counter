@@ -14,7 +14,7 @@ class RecordersIndexTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'recorders/index'
     assert_select 'div.pagination', 2
-    assert_select 'a[href=?]', user_setup_path(@user), count: 2, text: 'create new'
+    assert_select 'a[href=?]', user_setup_path(@user), count: 1, text: 'create new'
     first_page_of_recorders = @user.recorders.paginate(page: 1)
     first_page_of_recorders.each do |recorder|
       assert_select 'a[href=?]', recorder_path(recorder), title: recorder.title

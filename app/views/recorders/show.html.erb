@@ -1,23 +1,27 @@
 <% provide(:title, @recorder.title) %>
-<h1><%= @recorder.title %></h1>
-<% if @recorder.options.any? %>
-  <div class="row">
-    <section class="record_form">
-      <%= render 'shared/record_form' %>
-    </section>
-  </div>
-<% else %>
-  <h2>no options</h2>
-  <div><%= link_to "add options", recorder_add_options_path(@recorder) %></div>
-<% end %>
-<hr>
-<% if @recorder.records.count == 0 %>
-  <h2>no records</h2>
-<% else %>
-  <h2>Records</div>
-  <div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-      <%= render 'shared/records_table' %>
+<div class="row">
+  <div class="col-xs-3">
+    <div class="panel panel-default option-bar">
+      <div class="panel-heading side-item">
+        Add record
+      </div>
+      <ul class="nav nav-pills nav-stacked">
+        <% if @recorder.options.any? %>
+          <section class="record_form">
+            <%= render 'shared/record_form' %>
+          </section>
+        <% end %>
+        <li><%= link_to "add options", recorder_add_options_path(@recorder), class: "add-link side-item" %></li>
+      </ul>
     </div>
   </div>
-<% end %>
+  <div class="col-xs-9 records-table">
+    <%= flash_messages_with_excepted_key %>
+    <h1><%= @recorder.title %></h1>
+    <% if @recorder.records.count == 0 %>
+      <h2>no records</h2>
+    <% else %>
+      <%= render 'shared/records_table' %>
+    <% end %>
+  </div>
+</div>

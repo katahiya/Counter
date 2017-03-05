@@ -1,8 +1,5 @@
-      <% @recorder.options.each do |option| %>
-<%= form_for(@record, url: option_records_path(option)) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-    <div class="form">
-        <%= f.submit option.name, class: "form-control btn btn-primary" %>
-    </div>
+<% @recorder.options.each do |option| %>
+  <li class="side-item">
+    <%= link_to option.name, option_records_path(option), method: :post, class: "side-item" %>
+  </li>
 <% end %>
-      <% end %>
