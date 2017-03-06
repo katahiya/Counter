@@ -5,7 +5,7 @@ class RecordersController < ApplicationController
   }, only: [:edit, :update]
   before_action -> {
     correct_user(parent_user_id)
-  }, only: [:show, :edit, :add_options, :update, :update_options, :destroy]
+  }, only: [:show, :edit, :add_options, :update, :update_options, :delete, :destroy]
   before_action -> {
     correct_user(params[:user_id])
   }, only: [:index, :create, :new]
@@ -55,10 +55,13 @@ class RecordersController < ApplicationController
     @recorders = @user.recorders.paginate(page: params[:page])
   end
 
+  def delete
+  end
+
   def destroy
     @recorder.destroy
+    @recorders = @user.recorders.paginate(page: params[:page])
     flash[:success] = "Recorder deleted!"
-    redirect_to user_recorders_url(@user)
   end
 
   private

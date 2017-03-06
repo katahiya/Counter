@@ -1,22 +1,9 @@
 <% provide(:title, @recorder.title) %>
 <div class="row">
   <div class="col-xs-3">
-    <div class="panel panel-default option-bar">
-      <div class="panel-heading side-item">
-        Add record
-      </div>
-      <ul class="nav nav-pills nav-stacked">
-        <% if @recorder.options.any? %>
-          <section class="record_form">
-            <%= render 'shared/record_form' %>
-          </section>
-        <% end %>
-        <li><%= link_to "add options", recorder_add_options_path(@recorder), class: "add-link side-item" %></li>
-      </ul>
-    </div>
+   <%= render "options" %>
   </div>
   <div class="col-xs-9 records-table">
-    <%= flash_messages_with_excepted_key %>
     <h1><%= @recorder.title %></h1>
     <% if @recorder.records.count == 0 %>
       <h2>no records</h2>

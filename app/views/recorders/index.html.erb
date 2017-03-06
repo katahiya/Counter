@@ -2,20 +2,11 @@
 <h1>All counters</h1>
 
 <div class="setup-button"><%= link_to "create new", user_setup_path(@user), class: "btn btn-success" %></div>
-<%= will_paginate %>
 
 <div class="recorders">
-  <div class="row">
-    <% @recorders.each do |recorder| %>
-      <div class="col-xs-8 col-xs-offset-1">
-        <div id="recorder-<%= recorder.id %>">
-          <%= render recorder %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <%= render "recorders" %>
 </div>
 
-<%= will_paginate %>
 
 <div id="edit-recorder_title" class="modal fade"></div>
+<div id="delete-modal" class="modal fade"></div>

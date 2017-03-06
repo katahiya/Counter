@@ -120,17 +120,7 @@ footer {
   @include box_sizing;
 }
 
-/* setup forms */
-input, textarea, select, .uneditable-input {
-  border: 1px, solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
-}
 
-input {
-  height: auto !important;
-}
 
 #error_explanation {
   color: red;
@@ -194,7 +184,16 @@ input {
   h1 {
     text-align: center;
     font-size: 2.2em;
+  input, textarea, select, .uneditable-input {
+    border: 1px, solid #bbb;
+    width: 100%;
+    margin-bottom: 15px;
+    @include box_sizing;
   }
+
+  input {
+    height: auto !important;
+  } }
 }
 
 /* options form */
@@ -279,3 +278,12 @@ input {
   }
 }
 
+.modal-form {
+  margin-top: 30px;
+  .panel-body {
+    text-align: center;
+  }
+  .buttons {
+    text-align: right;
+  }
+}

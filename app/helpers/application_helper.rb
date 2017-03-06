@@ -9,8 +9,4 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
-
-  def flash_messages_with_excepted_key(excepted_key=nil)
-    render "shared/flash_messages", excepted_key: excepted_key
-  end
 end
