@@ -1,8 +1,8 @@
 class RecordersController < ApplicationController
-  before_action :logged_in_user, except: [:edit, :update]
+  before_action :logged_in_user, except: [:edit, :update, :delete, :destroy]
   before_action -> {
     logged_in_user(user_recorders_url(parent_user_id))
-  }, only: [:edit, :update]
+  }, only: [:edit, :update, :delete, :destroy]
   before_action -> {
     correct_user(parent_user_id)
   }, only: [:show, :edit, :add_options, :update, :update_options, :delete, :destroy]

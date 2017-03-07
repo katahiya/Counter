@@ -184,6 +184,7 @@ footer {
   h1 {
     text-align: center;
     font-size: 2.2em;
+  }
   input, textarea, select, .uneditable-input {
     border: 1px, solid #bbb;
     width: 100%;
@@ -193,7 +194,7 @@ footer {
 
   input {
     height: auto !important;
-  } }
+  }
 }
 
 /* options form */
@@ -209,16 +210,20 @@ footer {
     text-align: center;
     font-size: 1.8em;
   }
-}
-
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
+  .checkbox {
+    span {
+      margin-left: 20px;
+      font-weight: normal;
+    }
+  }
+  .actions {
+    margin-top: 10px;
+    input {
+      width: 100%;
+    }
   }
 }
+
 
 #session_remember_me {
   width: auto;

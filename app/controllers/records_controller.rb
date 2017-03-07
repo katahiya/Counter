@@ -1,11 +1,14 @@
 class RecordsController < ApplicationController
-  before_action :logged_in_user
+  before_action :logged_in_user, except: [:delete, :destroy]
+  before_action -> {
+    logged_in_user(user_recorders_url(user_id_of_destroy))
+  }, only: [:delete, :destroy]
   before_action -> {
     correct_user(user_id_of_create)
   }, only: [:create]
   before_action -> {
     correct_user(user_id_of_destroy)
-  }, only: [:destroy]
+  }, only: [:delete, :destroy]
 
   def create
     @record = @recorder.records.build(option: @option)
@@ -17,10 +20,13 @@ class RecordsController < ApplicationController
     end
   end
 
+  def delete
+  end
+
   def destroy
     @record.destroy
+    @records = @recorder.records.all
     flash[:success] = "deleted!"
-    redirect_to @recorder
   end
 
   private

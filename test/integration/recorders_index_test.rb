@@ -20,10 +20,24 @@ class RecordersIndexTest < ActionDispatch::IntegrationTest
       assert_select 'a[href=?]', recorder_path(recorder), title: recorder.title
       assert_select 'a[href=?]', edit_recorder_path(recorder), text: 'edit title'
       assert_select 'a[href=?]', recorder_options_path(recorder), text: 'edit options'
-      assert_select 'a[href=?]', recorder_path(recorder), text: 'delete'
+      assert_select 'a[href=?]', delete_recorder_path(recorder), text: 'delete'
     end
+  end
+
+  test "recorder delete with friendly forwarding" do
+    get delete_recorder_path(@recorder), xhr: true
+    log_in_as(@user)
+    assert_redirected_to user_recorders_url(@user)
+    follow_redirect!
+    assert_template 'recorders/index'
+    get delete_recorder_path(@recorder), xhr: true
+    assert_template 'recorders/delete'
+    assert_match "href=\\\"#{recorder_path(@recorder)}\\\"", response.body
     assert_difference 'Recorder.count', -1 do
-      delete recorder_path(@recorder)
+      delete recorder_path(@recorder), xhr: true
     end
+    assert_template 'recorders/destroy'
+    assert_template 'recorders/_recorders'
+    assert_no_match "#{@recorder.title}", response.body
   end
 end
