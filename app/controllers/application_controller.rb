@@ -25,4 +25,23 @@ class ApplicationController < ActionController::Base
       redirect_to(root_url) unless current_user.admin?
     end
 
+    def get_modal_window(selecter=".modal-container")
+      render "shared/get.js", locals: { selecter: selecter, html_template: calling_method }
+    end
+
+    def hide_modal_window(submit_object, html_template, rerender_selecter,
+                          modal_selecter=".modal-container",
+                          **html_args)
+      render "shared/hide.js", locals: { object: submit_object,
+                                         rerender_selecter: rerender_selecter,
+                                         modal_selecter: modal_selecter,
+                                         html_template: html_template,
+                                         html_args: html_args}
+    end
+
+    private
+
+      def calling_method
+        caller[1][/`([^']*)'/, 1]
+      end
 end

@@ -12,7 +12,6 @@ class OptionEditTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get recorder_options_path(@recorder)
     get edit_option_path(@option), xhr: true
-    assert_template 'options/edit'
     assert_template 'options/_edit'
     assert_match "action=\\\"#{option_path(@option)}\\\"", response.body
     patch option_path(@option), params: { option: { name: "  " } }, xhr: true
@@ -27,7 +26,6 @@ class OptionEditTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'options/index'
     get edit_option_path(@option), xhr: true
-    assert_template 'options/edit'
     assert_template 'options/_edit'
     assert_match "action=\\\"#{option_path(@option)}\\\"", response.body
     name = "white grint"

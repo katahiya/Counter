@@ -31,12 +31,12 @@ class RecordersIndexTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'recorders/index'
     get delete_recorder_path(@recorder), xhr: true
-    assert_template 'recorders/delete'
+    assert_template 'recorders/_delete'
     assert_match "href=\\\"#{recorder_path(@recorder)}\\\"", response.body
     assert_difference 'Recorder.count', -1 do
       delete recorder_path(@recorder), xhr: true
     end
-    assert_template 'recorders/destroy'
+    assert_template 'shared/hide.js'
     assert_template 'recorders/_recorders'
     assert_no_match "#{@recorder.title}", response.body
   end

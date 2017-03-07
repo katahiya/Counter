@@ -12,7 +12,7 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get user_recorders_path(@user)
     get edit_recorder_path(@recorder), xhr: true
-    assert_template 'recorders/edit'
+    assert_template 'recorders/_edit'
     assert_match "action=\\\"#{recorder_path(@recorder)}\\\"", response.body
     patch recorder_path(@recorder), params: { recorder: { title: "" } }, xhr: true
     assert_template 'shared/_error_messages'
@@ -26,11 +26,10 @@ class RecordersEditTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'recorders/index'
     get edit_recorder_path(@recorder), xhr: true
-    assert_template 'recorders/edit'
+    assert_template 'recorders/_edit'
     assert_match "action=\\\"#{recorder_path(@recorder)}\\\"", response.body
     title = "onion"
     patch recorder_path(@recorder), params: { recorder: { title: title } }, xhr: true
-    assert_template 'recorders/update'
     @recorder.reload
     assert_equal title, @recorder.title
     assert_template 'recorders/_recorder'

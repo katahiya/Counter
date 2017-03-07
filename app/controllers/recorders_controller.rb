@@ -31,6 +31,7 @@ class RecordersController < ApplicationController
   end
 
   def edit
+    get_modal_window
   end
 
   def add_options
@@ -40,6 +41,8 @@ class RecordersController < ApplicationController
   def update
     @recorder.update_attributes(recorder_title)
     @recorders = @user.recorders.paginate(page: params[:page])
+    hide_modal_window @recorder, "recorder", "#recorder-#{@recorder.id}",
+                                              recorder: @recorder
   end
 
   def update_options
@@ -56,12 +59,14 @@ class RecordersController < ApplicationController
   end
 
   def delete
+    get_modal_window
   end
 
   def destroy
     @recorder.destroy
     @recorders = @user.recorders.paginate(page: params[:page])
     flash[:success] = "Recorder deleted!"
+    hide_modal_window @recorder, "recorders", ".recorders"
   end
 
   private

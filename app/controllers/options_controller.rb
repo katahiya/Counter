@@ -15,11 +15,14 @@ class OptionsController < ApplicationController
   end
 
   def edit
+    get_modal_window
   end
 
   def update
     @option.update_attributes(single_option_params)
     @options = @recorder.options
+    hide_modal_window  @option, 'option', "#option-#{@option.id}",
+                                        option: @option
   end
 
   def destroy
