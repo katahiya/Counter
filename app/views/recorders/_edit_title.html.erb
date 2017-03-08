@@ -1,0 +1,7 @@
+<% provide(:title, 'Edit counter')%>
+<% provide(:submit_url, recorder_edit_title_path(@recorder)) %>
+<% provide(:submit_text, '変更') %>
+
+<%= render "shared/modal_form_template",
+           heading: "カウンター名: #{@recorder.title}を変更",
+           html: 'title_form' %>

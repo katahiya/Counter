@@ -1,12 +1,7 @@
 <% provide(:title, 'Edit option')%>
 <% provide(:submit_url, option_path(@option)) %>
-<% provide(:button_text, 'Save changes') %>
+<% provide(:submit_text, '変更') %>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="recorder-form">
-      <h1>Update <%= @option.name %></h1>
-      <%= render 'edit_form' %>
-    </div>
-  </div>
-</div>
+<%= render "shared/modal_form_template",
+           heading: "選択肢: #{@option.name}を変更",
+           html: 'edit_form' %>

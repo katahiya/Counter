@@ -1,5 +1,7 @@
 <%= form_for(@recorder, url: yield(:submit_url)) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+  <div class="error_messages">
+    <%= render 'shared/error_messages', object: f.object %>
+  </div>
 
   <div id="options" class="form-group">
     <label>Options</label>
@@ -10,7 +12,5 @@
       <%= link_to_add_association "Add option", f, :options %>
     </div>
   </div>
-  <div class="actions">
-    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-  </div>
+  <%= render "shared/modal_form_buttons", f: f %>
 <% end %>

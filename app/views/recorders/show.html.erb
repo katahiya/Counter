@@ -1,15 +1,25 @@
 <% provide(:title, @recorder.title) %>
+
 <div class="row">
   <div class="col-xs-3">
    <%= render "options" %>
   </div>
   <div class="col-xs-9 records-table">
-    <h1><%= @recorder.title %></h1>
-    <% if @recorder.records.count == 0 %>
-      <h2>no records</h2>
-    <% else %>
-      <%= render 'shared/records_table' %>
-    <% end %>
+    <div class="row heading">
+      <h2>
+        <%= @recorder.title %>
+        <%= link_to sanitize('<span class="glyphicon glyphicon-cog" aria-hidden="true"</sapn>'),
+                    edit_recorder_path(@recorder),
+                    class: "btn btn-link pull-right" %>
+      </h2>
+    </div>
+    <div class="row">
+      <% if @recorder.records.count == 0 %>
+        <h2>no records</h2>
+      <% else %>
+        <%= render 'shared/records_table' %>
+      <% end %>
+    </div>
   </div>
 </div>
 <div id="delete-modal" class="modal fade"></div>

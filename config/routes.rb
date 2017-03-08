@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :users, shallow: true do
     get '/setup', to: 'recorders#new'
     post '/setup', to: 'recorders#create'
-    resources :recorders, except: [:new, :create], path_names: {edit: "edit_title"}, shallow: true do
+    resources :recorders, except: [:new, :create], shallow: true do
       resources :options, except: [:show, :new, :create], shallow: true do
         resources :records, only: [:create, :destroy]
       end
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   end
   get 'recorders/:id/add_options', to: 'recorders#add_options', as: :recorder_add_options
   patch 'recorders/:id/add_options', to: 'recorders#update_options'
+  get 'recorders/:id/edit_title', to: 'recorders#edit_title', as: :recorder_edit_title
+  patch 'recorders/:id/edit_title', to: 'recorders#update_title'
   get 'recorders/:id/delete', to: 'recorders#delete', as: :delete_recorder
   get 'options/:id/delete', to: 'options#delete', as: :delete_option
   get 'records/:id/delete', to: 'records#delete', as: :delete_record

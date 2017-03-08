@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4">
+    <div class="panel panel-default modal-form">
+      <div class="panel-heading">
+        <%= name %>を削除
+      </div>
+      <div class="panel-body">
+        <%= name %>を完全に削除しますか?
+      </div>
+      <div class="panel-footer">
+        <div class="buttons">
+          <%= link_to "いいえ", "#", class: "btn btn-default", data: { dismiss: "modal" } %>
+          <%= link_to "はい", url, method: :delete, remote: true, class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

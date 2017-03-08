@@ -1,0 +1,38 @@
+<% provide(:title, 'Edit') %>
+<h1>Edit</h1>
+
+<div class="row recorder-items">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="row heading">
+      <h2>
+        名前
+        <%= link_to sanitize('<span class="glyphicon glyphicon-pencil" aria-hidden="true"</sapn>'),
+                    recorder_edit_title_path(@recorder),
+                    class: "btn btn-link btn-xs",
+                    remote: true %>
+      </h2>
+    </div>
+    <div class="row recorder-item  recorder-<%= @recorder.id %>_title">
+      <%= render "recorder_title" %>
+    </div>
+    <div class="row heading">
+      <h2>
+        選択肢
+        <%= link_to sanitize('<span class="glyphicon glyphicon-plus" aria-hidden="true"</sapn>'),
+                    recorder_add_options_path(@recorder),
+                    class: "btn btn-info btn-xs",
+                    remote: true %>
+      </h2>
+    </div>
+    <div class="row recorder-item options_table">
+      <%= render 'options/options_table' %>
+    </div>
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<div><%= link_to @recorder.title, recorder_path(@recorder) %>
+</div>
+<div class="modal fade modal-container"></div>
+

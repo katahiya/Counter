@@ -1,0 +1,7 @@
+<% provide(:title, 'Add options')%>
+<% provide(:submit_url, recorder_add_options_path(@recorder)) %>
+<% provide(:submit_text, '追加') %>
+
+<%= render "shared/modal_form_template",
+           heading: "選択肢を追加",
+           html: 'add_options_form' %>

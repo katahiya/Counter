@@ -1,11 +1,11 @@
 class RecordersController < ApplicationController
-  before_action :logged_in_user, except: [:edit, :update, :delete, :destroy]
+  before_action :logged_in_user, except: [:edit_title, :update_title, :delete, :destroy]
   before_action -> {
     logged_in_user(user_recorders_url(parent_user_id))
-  }, only: [:edit, :update, :delete, :destroy]
+  }, only: [:edit_title, :update_title, :delete, :destroy]
   before_action -> {
     correct_user(parent_user_id)
-  }, only: [:show, :edit, :add_options, :update, :update_options, :delete, :destroy]
+  }, only: [:show, :add_options, :edit_title, :update_title, :edit, :update, :update_options, :delete, :destroy]
   before_action -> {
     correct_user(params[:user_id])
   }, only: [:index, :create, :new]
@@ -31,27 +31,42 @@ class RecordersController < ApplicationController
   end
 
   def edit
+    @options = @recorder.options
+  end
+
+  def update
+    if @recorder.update_attributes(recorder_params)
+      flash[:success] = "#{@recorder.title} successfully updated!"
+      redirect_to @recorder
+    else
+      render 'recorders/edit'
+    end
+  end
+
+  def edit_title
     get_modal_window
+  end
+
+  def update_title
+    @recorder.update_attributes(recorder_title)
+    @recorders = @user.recorders.paginate(page: params[:page])
+    hide_modal_window @recorder,
+                      "recorder_title",
+                      ".recorder-#{@recorder.id}_title",
+                      recorder: @recorder
   end
 
   def add_options
     @recorder.options.build
-  end
-
-  def update
-    @recorder.update_attributes(recorder_title)
-    @recorders = @user.recorders.paginate(page: params[:page])
-    hide_modal_window @recorder, "recorder", "#recorder-#{@recorder.id}",
-                                              recorder: @recorder
+    get_modal_window
   end
 
   def update_options
-    if @recorder.update_attributes(recorder_params)
-      flash[:success] = "new recorder successfully created!"
-      redirect_to @recorder
-    else
-      render 'add_options'
-    end
+    @recorder.update_attributes(recorder_params)
+    @options = @recorder.options
+    hide_modal_window @recorder,
+                      "options/options_table",
+                      ".options_table"
   end
 
   def index
@@ -65,7 +80,6 @@ class RecordersController < ApplicationController
   def destroy
     @recorder.destroy
     @recorders = @user.recorders.paginate(page: params[:page])
-    flash[:success] = "Recorder deleted!"
     hide_modal_window @recorder, "recorders", ".recorders"
   end
 

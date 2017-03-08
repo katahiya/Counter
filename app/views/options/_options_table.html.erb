@@ -1,17 +1,5 @@
-<div class="table-responsive records">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>option</th>
-        <th>actions</th>
-      </tr>
-    </thead>
-    <% @options.each do |option| %>
-      <tbody>
-        <tr id="option-<%= option.id %>">
-          <%= render option %>
-        </tr>
-      </tbody>
-    <% end %>
-  </table>
-</div>
+<% @options.each do |option| %>
+  <div id="option-<%= option.id %>">
+    <%= render option %>
+  </div>
+<% end %>
