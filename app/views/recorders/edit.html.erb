@@ -27,12 +27,19 @@
     <div class="row recorder-item options_table">
       <%= render 'options/options_table' %>
     </div>
-    <ul>
-    </ul>
+    <div class="row">
+      <div class="pull-right">
+        <%= link_to "カウンターを削除", delete_recorder_path(@recorder), remote: true, class: "btn btn-default"  %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="pull-right">
+        <%= link_to "記録する", recorder_path(@recorder), class: "btn btn-default" %>
+      </div>
+    </div>
   </div>
 </div>
 
-<div><%= link_to @recorder.title, recorder_path(@recorder) %>
 </div>
 <div class="modal fade modal-container"></div>
 

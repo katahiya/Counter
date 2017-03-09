@@ -50,22 +50,13 @@ $gray-medium-light: #eaeaea;
   }
 }
 
-@mixin item {
-  h3 {
-    font-size: 1.2em;
-    text-align: left;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid #eee;
-    @include caret_btn-group;
-    .btn-group {
-      bottom: 0;
-    }
-    .btn {
-      position: absolute;
-      right: 0;
-      bottom: 0;
+@mixin inline-item {
+  border-bottom: 1px solid #eee;
+  .inline {
+    vertical-align: middle;
+    display: table-cell;
+    h3 {
+      font-size: 1.2em;
     }
   }
 }
@@ -337,6 +328,9 @@ footer {
 .recorder-items {
   @include heading;
   .recorder-item {
-    @include item
+    [id^="option-"] {
+      @include inline-item;
+      margin-right: 15px;
+    }
   }
 }
