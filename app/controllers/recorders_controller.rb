@@ -64,9 +64,17 @@ class RecordersController < ApplicationController
   def update_options
     @recorder.update_attributes(recorder_params)
     @options = @recorder.options
-    hide_modal_window @recorder,
-                      "options/options_table",
-                      ".options_table"
+    if from_edit?
+      hide_modal_window @recorder,
+                        "options/options_table",
+                        ".options_table"
+    elsif from_show?
+      hide_modal_window @recorder,
+                        "shared/record_form",
+                        ".record_form"
+    else
+      redirect_to(:back)
+    end
   end
 
   def index
@@ -80,7 +88,8 @@ class RecordersController < ApplicationController
   def destroy
     @recorder.destroy
     @recorders = @user.recorders.paginate(page: params[:page])
-    hide_modal_window @recorder, "recorders", ".recorders"
+    flash[:success] = "1つのカウンターが削除されました"
+    redirect_to user_recorders_url(@user)
   end
 
   private
@@ -102,5 +111,17 @@ class RecordersController < ApplicationController
     def parent_user_id
       @recorder = Recorder.find(params[:id])
       @recorder.user_id
+    end
+
+    def before_actions
+      Rails.application.routes.recognize_path(request.referrer)
+    end
+
+    def from_show?
+      before_actions[:controller] == "recorders" && before_actions[:action] == "show"
+    end
+
+    def from_edit?
+      before_actions[:controller] == "recorders" && before_actions[:action] == "edit"
     end
 end
