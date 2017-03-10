@@ -52,12 +52,13 @@ $gray-medium-light: #eaeaea;
 
 @mixin inline-item {
   border-bottom: 1px solid #eee;
+  h3 {
+    font-size: 1.2em;
+    word-wrap: break-word;
+  }
   .inline {
     vertical-align: middle;
-    display: table-cell;
-    h3 {
-      font-size: 1.2em;
-    }
+    display: inline;
   }
 }
 
@@ -89,13 +90,14 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+  color: navy;
 }
 
 h2 {
   font-size: 1.2em;
   letter-spacing: -1px;
   font-weight: normal;
-  color: $gray-light;
+  color: navy;
 }
 
 p {
@@ -338,6 +340,13 @@ footer {
     [id^="option-"] {
       @include inline-item;
       margin-right: 10px;
+      h3 {
+        max-width: 90%;
+      }
+      .dropdown-menu {
+        left: auto;
+        right: 0;
+      }
     }
   }
 }
