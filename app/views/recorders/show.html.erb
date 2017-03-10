@@ -13,12 +13,8 @@
                     class: "btn btn-link pull-right" %>
       </h2>
     </div>
-    <div class="row">
-      <% if @recorder.records.count == 0 %>
-        <h2>no records</h2>
-      <% else %>
-        <%= render 'shared/records_table' %>
-      <% end %>
+    <div class="row records-body">
+      <%= render 'shared/records_table' %>
     </div>
   </div>
 </div>

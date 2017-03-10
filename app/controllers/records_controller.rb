@@ -21,12 +21,17 @@ class RecordsController < ApplicationController
   end
 
   def delete
+    @index = params[:index]
+    get_modal_window
   end
 
   def destroy
     @record.destroy
     @records = @recorder.records.all
-    flash[:success] = "deleted!"
+    hide_modal_window @record,
+                      "shared/records_table",
+                      ".records-body",
+                      recorder: @recorder
   end
 
   private

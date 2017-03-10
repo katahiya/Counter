@@ -1,9 +1,0 @@
-<tbody>
-  <tr id="record-<%= record.id %>">
-    <td class="record-data"><%= record.option.name %></td>
-    <td class="timestamp">
-      Posted <%= time_ago_in_words(record.created_at) %> ago.
-    </td>
-    <td><%= link_to "delete", record_path(record), method: :delete, data: { confirm: "You sure?" } %>
-  </tr>
-</tbody>

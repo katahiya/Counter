@@ -1,12 +1,18 @@
-<div class="table-responsive records">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>record</th>
-        <th>timestamp</th>
-      </tr>
-    </thead>
-    <%= render @records %>
-  </table>
-</div>
-
+<% if @recorder.records.count == 0 %>
+  <h2>no records</h2>
+<% else %>
+  <div class="table-responsive records">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-xs-1"></th>
+          <th class="col-xs-10"></th>
+          <th class="col-xs-1"></th>
+        </tr>
+      </thead>
+      <div class="">
+        <%= render "records/records" %>
+      </div>
+    </table>
+  </div>
+<% end %>

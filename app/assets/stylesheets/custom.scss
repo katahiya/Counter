@@ -206,6 +206,12 @@ footer {
 
 .records-table {
   @include heading;
+  .timestamp {
+    color: gray;
+  }
+  .remove-btn {
+    color: tomato;
+  }
 }
 
 /* recorder form */
@@ -328,9 +334,10 @@ footer {
 .recorder-items {
   @include heading;
   .recorder-item {
+    margin-left: 10px;
     [id^="option-"] {
       @include inline-item;
-      margin-right: 15px;
+      margin-right: 10px;
     }
   }
 }
