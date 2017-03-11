@@ -5,13 +5,14 @@
    <%= render "options" %>
   </div>
   <div class="col-xs-9 records-table">
-    <div class="row heading">
-      <h2>
-        <%= @recorder.title %>
+    <div class="row">
+      <div class="heading">
+        <h2>
+          <%= @recorder.title %>
+        </h2>
         <%= link_to sanitize('<span class="glyphicon glyphicon-cog" aria-hidden="true"</sapn>'),
-                    edit_recorder_path(@recorder),
-                    class: "btn btn-link pull-right" %>
-      </h2>
+                    edit_recorder_path(@recorder) %>
+      </div>
     </div>
     <div class="row records-body">
       <%= render 'shared/records_table' %>
