@@ -303,23 +303,25 @@ footer {
       height: 100%;
       width: 100%;
       &:hover {
-        background-color: gainsboro;
-        z-index: 0;
-        filter: alpha(opacity=10);
-        -moz-opacity: 0.1;
-        opcity: 0.1;
+        background-color: rgba(0, 0, 0, 0.1);
       }
     }
-    .title {
-      font-size: 1.4em;
-      position: absolute;
-      top: 0;
-      left: 0;
-      max-width: 90%;
-      max-height: 40%;
-      word-wrap: break-word;
+    .heading {
+      @include flex-inline-container;
+        .text {
+          max-width: 90%;
+          height: 100%;
+          font-size: 1.4em;
+          white-space: nowrap;
+          overflow-x: hidden;
+          overflow-y: visible;
+          text-overflow: ellipsis;
+        }
+      .dropdown-menu {
+        left: auto;
+        right: 0;
+      }
     }
-    @include caret_btn-group;
     .options-preview {
       padding-top: 50px;
       padding-left: 30px;
@@ -334,7 +336,6 @@ footer {
     }
     hr {
       position: relative;
-      z-index: 1000;
       margin-top: 1px;
       margin-bottom: 0;
       border: 1px double;
