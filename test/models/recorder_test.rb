@@ -52,6 +52,10 @@ class RecorderTest < ActiveSupport::TestCase
     end
   end
 
+  test "order should be most recent updated first" do
+    assert_equal recorders(:latest_updated), Recorder.first
+  end
+
 =begin
   test "title should be unique" do
     duplicate_recorder = @recorder.dup

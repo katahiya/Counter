@@ -1,4 +1,5 @@
 class RecordsController < ApplicationController
+  include RecorderCommons
   before_action :logged_in_user, except: [:delete, :destroy]
   before_action -> {
     logged_in_user(user_recorders_url(user_id_of_destroy))
@@ -13,6 +14,7 @@ class RecordsController < ApplicationController
   def create
     @record = @recorder.records.build(option: @option)
     if @record.save
+      update_recorder
       flash[:success] = "saved!"
       redirect_to @recorder
     else
@@ -27,6 +29,7 @@ class RecordsController < ApplicationController
 
   def destroy
     @record.destroy
+    update_recorder
     @records = @recorder.records.all
     hide_modal_window @record,
                       "shared/records_table",

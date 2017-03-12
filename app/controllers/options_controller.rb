@@ -1,4 +1,5 @@
 class OptionsController < ApplicationController
+  include RecorderCommons
   before_action :logged_in_user, except: [:edit, :update, :delete, :destroy]
   before_action -> {
     logged_in_user(recorder_options_url(parent_recorder))
@@ -20,6 +21,7 @@ class OptionsController < ApplicationController
 
   def update
     @option.update_attributes(single_option_params)
+    update_recorder
     @options = @recorder.options
     hide_modal_window @option, 'option', "#option-#{@option.id}",
                                          option: @option
@@ -31,6 +33,7 @@ class OptionsController < ApplicationController
 
   def destroy
     @option.destroy
+    update_recorder
     @options = @recorder.options
     hide_modal_window @option,
                       "options/options_table",

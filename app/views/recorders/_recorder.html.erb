@@ -12,21 +12,24 @@
     </ul>
   </div>
 </div>
-<div class="row options-preview">
-  <ul class="list-inline">
-    <% recorder.options.each_with_index do |option, i| %>
-      <% if i > 3 %>
-        etc...
-        <% break %>
-      <% else %>
-        <li><%= option.name %></li>
+<div class="informations">
+  <div class="row options-preview">
+    <ul class="unstyled">
+      <% recorder.options.each_with_index do |option, i| %>
+        <li>
+          <div class="text">
+            <%= option.name %>
+          </div>
+        </li>
+        <% if i > 1 %>
+          <li class="etc">...</li>
+          <% break %>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
-</div>
-<% if recorder.records.any? %>
-  <div class="updated">
-      updated <%= recorder.records.last.created_at %>
+    </ul>
   </div>
-<% end %>
+  <div class="updated">
+      更新: <%= time_ago_in_words(recorder.updated_at) %>前
+  </div>
+</div>
 <hr>

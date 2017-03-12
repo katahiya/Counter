@@ -322,17 +322,27 @@ footer {
         right: 0;
       }
     }
-    .options-preview {
-      padding-top: 50px;
-      padding-left: 30px;
-    }
-    .btn-group {
-      top: 0;
-    }
-    .updated {
-      position: absolute;
-      bottom: 20px;
-      right: 5px;
+    .informations {
+      @include flex-inline-container;
+      -webkit-align-itmes: flex-end;
+      align-items: flex-end;
+      .options-preview {
+        .unstyled {
+          list-style: none;
+        }
+        .text {
+          max-width: 60px;
+          white-space: nowrap;
+          overflow-x: hidden;
+          overflow-y: visible;
+          text-overflow: ellipsis;
+        }
+        .etc {
+          font-weight: bold;
+        }
+      }
+      .updated {
+      }
     }
     hr {
       position: relative;

@@ -1,8 +1,12 @@
 class RecordersController < ApplicationController
+  include RecorderCommons
   before_action :logged_in_user, except: [:edit_title, :update_title, :add_options, :update_options, :delete, :destroy]
   before_action -> {
     logged_in_user(user_recorders_url(parent_user_id))
-  }, only: [:edit_title, :update_title, :add_options, :update_options, :delete, :destroy]
+  }, only: [:delete, :destroy]
+  before_action -> {
+    logged_in_user(edit_recorder_url(Recorder.find(params[:id])))
+  }, only: [:edit_title, :update_title, :add_options, :update_options]
   before_action -> {
     correct_user(parent_user_id)
   }, only: [:show, :add_options, :edit_title, :update_title, :edit, :update, :update_options, :delete, :destroy]
@@ -63,6 +67,7 @@ class RecordersController < ApplicationController
 
   def update_options
     @recorder.update_attributes(recorder_params)
+    update_recorder
     @options = @recorder.options
     if from_edit?
       hide_modal_window @recorder,

@@ -7,5 +7,6 @@ class CreateRecorders < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_index :recorders, [:user_id, :created_at]
+    add_index :recorders, [:updated_at]
   end
 end

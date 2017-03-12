@@ -25,8 +25,18 @@ recorder.records.create!(option: sr)
 recorder.records.create!(option: sr)
 recorder.records.create!(option: ssr)
 recorder.records.create!(option: sr)
+wordful_recorder = user.recorders.create!(title: "a" * 255)
+9.times do |n|
+  name = "b" * 40
+  wordful_recorder.options.create!(name: name)
+end
 
 49.times do |n|
-  title = Faker::Pokemon.name
-  user.recorders.create!(title: title)
+  title = "pokemon#{n}"
+  p_recorder = user.recorders.create!(title: title)
+  49.times do |n|
+    name = Faker::Pokemon.name
+    p_recorder.options.create!(name: name)
+    p_recorder.options.first.records.create!(recorder: p_recorder)
+  end
 end

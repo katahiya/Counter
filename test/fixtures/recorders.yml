@@ -3,13 +3,31 @@
 hoge:
   title: "hoge"
   user: hoge
+  created_at: <%= 10.years.ago%>
+  updated_at: <%= 1000.minutes.ago%>
 
 isolated:
   title: "isolated"
   user: hoge
+  created_at: <%= 10.years.ago%>
+  updated_at: <%= 100.minutes.ago%>
+
+latest_updated:
+  title: "latest_updated"
+  user: hoge
+  created_at: <%= 5.years.ago%>
+  updated_at: <%= 1.minutes.ago%>
+
+latest_created:
+  title: "latest_created"
+  user: hoge
+  created_at: <%= 1.years.ago%>
+  updated_at: <%= 10.minutes.ago%>
 
 <% 30.times do |n| %>
 counter_<%= n %>:
   title: <%= "Counter#{n}" %>
   user: hoge
+  created_at: <%= 10.years.ago%>
+  updated_at: <%= 100.minutes.ago%>
 <% end %>
