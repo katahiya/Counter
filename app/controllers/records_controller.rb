@@ -23,7 +23,6 @@ class RecordsController < ApplicationController
   end
 
   def delete
-    @index = params[:index]
     get_modal_window
   end
 
