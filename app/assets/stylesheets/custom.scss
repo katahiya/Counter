@@ -10,6 +10,12 @@ $gray-medium-light: #eaeaea;
   box_sizing: border-box;
 }
 
+@mixin timestamp_color {
+  .timestamp {
+    color: gray;
+  }
+}
+
 @mixin form_standard {
   padding: 25px;
   width: 100%;
@@ -157,6 +163,10 @@ footer {
   }
 }
 
+ul.unstyled {
+  list-style: none;
+}
+
 .debug_dump {
   clear: both;
   float: left;
@@ -164,8 +174,6 @@ footer {
   margin-top: 45px;
   @include box_sizing;
 }
-
-
 
 #error_explanation {
   color: red;
@@ -212,9 +220,7 @@ footer {
 
 .records-table {
   @include heading;
-  .timestamp {
-    color: gray;
-  }
+  @include timestamp_color;
   .remove-btn {
     color: tomato;
   }
@@ -385,4 +391,8 @@ footer {
   .options_table {
     margin-bottom: 20px;
   }
+}
+
+.checked {
+  @include timestamp_color;
 }

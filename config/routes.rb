@@ -24,5 +24,7 @@ Rails.application.routes.draw do
   get 'recorders/:id/delete', to: 'recorders#delete', as: :delete_recorder
   get 'options/:id/delete', to: 'options#delete', as: :delete_option
   get 'records/:id/delete', to: 'records#delete', as: :delete_record
+  get '/plural_delete_records', to: 'plural_actions#delete_records', as: :plural_delete_records
+  delete '/plural_delete_records', to: 'plural_actions#destroy_records'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

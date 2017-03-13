@@ -1,0 +1,9 @@
+<% provide(:title, 'confirmation')%>
+<% provide(:submit_url, recorder_edit_title_path(@recorder)) %>
+<% provide(:submit_text, '変更') %>
+
+<%= render "delete_commons",
+           heading: "複数の記録を削除",
+           html: "checked_record",
+           url: plural_delete_records_path(ids: params[:ids]) %>
+
