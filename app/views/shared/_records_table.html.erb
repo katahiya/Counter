@@ -2,7 +2,9 @@
   <h2>no records</h2>
 <% else %>
 <%= form_tag({action: :delete_records, controller: :plural_actions } , { method: :get , remote: true}) do %>
-<%= submit_tag "delete" %>
+<%= submit_tag "delete", class: "plural_action_button", disabled: true %>
+<%= button_tag "全選択", type: 'button', class: "check_all" %>
+<div class="appear_checked"></div>
   <div class="table-responsive records">
     <table class="table">
       <thead>
