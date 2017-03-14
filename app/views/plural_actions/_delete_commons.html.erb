@@ -6,9 +6,7 @@
       </div>
       <div class="panel-body checked">
         <% @checked.each do |c| %>
-          <ol class="unstyled">
-            <%= render html, c: c %>
-          </ol>
+          <%= render html, c: c %>
         <% end %>
         以上を完全に削除しますか?
       </div>

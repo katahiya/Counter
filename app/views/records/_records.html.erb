@@ -2,6 +2,7 @@
   <% index = @records.count - i %>
   <tbody>
     <tr id="record-<%= record.id %>">
+      <td><%= check_box_tag 'ids[]', record.id %></td>
       <td><%= index %>.</td>
       <td class="record-data">
         <div class="row">
@@ -17,7 +18,6 @@
                     class: "remove-btn",
                     remote: true %>
       </td>
-      <td><%= check_box_tag 'ids[]', record.id %></td>
     </tr>
   </tbody>
 <% end %>

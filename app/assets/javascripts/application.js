@@ -20,7 +20,7 @@
 $(function() {
 
   //checkbox
-  $('.check_all').click(function(){
+  $(document).on('click', '.check_all', function(){
     $('input[name="ids[]"]').prop('checked', true);
     generate_buttons();
   });
@@ -30,7 +30,7 @@ $(function() {
     remove_buttons();
   });
 
-  $('input[name="ids[]"]').change(function(){
+  $(document).on('change', 'input[name="ids[]"]', function(){
     checked_any();
   });
 

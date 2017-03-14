@@ -1,24 +1,25 @@
 <% if @recorder.records.count == 0 %>
   <h2>no records</h2>
 <% else %>
-<%= form_tag({action: :delete_records, controller: :plural_actions } , { method: :get , remote: true}) do %>
-<%= submit_tag "delete", class: "plural_action_button", disabled: true %>
-<%= button_tag "全選択", type: 'button', class: "check_all" %>
-<div class="appear_checked"></div>
-  <div class="table-responsive records">
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="col-xs-1"></th>
-          <th class="col-xs-9"></th>
-          <th class="col-xs-1"></th>
-          <th class="col-xs-1"></th>
-        </tr>
-      </thead>
-      <div class="">
-        <%= render "records/records" %>
-      </div>
-    </table>
-  </div>
-<% end %>
+  <%= form_tag({action: :delete_records, controller: :plural_actions } , { method: :get , remote: true}) do %>
+    <%= submit_tag "delete", class: "plural_action_button", disabled: true %>
+    <%= button_tag "全選択", type: 'button', class: "check_all" %>
+    <span class="appear_checked"></span>
+
+    <div class="table-responsive records">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-9"></th>
+            <th class="col-xs-1"></th>
+          </tr>
+        </thead>
+        <div class="">
+          <%= render "records/records" %>
+        </div>
+      </table>
+    </div>
+  <% end %>
 <% end %>

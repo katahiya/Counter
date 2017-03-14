@@ -1,5 +1,11 @@
-<% @options.each do |option| %>
-  <div id="option-<%= option.id %>">
-    <%= render option %>
-  </div>
+<%= form_tag({action: :delete_options, controller: :plural_actions } , { method: :get , remote: true}) do %>
+  <%= submit_tag "delete", class: "plural_action_button", disabled: true %>
+  <%= button_tag "全選択", type: 'button', class: "check_all" %>
+  <span class="appear_checked"></span>
+
+  <% @options.each do |option| %>
+    <div id="option-<%= option.id %>">
+      <%= render option %>
+    </div>
+  <% end %>
 <% end %>
