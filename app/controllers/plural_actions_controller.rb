@@ -1,5 +1,5 @@
 class PluralActionsController < ApplicationController
-  include RecorderCommons
+  include RecorderFamily
   before_action -> {
     logged_in_user(recorder_url(parent_of_records))
   }, only: [:delete_records, :destroy_records]

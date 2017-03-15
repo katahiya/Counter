@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  include RecorderCommons
+  include RecorderFamily
   before_action :logged_in_user, except: [:delete, :destroy]
   before_action -> {
     logged_in_user(user_recorders_url(user_id_of_destroy))

@@ -1,5 +1,5 @@
 class RecordersController < ApplicationController
-  include RecorderCommons
+  include RecorderFamily
   before_action :logged_in_user, except: [:edit_title, :update_title, :add_options, :update_options, :delete, :destroy]
   before_action -> {
     logged_in_user(user_recorders_url(parent_user_id))

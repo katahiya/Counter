@@ -1,5 +1,5 @@
 class OptionsController < ApplicationController
-  include RecorderCommons
+  include RecorderFamily
   before_action :logged_in_user, except: [:edit, :update, :delete, :destroy]
   before_action -> {
     logged_in_user(recorder_options_url(parent_recorder))

@@ -1,0 +1,9 @@
+<% @recorder.options.each_with_index do |option, i| %>
+  <div class="select-count">
+    <div class="form-group">
+      <label><%= option.name %></label>
+      <%= select_tag "options_attrbutes[#{i}][count]", options_for_select([*0..25]), class: "form-control" %>
+      <%= hidden_field_tag "options_attrbutes[#{i}][id]", option.id %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+<% provide(:title, '一括記録')%>
+<% provide(:submit_url, batch_register_path(@recorder)) %>
+<% provide(:submit_text, '追加') %>
+
+<%= render "shared/modal_form_template",
+           heading: "一括記録",
+           html: 'form' %>

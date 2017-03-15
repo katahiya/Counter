@@ -1,4 +1,4 @@
-module RecorderCommons
+module RecorderFamily
   private
 
     def update_recorder

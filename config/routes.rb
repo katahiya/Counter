@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'recorders/:id/edit_title', to: 'recorders#edit_title', as: :recorder_edit_title
   patch 'recorders/:id/edit_title', to: 'recorders#update_title'
   get 'recorders/:id/delete', to: 'recorders#delete', as: :delete_recorder
+  get 'recorders/:id/batch_register', to: 'batch_registration#new', as: :batch_register
+  post 'recorders/:id/batch_register', to: 'batch_registration#create'
   get 'options/:id/delete', to: 'options#delete', as: :delete_option
   get 'records/:id/delete', to: 'records#delete', as: :delete_record
   get '/plural_delete_records', to: 'plural_actions#delete_records', as: :plural_delete_records
