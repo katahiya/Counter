@@ -5,6 +5,9 @@ class BatchRegistrationController < ApplicationController
   }
 
   def new
+    @recorder.options.count.times do
+      @recorder.records.build
+    end
     get_modal_window
   end
 

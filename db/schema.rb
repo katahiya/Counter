@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218053555) do
+ActiveRecord::Schema.define(version: 20170316121435) do
 
   create_table "options", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170218053555) do
     t.integer  "option_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "count"
     t.index ["option_id"], name: "index_records_on_option_id"
     t.index ["recorder_id", "created_at"], name: "index_records_on_recorder_id_and_created_at"
     t.index ["recorder_id"], name: "index_records_on_recorder_id"

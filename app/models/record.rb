@@ -4,4 +4,5 @@ class Record < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   validates :recorder_id, presence: :true
   validates :option_id, presence: :true
+  validates :count, numericality: { only_integer: true, greater_than: 0 }
 end
