@@ -1,7 +1,9 @@
 <ul>
-  <li>
-    <div class="row">
-      <%= c.name %>
-    </div>
-  </li>
+  <% @checked.each do |c| %>
+    <li>
+      <div class="row">
+        <%= c.name %>
+      </div>
+    </li>
+  <% end %>
 </ul>

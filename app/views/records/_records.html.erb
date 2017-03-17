@@ -7,7 +7,7 @@
           <td rowspan=<%= rowspan %>><%= check_box_tag 'ids[]', recordability.id %></td>
           <td rowspan=<%= rowspan %>>
             <%= link_to sanitize('<span class="glyphicon glyphicon-remove" aria-hidden="true"</sapn>'),
-                        delete_record_path(record),
+                        delete_recordability_path(recordability),
                         class: "remove-btn",
                         remote: true %>
           </td>

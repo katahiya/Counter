@@ -5,9 +5,7 @@
         <%= heading %>
       </div>
       <div class="panel-body checked">
-        <% @checked.each do |c| %>
-          <%= render html, c: c %>
-        <% end %>
+        <%= render html %>
         以上を完全に削除しますか?
       </div>
       <div class="panel-footer">

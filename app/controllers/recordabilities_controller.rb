@@ -2,7 +2,10 @@ class RecordabilitiesController < ApplicationController
   include RecorderFamily
   before_action -> {
     logged_in_user(recorder_url(current_recorder))
-  }
+  }, only: [:new, :create]
+  before_action -> {
+    logged_in_user(recorder_url(parent_recorder))
+  }, only: [:delete, :destroy]
   before_action -> {
     correct_user(parent_user.id)
   }
@@ -26,7 +29,20 @@ class RecordabilitiesController < ApplicationController
     @recordabilities = @recorder.recordabilities
     @recordability = @recorder.recordabilities.build
     hide_modal_window @recorder,
-                      "shared/records_table",
+                      "recorders/records_table",
+                      ".records-body"
+  end
+
+  def delete
+    get_modal_window
+  end
+
+  def destroy
+    @recordability.destroy
+    update_recorder
+    @recordabilities = @recorder.recordabilities.all
+    hide_modal_window @recorder,
+                      "recorders/records_table",
                       ".records-body"
   end
 
@@ -35,6 +51,11 @@ class RecordabilitiesController < ApplicationController
 
     def current_recorder
       @recorder = Recorder.find(params[:recorder_id])
+    end
+
+    def parent_recorder
+      @recordability = Recordability.find(params[:id])
+      @recorder = @recordability.recorder
     end
 
     def parent_user

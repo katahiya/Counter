@@ -1,0 +1,5 @@
+<ol>
+  <% @checked.each do |c| %>
+    <%= render "shared/records_list", recordability: c %>
+  <% end %>
+</ol>

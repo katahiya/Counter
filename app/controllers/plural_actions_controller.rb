@@ -1,8 +1,8 @@
 class PluralActionsController < ApplicationController
   include RecorderFamily
   before_action -> {
-    logged_in_user(recorder_url(parent_of_records))
-  }, only: [:delete_records, :destroy_records]
+    logged_in_user(recorder_url(parent_of_recordabilities))
+  }, only: [:delete_recordabilities, :destroy_recordabilities]
   before_action -> {
     logged_in_user(edit_recorder_url(parent_of_options))
   }, only: [:delete_options, :destroy_options]
@@ -16,24 +16,28 @@ class PluralActionsController < ApplicationController
   end
 
   def destroy_options
-    plural_destroy
+    Option.transaction do
+      plural_destroy
+    end
     @options = @recorder.options.all
     hide_modal_window @recorder,
                       "options/options_table",
                       ".options_table"
   end
 
-  def delete_records
+  def delete_recordabilities
     @objects = @checked
     get_modal_window
   end
 
-  def destroy_records
-    plural_destroy
-    @records = @recorder.records.all
-    @options = @records.options.all
+  def destroy_recordabilities
+    Recordability.transaction do
+      plural_destroy
+    end
+    @recordabilities = @recorder.recordabilities.all
+    @options = @recorder.options.all
     hide_modal_window @recorder,
-                      "shared/records_table",
+                      "recorders/records_table",
                       ".records-body"
   end
 
@@ -43,8 +47,8 @@ class PluralActionsController < ApplicationController
       params.require(:ids)
     end
 
-    def parent_of_records
-      @checked = Record.find(checked_ids)
+    def parent_of_recordabilities
+      @checked = Recordability.find(checked_ids)
       @recorder = @checked.first.recorder
     end
 

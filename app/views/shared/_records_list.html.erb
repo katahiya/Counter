@@ -1,0 +1,12 @@
+<li value = <%= recordability_index(recordability) %>>
+  <ul>
+    <% recordability.records.each do |record| %>
+      <li>
+        <%= "#{record.option.name}, #{record.count}" %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="row timestamp">
+    <%= time_ago_in_words(recordability.created_at) %>前
+  </div>
+</li>
