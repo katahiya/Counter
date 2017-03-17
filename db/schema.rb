@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316121435) do
+ActiveRecord::Schema.define(version: 20170317050339) do
 
   create_table "options", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 20170316121435) do
     t.datetime "updated_at",  null: false
     t.index ["recorder_id", "created_at"], name: "index_options_on_recorder_id_and_created_at"
     t.index ["recorder_id"], name: "index_options_on_recorder_id"
+  end
+
+  create_table "recordabilities", force: :cascade do |t|
+    t.integer  "recorder_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["recorder_id", "created_at"], name: "index_recordabilities_on_recorder_id_and_created_at"
+    t.index ["recorder_id"], name: "index_recordabilities_on_recorder_id"
   end
 
   create_table "recorders", force: :cascade do |t|
@@ -32,14 +40,14 @@ ActiveRecord::Schema.define(version: 20170316121435) do
   end
 
   create_table "records", force: :cascade do |t|
-    t.integer  "recorder_id"
+    t.integer  "recordability_id"
     t.integer  "option_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "count"
     t.index ["option_id"], name: "index_records_on_option_id"
-    t.index ["recorder_id", "created_at"], name: "index_records_on_recorder_id_and_created_at"
-    t.index ["recorder_id"], name: "index_records_on_recorder_id"
+    t.index ["recordability_id", "created_at"], name: "index_records_on_recordability_id_and_created_at"
+    t.index ["recordability_id"], name: "index_records_on_recordability_id"
   end
 
   create_table "users", force: :cascade do |t|

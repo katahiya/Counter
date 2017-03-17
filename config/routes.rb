@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :options, except: [:show, :new, :create], shallow: true do
         resources :records, only: [:create, :destroy]
       end
+      resources :recordabilities
     end
   end
   get 'recorders/:id/add_options', to: 'recorders#add_options', as: :recorder_add_options

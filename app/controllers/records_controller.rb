@@ -32,8 +32,7 @@ class RecordsController < ApplicationController
     @records = @recorder.records.all
     hide_modal_window @record,
                       "shared/records_table",
-                      ".records-body",
-                      recorder: @recorder
+                      ".records-body"
   end
 
   private

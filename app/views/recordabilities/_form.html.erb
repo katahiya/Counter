@@ -2,9 +2,10 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="batch_registartion-form">
-    <%= render 'option_field', f: f %>
+    <%= f.fields_for @recordability do |fr| %>
+      <%= render 'option_field', f: fr %>
+    <% end %>
   </div>
   <%= render "shared/modal_form_buttons", f: f %>
   </div>
 <% end %>
-

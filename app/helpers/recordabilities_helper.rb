@@ -1,0 +1,2 @@
+module RecordabilitiesHelper
+end

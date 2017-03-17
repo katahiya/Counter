@@ -4,6 +4,10 @@ module ViewHelper
     Array(@recorder.records).reverse.index(record) + 1
   end
 
+  def recordability_index(recordability)
+    Array(@recorder.recordabilities).reverse.index(recordability)
+  end
+
   def new_fields_for(f, model)
     fields = []
     f.fields_for model do |m|

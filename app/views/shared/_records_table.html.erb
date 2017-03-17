@@ -1,5 +1,5 @@
-<% if @recorder.records.count == 0 %>
-  <h2>no records</h2>
+<% if @recorder.recordabilities.count == 0 %>
+  <h2>記録はまだありません<br>フォームから新しく記録しましょう!</h2>
 <% else %>
   <%= form_tag({action: :delete_records, controller: :plural_actions } , { method: :get , remote: true}) do %>
     <%= submit_tag "delete", class: "plural_action_button", disabled: true %>
@@ -12,8 +12,8 @@
           <tr>
             <th class="col-xs-1"></th>
             <th class="col-xs-1"></th>
-            <th class="col-xs-9"></th>
             <th class="col-xs-1"></th>
+            <th class="col-xs-9"></th>
           </tr>
         </thead>
         <div class="">

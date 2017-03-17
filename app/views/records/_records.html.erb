@@ -1,23 +1,29 @@
-<% @records.each_with_index do |record, i| %>
-  <% index = @records.count - i %>
-  <tbody>
-    <tr id="record-<%= record.id %>">
-      <td><%= check_box_tag 'ids[]', record.id %></td>
-      <td><%= index %>.</td>
-      <td class="record-data">
-        <div class="row">
-          <%= "#{record.option.name}, #{record.count}" %>
-        </div>
-        <div class="row timestamp">
-          <%= time_ago_in_words(record.created_at) %>前
-        </div>
-      </td>
-      <td>
-        <%= link_to sanitize('<span class="glyphicon glyphicon-remove" aria-hidden="true"</sapn>'),
-                    delete_record_path(record),
-                    class: "remove-btn",
-                    remote: true %>
-      </td>
-    </tr>
+<% @recordabilities.each do |recordability, i| %>
+  <% rowspan = recordability.records.count %>
+  <tbody id="recordability-<%= recordability.id %>">
+    <% recordability.records.each_with_index do |record, i| %>
+      <tr id="record-<%= record.id %>">
+        <% if i == 0 %>
+          <td rowspan=<%= rowspan %>><%= check_box_tag 'ids[]', recordability.id %></td>
+          <td rowspan=<%= rowspan %>>
+            <%= link_to sanitize('<span class="glyphicon glyphicon-remove" aria-hidden="true"</sapn>'),
+                        delete_record_path(record),
+                        class: "remove-btn",
+                        remote: true %>
+          </td>
+          <td rowspan=<%= rowspan %>><%= recordability_index(recordability) %>.</td>
+        <% end %>
+        <td class="record-data">
+          <div class="row">
+            <%= "#{record.option.name}, #{record.count}" %>
+          </div>
+          <div class="row timestamp">
+            <%= time_ago_in_words(record.created_at) %>前
+          </div>
+        </td>
+        <% if i == 0 %>
+        <% end %>
+      </tr>
+    <% end %>
   </tbody>
 <% end %>

@@ -20,8 +20,8 @@ class RecordersController < ApplicationController
   end
 
   def show
-    @records = @recorder.records.all
-    @record = @recorder.records.build
+    @recordabilities = @recorder.recordabilities.all
+    @recordability = @recorder.recordabilities.build
   end
 
   def create
