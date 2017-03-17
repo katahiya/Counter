@@ -6,7 +6,7 @@
       <td><%= index %>.</td>
       <td class="record-data">
         <div class="row">
-          <%= record.option.name %>
+          <%= "#{record.option.name}, #{record.count}" %>
         </div>
         <div class="row timestamp">
           <%= time_ago_in_words(record.created_at) %>前

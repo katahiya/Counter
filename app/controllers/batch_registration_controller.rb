@@ -12,6 +12,13 @@ class BatchRegistrationController < ApplicationController
   end
 
   def create
+    @recorder.update_attributes(recorder_params)
+    update_recorder
+    @records = @recorder.records
+    hide_modal_window @recorder,
+                      "shared/records_table",
+                      ".records-body",
+                      recorder: @recorder
   end
 
 
@@ -19,6 +26,11 @@ class BatchRegistrationController < ApplicationController
 
     def current_recorder
       @recorder = Recorder.find(params[:id])
+    end
+
+    def recorder_params
+      params[:recorder][:records_attributes].select!{ |index, attr| attr[:count].to_i > 0 }
+      params.require(:recorder).permit(records_attributes: [:count, :option_id])
     end
 
 end
