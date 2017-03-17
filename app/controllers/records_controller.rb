@@ -5,22 +5,8 @@ class RecordsController < ApplicationController
     logged_in_user(user_recorders_url(user_id_of_destroy))
   }, only: [:delete, :destroy]
   before_action -> {
-    correct_user(user_id_of_create)
-  }, only: [:create]
-  before_action -> {
     correct_user(user_id_of_destroy)
   }, only: [:delete, :destroy]
-
-  def create
-    @record = @recorder.records.build(option: @option)
-    if @record.save
-      update_recorder
-      flash[:success] = "saved!"
-      redirect_to @recorder
-    else
-      @recorder.reload
-    end
-  end
 
   def delete
     get_modal_window

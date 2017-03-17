@@ -1,0 +1,2 @@
+module SingleRegisterHelper
+end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BatchRegistrationControllerTest < ActionDispatch::IntegrationTest
+class SingleRegisterControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

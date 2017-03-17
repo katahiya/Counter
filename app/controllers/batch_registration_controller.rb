@@ -1,2 +1,0 @@
-class BatchRegistrationController < ApplicationController
-end
