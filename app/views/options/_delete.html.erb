@@ -1,2 +1,3 @@
-<%= render "shared/delete_form", name: @option.name, url: option_path(@option) %>
-
+<%= render "shared/delete_form", name: @option.name,
+                                 body: "delete_confirmation",
+                                 url: option_path(@option) %>

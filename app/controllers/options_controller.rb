@@ -33,6 +33,7 @@ class OptionsController < ApplicationController
 
   def destroy
     @option.destroy
+    delete_empty_recordabilities
     update_recorder
     @options = @recorder.options
     hide_modal_window @option,

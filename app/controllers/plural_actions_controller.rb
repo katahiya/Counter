@@ -19,6 +19,7 @@ class PluralActionsController < ApplicationController
     Option.transaction do
       plural_destroy
     end
+    delete_empty_recordabilities
     @options = @recorder.options.all
     hide_modal_window @recorder,
                       "options/options_table",

@@ -1,1 +1,3 @@
-<%= render "shared/delete_form", name: @recorder.title, url: recorder_path(@recorder) %>
+<%= render "shared/delete_form", name: @recorder.title,
+                                 body: "delete_confirmation",
+                                 url: recorder_path(@recorder) %>
