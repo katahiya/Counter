@@ -5,7 +5,7 @@ class RecordabilitiesController < ApplicationController
   }, only: [:new, :create]
   before_action -> {
     logged_in_user(recorder_url(parent_recorder))
-  }, only: [:delete, :destroy]
+  }, only: [:edit, :update, :delete, :destroy]
   before_action -> {
     correct_user(parent_user.id)
   }
@@ -28,6 +28,26 @@ class RecordabilitiesController < ApplicationController
     end
     @recordabilities = @recorder.recordabilities
     @recordability = @recorder.recordabilities.build
+    hide_modal_window @recorder,
+                      "recorders/records_table",
+                      ".records-body"
+  end
+
+  def edit
+    registered_options = @recordability.records.pluck :option_id
+    @recorder.options.each do |option|
+      @recordability.records.build(option: option) unless registered_options.include?(option.id)
+    end
+    get_modal_window
+  end
+
+  def update
+    Recordability.transaction do Record.transaction do
+        @recordability.update_attributes(recordability_params)
+        update_recorder
+      end
+    end
+    @recordabilities = @recorder.recordabilities
     hide_modal_window @recorder,
                       "recorders/records_table",
                       ".records-body"
@@ -65,5 +85,10 @@ class RecordabilitiesController < ApplicationController
     def recorder_params
       params[:recorder][:recordability][:records_attributes].select! { |index, attr| attr[:count].to_i > 0 }
       params.require(:recorder).permit(recordability: { records_attributes: [:count, :option_id] })
+    end
+
+    def recordability_params
+      params[:recordability][:records_attributes].select! { |index, attr| attr[:count].to_i > 0 }
+      params.require(:recordability).permit(records_attributes: [:count, :option_id, :id])
     end
 end

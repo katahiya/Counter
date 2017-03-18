@@ -30,15 +30,15 @@ third.records.create!(option: ssr, count: 1)
 third.records.create!(option: sr, count: 1)
 wordful_recorder = user.recorders.create!(title: "a" * 255)
 9.times do |n|
-  name = "b" * 40
-  wordful_recorder.options.create!(name: name)
+  name = "b" * 39
+  wordful_recorder.options.create!(name: name << n)
 end
 
 49.times do |n|
   title = "pokemon#{n}"
   p_recorder = user.recorders.create!(title: title)
   49.times do |n|
-    name = Faker::Pokemon.name
+    name = "option#{n}"
     p_recorder.options.create!(name: name)
     p_recorder.recordabilities.create.records.create!(option: p_recorder.options.first, count: 1)
   end

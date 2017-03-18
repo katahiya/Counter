@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317050339) do
+ActiveRecord::Schema.define(version: 20170318045954) do
 
   create_table "options", force: :cascade do |t|
     t.string   "name"
     t.integer  "recorder_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["name", "recorder_id"], name: "index_options_on_name_and_recorder_id", unique: true
     t.index ["recorder_id", "created_at"], name: "index_options_on_recorder_id_and_created_at"
     t.index ["recorder_id"], name: "index_options_on_recorder_id"
   end

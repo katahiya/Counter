@@ -1,0 +1,33 @@
+<% @recordabilities.each do |recordability, i| %>
+  <% rowspan = recordability.records.count %>
+  <tbody id="recordability-<%= recordability.id %>">
+    <% recordability.records.each_with_index do |record, i| %>
+      <tr id="record-<%= record.id %>">
+        <% if i == 0 %>
+          <td rowspan=<%= rowspan %>><%= check_box_tag 'ids[]', recordability.id %></td>
+          <td rowspan=<%= rowspan %>>
+            <div class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">
+                <span class="caret" aria-hidden="true"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to "編集", edit_recordability_path(recordability), remote: true %></li>
+                <li><%= link_to "削除", delete_recordability_path(recordability), remote: true %></li>
+              </ul>
+            </div>
+          </td>
+          <td rowspan=<%= rowspan %>><%= recordability_index(recordability) %>.</td>
+        <% end %>
+        <td class="record-data">
+          <div class="row">
+            <%= "#{record.option.name}, #{record.count}" %>
+          </div>
+          <div class="row timestamp">
+            <%= time_ago_in_words(record.created_at) %>前
+          </div>
+        </td>
+        <% if i == 0 %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+<% end %>

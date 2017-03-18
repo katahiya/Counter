@@ -1,0 +1,16 @@
+<%= form_for(@recordability, remote: true) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.fields_for :records, @recordability.records.sort{ |a, b| a.option.created_at <=> b.option.created_at } do |fr| %>
+    <% option = fr.object.option %>
+    <div class="select-count">
+      <div class="form-group">
+        <label><%= option.name %></label>
+        <%= fr.select :count, options_for_select([*0..25], selected: fr.object.count.to_i), { class: "form-control" } %>
+        <%= fr.hidden_field :option_id, value: option.id %>
+      </div>
+    </div>
+  <% end %>
+  <%= render "shared/modal_form_buttons", f: f %>
+<% end %>
+
