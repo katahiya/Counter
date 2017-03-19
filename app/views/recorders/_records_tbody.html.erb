@@ -1,9 +1,9 @@
 <% @recordabilities.each do |recordability, i| %>
   <% rowspan = recordability.records.count %>
   <tbody id="recordability-<%= recordability.id %>">
-    <% recordability.records.each_with_index do |record, i| %>
+    <% recordability.records.each.with_index(1) do |record, i| %>
       <tr id="record-<%= record.id %>">
-        <% if i == 0 %>
+        <% if i == 1 %>
           <td rowspan=<%= rowspan %>><%= check_box_tag 'ids[]', recordability.id %></td>
           <td rowspan=<%= rowspan %>>
             <div class="dropdown">
@@ -19,12 +19,15 @@
         <% end %>
         <td class="record-data">
           <div class="row">
-            <%= "#{record.option.name}, #{record.count}" %>
+            <%= record.option.name %>
           </div>
-          <div class="row timestamp">
-            <%= time_ago_in_words(record.created_at) %>前
-          </div>
+          <% if i == rowspan %>
+            <div class="row timestamp">
+              <%= time_ago_in_words(record.created_at) %>前
+            </div>
+          <% end %>
         </td>
+        <td><%= record.count %></td>
         <% if i == 0 %>
         <% end %>
       </tr>

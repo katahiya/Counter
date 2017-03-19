@@ -17,7 +17,23 @@
 //= require turbolinks
 //= require_tree .
 
+//resize windowful by window height
+var resize_windowful = function() {
+  var window_height = $(window).height();
+  var header_height = $('.navbar-fixed-top').height();
+  var resize = window_height - header_height - 50;
+  $('.windowful').css("height", resize + "px");
+  var side_height = $('.option-bar-head').height();
+  console.log(window_height);
+  console.log(header_height);
+  console.log(side_height);
+  $('.record_form').css("height", resize-side_height + "px");
+};
+
 $(function() {
+
+  //resize section by window height
+  resize_windowful();
 
   //checkbox
   $(document).on('click', '.check_all', function(){
@@ -58,4 +74,9 @@ $(function() {
       remove_buttons();
     }
   };
+
+});
+
+$(window).resize(function() {
+  resize_windowful();
 });

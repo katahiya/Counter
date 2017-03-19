@@ -1,11 +1,14 @@
 <%= form_for(@recorder, url: yield(:submit_url), method: :post, remote: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <div class="batch_registartion-form">
-    <%= f.fields_for @recordability do |fr| %>
-      <%= render 'option_field', f: fr %>
-    <% end %>
+  <div class="scroll-window">
+    <div class="batch_registartion-form">
+      <%= f.fields_for @recordability do |fr| %>
+        <%= render 'option_field', f: fr %>
+      <% end %>
+    </div>
   </div>
+
   <%= render "shared/modal_form_buttons", f: f %>
   </div>
 <% end %>

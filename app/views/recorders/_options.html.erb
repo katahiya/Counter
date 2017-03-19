@@ -1,7 +1,17 @@
+<div class="windowful">
 <div class="panel panel-default option-bar">
+  <div class="option-bar-head">
   <div class="panel-heading side-item">
-    <%= link_to "一括記録", new_recorder_recordability_path(@recorder), remote: true %>
-    <div>記録</div>
+    <span class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">
+        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to "選択肢を追加", recorder_add_options_path(@recorder), remote: true %></li>
+        <li><%= link_to "まとめて記録", new_recorder_recordability_path(@recorder), remote: true %></li>
+      </ul>
+     </span>
+    記録
+  </div>
   </div>
   <ul class="nav nav-pills nav-stacked">
     <% if @recorder.options.any? %>
@@ -9,6 +19,6 @@
         <%= render 'shared/record_form' %>
       </section>
     <% end %>
-    <li><%= link_to "選択肢を追加", recorder_add_options_path(@recorder), class: "add-link side-item", remote: true %></li>
   </ul>
+</div>
 </div>

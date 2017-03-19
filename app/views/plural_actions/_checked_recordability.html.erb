@@ -1,5 +1,5 @@
-<ol>
-  <% @checked.each do |c| %>
+<% @checked.each do |c| %>
+  <div class="row">
     <%= render "shared/records_list", recordability: c %>
-  <% end %>
-</ol>
+  </div>
+<% end %>

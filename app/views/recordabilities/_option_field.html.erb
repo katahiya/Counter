@@ -1,8 +1,8 @@
 <% @recorder.options.zip(new_fields_for(f, :records)).each do |option, fr| %>
   <div class="select-count">
     <div class="form-group">
-      <label><%= option.name %></label>
-      <%= fr.select :count, options_for_select([*0..25]), class: "form-control" %>
+      <%= fr.label :count, option.name, class: "label-xs" %>
+      <%= fr.select :count, options_for_select([*0..25]) %>
       <%= fr.hidden_field :option_id, value: option.id %>
     </div>
   </div>

@@ -10,15 +10,14 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="col-xs-1"></th>
-            <th class="col-xs-1"></th>
-            <th class="col-xs-1"></th>
-            <th class="col-xs-9"></th>
+            <th class="col-xs-1">選択</th>
+            <th class="col-xs-1">操作</th>
+            <th class="col-xs-1">No.</th>
+            <th class="col-xs-8">記録内容</th>
+            <th class="col-xs-1">数量</th>
           </tr>
         </thead>
-        <div class="">
-          <%= render "recorders/records_tbody" %>
-        </div>
+        <%= render "recorders/records_tbody" %>
       </table>
     </div>
   <% end %>
