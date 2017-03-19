@@ -214,6 +214,13 @@ ul.unstyled {
   }
 }
 
+input:disabled.plural_action_button {
+  color: darkgray;
+}
+input:enabled.plural_action_button {
+  color: black;
+}
+
 .windowful {
   min-height: 120px;
 }
@@ -221,7 +228,6 @@ ul.unstyled {
 /* record form */
 .option-bar {
   margin-top: 30px;
-  overflow: visible;
   height: 100%;
   .side-item {
     display: block;
@@ -244,14 +250,20 @@ ul.unstyled {
   @include heading;
   @include timestamp_color;
   table {
-    max-height: 780px;
-    overflow-y: auto;
-  }
-  thead {
-    border-bottom: 3px double black;
-  }
-  tbody {
-    border-bottom: 2px solid black;
+    thead {
+      border-bottom: 3px double black;
+      display: block;
+      width: 100%;
+      overflow: visible;
+    }
+    tbody {
+      display: block;
+      width: 100%;
+      overflow: auto;
+      tr {
+        width: 100%;
+      }
+    }
   }
 }
 

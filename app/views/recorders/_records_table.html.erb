@@ -2,19 +2,21 @@
   <h2>記録はまだありません<br>フォームから新しく記録しましょう!</h2>
 <% else %>
   <%= form_tag({action: :delete_recordabilities, controller: :plural_actions } , { method: :get , remote: true}) do %>
-    <%= submit_tag "delete", class: "plural_action_button", disabled: true %>
-    <%= button_tag "全選択", type: 'button', class: "check_all" %>
-    <span class="appear_checked"></span>
+    <div class="records-buttons">
+      <%= submit_tag "delete", class: "plural_action_button", disabled: true %>
+      <%= button_tag "全選択", type: 'button', class: "check_all" %>
+      <span class="appear_checked"></span>
+    </div>
 
     <div class="table-responsive records">
       <table class="table">
-        <thead>
+        <thead class="records-thead">
           <tr>
-            <th class="col-xs-1">選択</th>
-            <th class="col-xs-1">操作</th>
-            <th class="col-xs-1">No.</th>
-            <th class="col-xs-8">記録内容</th>
-            <th class="col-xs-1">数量</th>
+            <th class="record-select">選択</th>
+            <th class="record-action">操作</th>
+            <th class="record-no">No.</th>
+            <th class="record-data">記録内容</th>
+            <th class="record-count">数量</th>
           </tr>
         </thead>
         <%= render "recorders/records_tbody" %>
@@ -22,3 +24,4 @@
     </div>
   <% end %>
 <% end %>
+</div>

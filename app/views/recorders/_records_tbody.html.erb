@@ -1,11 +1,11 @@
+<tbody class="records-tbody">
 <% @recordabilities.each do |recordability, i| %>
   <% rowspan = recordability.records.count %>
-  <tbody id="recordability-<%= recordability.id %>">
     <% recordability.records.each.with_index(1) do |record, i| %>
       <tr id="record-<%= record.id %>">
         <% if i == 1 %>
-          <td rowspan=<%= rowspan %>><%= check_box_tag 'ids[]', recordability.id %></td>
-          <td rowspan=<%= rowspan %>>
+          <td rowspan=<%= rowspan %> class="record-select"><%= check_box_tag 'ids[]', recordability.id %></td>
+          <td rowspan=<%= rowspan %> class="record-action">
             <div class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">
                 <span class="caret" aria-hidden="true"></span></a>
@@ -15,7 +15,7 @@
               </ul>
             </div>
           </td>
-          <td rowspan=<%= rowspan %>><%= recordability_index(recordability) %>.</td>
+          <td rowspan=<%= rowspan %> class="record-no"><%= recordability_index(recordability) %>.</td>
         <% end %>
         <td class="record-data">
           <div class="row">
@@ -27,10 +27,10 @@
             </div>
           <% end %>
         </td>
-        <td><%= record.count %></td>
+        <td class="record-count"><%= record.count %></td>
         <% if i == 0 %>
         <% end %>
       </tr>
     <% end %>
-  </tbody>
 <% end %>
+</tbody>

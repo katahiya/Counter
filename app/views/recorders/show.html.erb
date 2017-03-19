@@ -1,11 +1,11 @@
 <% provide(:title, @recorder.title) %>
 
 <div class="row">
-  <div class="col-xs-3">
+  <div class="col-xs-3 options-col">
    <%= render "options" %>
   </div>
   <div class="col-xs-9 records-table">
-    <div class="row">
+    <div class="row records-head">
       <div class="heading">
         <h2>
           <%= @recorder.title %>
