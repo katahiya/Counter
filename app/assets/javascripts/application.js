@@ -17,8 +17,17 @@
 //= require turbolinks
 //= require_tree .
 
+//コントローラーとアクションで呼び出しに制限をかける
+var filter = function(controller, action, callback) {
+  selector = `body[data-controller='${controller}'][data-action='${action}']`;
+  console.log(selector);
+  if($(selector).length > 0)
+    callback();
+};
+
 //resize windowful by window height
 var resize_windowful = function() {
+  console.log("resize");
   var window_height = $(window).height();
   var header_height = $('.navbar-fixed-top').height();
   var resize = window_height - header_height - 50;
@@ -40,10 +49,6 @@ var resize_records_table = function(base) {
   var buttons_height = $('.records-buttons').height();
   var thead_height = $('.records-thead').height();
   var table_width = $('.records-tbody').width();
-  console.log(head_height);
-  console.log(buttons_height);
-  console.log(thead_height);
-  console.log(table_width);
   $('.records-tbody').css("max-height", base-head_height-buttons_height-thead_height + "px");
   $('td.record-select').css("width", table_width*0.1 + "px");
   $('td.record-action').css("width", table_width*0.1 + "px");
@@ -59,9 +64,7 @@ var resize_records_table = function(base) {
 }
 
 $(function() {
-
-  //resize section by window height
-  resize_windowful();
+  console.log("ready");
 
   //checkbox
   $(document).on('click', '.check_all', function(){
@@ -105,10 +108,17 @@ $(function() {
 
 });
 
-$(window).load(function(){
-  resize_windowful();
+$(document).on('turbolinks:load', function(){
+  //resize section by window height
+  console.log("turbolinks");
+  filter("recorders", "show", function() {
+    resize_windowful()
+  });
 });
 
 $(window).resize(function() {
-  resize_windowful();
+  console.log("window");
+  filter("recorders", "show", function() {
+    resize_windowful()
+  });
 });

@@ -4,4 +4,7 @@
   $("#flash_messages").html("<%= escape_javascript(render "shared/flash_messages") %>")
   $("<%= rerender_selecter %>").html("<%= escape_javascript(render html_template, html_args) %>")
   $("<%= modal_selecter %>").modal("hide")
+  filter("recorders", "show", function() {
+    resize_windowful()
+  })
 <% end %>

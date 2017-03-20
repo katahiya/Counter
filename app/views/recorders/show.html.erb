@@ -10,6 +10,8 @@
         <h2>
           <%= @recorder.title %>
         </h2>
+        <%= link_to sanitize('<span class="glyphicon glyphicon-stats" aria-hidden="true"</sapn>'),
+                    graph_path(@recorder) %>
         <%= link_to sanitize('<span class="glyphicon glyphicon-cog" aria-hidden="true"</sapn>'),
                     edit_recorder_path(@recorder) %>
       </div>

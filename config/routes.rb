@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'recorders/:id/edit_title', to: 'recorders#edit_title', as: :recorder_edit_title
   patch 'recorders/:id/edit_title', to: 'recorders#update_title'
   get 'recorders/:id/delete', to: 'recorders#delete', as: :delete_recorder
+  get 'recorders/:id/graph', to: 'graph#show', as: :graph
   post 'options/:id/register', to: 'single_register#create', as: :single_register
   get 'options/:id/delete', to: 'options#delete', as: :delete_option
   get 'recordabilities/:id/delete', to: 'recordabilities#delete', as: :delete_recordability
