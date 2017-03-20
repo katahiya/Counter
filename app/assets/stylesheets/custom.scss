@@ -129,10 +129,6 @@ p {
   max-height: 480px;
   text-align: center;
   border-bottom: 1px solid #eee;
-//  .label-xs {
-//    max-width: 80%;
-//    @include ellipsis;
-//  }
   .name {
     max-width: 60px;
     @include ellipsis;
@@ -223,6 +219,11 @@ input:enabled.plural_action_button {
 
 .windowful {
   min-height: 120px;
+}
+
+.graph {
+  width: 100%;
+  height: 100%;
 }
 
 /* record form */

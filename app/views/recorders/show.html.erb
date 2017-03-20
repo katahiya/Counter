@@ -11,7 +11,7 @@
           <%= @recorder.title %>
         </h2>
         <%= link_to sanitize('<span class="glyphicon glyphicon-stats" aria-hidden="true"</sapn>'),
-                    graph_path(@recorder) %>
+                    graph_path(@recorder), remote: true %>
         <%= link_to sanitize('<span class="glyphicon glyphicon-cog" aria-hidden="true"</sapn>'),
                     edit_recorder_path(@recorder) %>
       </div>
