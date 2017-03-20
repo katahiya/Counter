@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-4 col-xs-offset-4">
+  <div class="col-sm-6 col-sm-offset-3">
     <div class="panel panel-default modal-form">
       <div class="panel-heading">
         <%= heading %>
@@ -11,7 +11,7 @@
         以上を完全に削除しますか?
       </div>
       <div class="panel-footer">
-        <div class="buttons">
+        <div class="modal-buttons">
           <%= link_to "いいえ", "#", class: "btn btn-default", data: { dismiss: "modal" } %>
           <%= link_to "はい", url, method: :delete, remote: true, class: "btn btn-danger" %>
         </div>

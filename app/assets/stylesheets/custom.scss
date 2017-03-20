@@ -122,19 +122,6 @@ p {
   line-height: 1.7em;
 }
 
-.scroll-window {
-  overflow-x: visible;
-  overflow-y: auto;
-  width: 100%;
-  max-height: 480px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-  .name {
-    max-width: 60px;
-    @include ellipsis;
-  }
-}
-
 /* header */
 #logo {
   float: left;
@@ -402,12 +389,30 @@ input:enabled.plural_action_button {
 }
 
 .modal-form {
-  margin-top: 30px;
+  min-width: 460px;
+  margin-left: 10px;
   .panel-body {
     text-align: center;
   }
-  .buttons {
+  .modal-buttons {
     text-align: right;
+  }
+  .scroll-window {
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px double #eee;
+    .recordability {
+      border-bottom: 1px solid #eee;
+      .inline {
+        @include flex-inline-container;
+        .name {
+          max-width: 80%;
+          @include ellipsis;
+        }
+      }
+    }
   }
 }
 
