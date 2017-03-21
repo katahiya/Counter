@@ -64,4 +64,10 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid
   end
 
+  specify "保有するrecorderは連動して削除されなけてばならない" do
+    user_with_recorder = create(:user, :with_descendants)
+    recorder_count = user_with_recorder.recorders.count
+    expect { user_with_recorder.destroy }.to change { Recorder.count }.by(-recorder_count)
+  end
+
 end

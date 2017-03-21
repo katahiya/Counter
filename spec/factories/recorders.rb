@@ -1,27 +1,20 @@
 FactoryGirl.define do
+  sequence :title do |n|
+    "title#{n}"
+  end
+
   factory :recorder do
-    title "Test"
+    title
 
-    factory :recorder_with_options do
-      after(:create) do |recorder, evaluator|
-        create_list(:option, evaluator.options_count, recorder: recorder)
+    trait :with_descendants do
+      after(:create) do |recorder|
+        5.times do
+          recorder.options << build(:option)
+        end
+        3.times do
+          recorder.recordabilities << build(:recordability, :with_records)
+        end
       end
-    end
-
-    factory :recorder_with_recordabilies do
-      after(:create) do |recorder, evaluator|
-        create_list(:recordability, evaluator.recordabilities_count, recorder: recorder)
-      end
-    end
-
-    factory :recorder_with_options do
-      after(:create) do |recorder, evaluator|
-        create_list(:record, evaluator.records_count, recorder: recorder)
-      end
-    end
-
-    factory :isolated_recorder do
-      title "Isolated"
     end
   end
 end
