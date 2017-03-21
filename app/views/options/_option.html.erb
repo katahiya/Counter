@@ -1,7 +1,4 @@
 <span><%= check_box_tag 'ids[]', option.id %></span>
-<h3>
-  <%= option.name %>
-</h3>
 <div class="dropdown">
   <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">
     <span class="caret" aria-hidden="true"></span></a>
@@ -10,3 +7,6 @@
     <li><%= link_to "削除", delete_option_path(option), remote: true %></li>
   </ul>
 </div>
+<h3>
+  <%= option.name %>
+</h3>

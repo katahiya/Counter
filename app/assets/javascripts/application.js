@@ -64,16 +64,14 @@ $(function() {
 
 $(document).on('turbolinks:load', function(){
   //resize section by window height
-  filter("recorders", "show", function() {
-    resize_windowful()
-  });
+  filter("recorders", "show", resize_windowful);
+  filter("recorders", "edit", size_options_list);
 });
 
 $(window).resize(function() {
   console.log("window");
-  filter("recorders", "show", function() {
-    resize_windowful()
-  });
+  filter("recorders", "show", resize_windowful);
+  filter("recorders", "edit", size_options_list);
   size_modal_window();
   hide_less_than_min_modal();
 });
@@ -85,11 +83,15 @@ var filter = function(controller, action, callback) {
     callback();
 };
 
-//resize windowful by window height
-var resize_windowful = function() {
+var window_height_without_header = function() {
   var window_height = $(window).height();
   var header_height = $('.navbar-fixed-top').height();
-  var resize = window_height - header_height - 50;
+  return window_height - header_height;
+};
+
+//resize windowful by window height
+var resize_windowful = function() {
+  var resize = window_height_without_header() - 50;
   $('.windowful').css("max-height", resize + "px");
   resize_option_bar(resize);
   resize_records_table(resize + 30);
@@ -126,13 +128,23 @@ var size_modal_window = function() {
   if('.modal-container'.length == 0) return;
   if('.scroll-window'.length == 0) return;
   var window_height = $(window).height();
-  var body_height = $('body').height();
   var header_height = 41;
   var buttons_height = 50;
   var margin = window_height * 0.1;
-  var scroll_height = body_height*0.8 - header_height - buttons_height - margin*2
+  var scroll_height = window_height_without_header*0.8 - header_height - buttons_height - margin*2
   $('.modal-form').css("margin-top", margin + "px");
   $('.scroll-window').css("max-height", scroll_height + "px");
+};
+
+var size_options_list = function() {
+  var body_height = window_height_without_header();
+  var header_height = $('.options-head').height();
+  var buttons_height = $('.options-buttons').height();
+  console.log(body_height);
+  console.log(header_height);
+  console.log(buttons_height);
+  var scroll_height = body_height - header_height - buttons_height - 50
+  $('.options-list').css("max-height", scroll_height + "px");
 };
 
 var hide_less_than_min_modal = function() {
