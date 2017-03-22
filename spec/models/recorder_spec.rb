@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Recorder, type: :model do
-  let(:recorder) { build(:recorder) }
+  let(:user) {
+    create(:user)
+  }
+  let(:recorder) {
+    build(:recorder, user: user)
+  }
 
   specify "should be valid" do
     expect(recorder).to be_valid
@@ -13,7 +18,7 @@ RSpec.describe Recorder, type: :model do
   end
 
   specify "user_id should be present" do
-    recorder.user_id = nil
+    recorder.user = nil
     expect(recorder).not_to be_valid
   end
 
@@ -23,34 +28,21 @@ RSpec.describe Recorder, type: :model do
   end
 
   specify "associated options should be destroyd" do
-    @recorder.save
-    @recorder.options.create!(name: "onion")
-    assert_difference 'Option.count', -1 do
-      @recorder.destroy
-    end
+    recorder_with_options = create(:recorder, :with_descendants, user: user)
+    options_count = recorder_with_options.options.count
+    expect(options_count).to be > 0
+    expect { recorder_with_options.destroy }.to change { Option.count }.by(-options_count)
   end
 
   specify "associated records should be destroyed" do
-    @recorder.save
-    @recorder.options.create!(name: "onion")
-    @recorder.records.create!(option: @recorder.options.first)
-    assert_difference 'Record.count', -1 do
-      @recorder.destroy
-    end
-  end
-
-  specify "associated records created by option should be destroyed" do
-    @recorder.save
-    option = @recorder.options.build(name: "onion")
-    option.save
-    option.records.create!(recorder: @recorder)
-    assert_difference 'Record.count', -1 do
-      @recorder.destroy
-    end
+    recorder_with_options = create(:recorder, :with_descendants, user: user)
+    recordabilities_count = recorder_with_options.recordabilities.count
+    expect(recordabilities_count).to be > 0
+    expect { recorder_with_options.destroy }.to change { Recordability.count }.by(-recordabilities_count)
   end
 
   specify "order should be most recent updated first" do
-    assert_equal recorders(:latest_updated), Recorder.first
+    expect(Recorder.all.to_sql).to eq Recorder.unscoped.order(updated_at: :desc).to_sql
   end
 
 end

@@ -11,7 +11,7 @@ FactoryGirl.define do
     trait :with_descendants do
       after(:create) do |user|
         4.times do
-          user.recorders << build(:recorder, :with_descendants)
+          user.recorders << create(:recorder, :with_descendants, user: user)
         end
       end
     end
