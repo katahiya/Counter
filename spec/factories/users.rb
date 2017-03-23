@@ -16,5 +16,12 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_paginate do
+      after(:create) do |user|
+        100.times do
+          user.recorders << create(:recorder, user: user)
+        end
+      end
+    end
   end
 end
