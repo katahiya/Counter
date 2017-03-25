@@ -18,6 +18,7 @@ RSpec.feature "RecordersIndexes", type: :feature do
       p_user = create(:user, :with_paginate)
       log_in_as p_user
       visit user_recorders_path(p_user)
+      expect(page).to have_link nil, href: user_setup_path(p_user)
       i = 1
       current_page_recorders = p_user.recorders.paginate(page: i)
       while current_page_recorders.empty? do
@@ -39,15 +40,23 @@ RSpec.feature "RecordersIndexes", type: :feature do
       visit user_recorders_path(user)
       expect(page).not_to have_css('div.pagination')
     end
+  end
 
-    describe 'modal' do
-      before(:each){
-        log_in_as user
-        visit user_recorders_path(user)
-      }
-      scenario 'delete recorder', js: true do
+  describe 'モーダルウィンドウ' do
+    specify 'recorderの削除', js: true do
+      log_in_as user
+      visit user_recorders_path(user)
+      recorder = recorders.first
+      expect(page).to have_content recorder.title
+      within "#recorder-#{recorder.id}" do
+        find('.dropdown-toggle').click
         click_on "削除"
       end
+      expect(page).to have_css '.modal-form'
+      within ".modal-container" do
+        click_on "はい"
+      end
+      expect(page).not_to have_content recorder.title
     end
   end
 end
