@@ -75,7 +75,7 @@ RSpec.feature "RecordersShow", type: :feature do
       expect(page).to have_css '.graph_path'
       find('.graph_path').click
       within ".modal-container" do
-        expect(page).to have_css '.graph'
+        wait_for_css '.graph'
       end
     end
 
@@ -89,12 +89,42 @@ RSpec.feature "RecordersShow", type: :feature do
       end
       new_option_name = 'new_option'
       within ".modal-container" do
-        expect(page).to have_css 'form.edit_recorder'
+        wait_for_css 'form.edit_recorder'
         fill_in '名前', with: new_option_name
         click_button '追加'
       end
       within ".option-bar" do
-        expect(page).to have_content new_option_name
+        wait_for_content new_option_name
+      end
+    end
+
+    specify 'モーダルウィンドウで複数の記録を追加する', js: true do
+      within ".modal-container" do
+        expect(page).not_to have_css 'form.edit_recorder'
+      end
+      within ".option-bar" do
+        find('.dropdown-toggle').click
+        click_on "まとめて記録"
+      end
+      within ".modal-container" do
+        wait_for_css '.batch_registration-form'
+        recorder.options.each.with_index(1) do |option, index|
+          select index, from: option.name
+        end
+        click_button '追加'
+      end
+      wait_for_no_css '.batch_registration-form', hidden: true
+      recorder.reload
+      recordability = recorder.recordabilities.first
+      i = 1
+      recordability.records.zip(recorder.options).each do |record, option|
+        within "#record-#{record.id}" do
+          expect(page).to have_content record.option.name
+          expect(page).to have_content record.count
+          expect(record.option).to eq option
+          expect(record.count).to eq i
+        end
+        i += 1
       end
     end
   end

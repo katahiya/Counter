@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="scroll-window">
-    <div class="batch_registartion-form">
+    <div class="batch_registration-form">
       <%= f.fields_for @recordability do |fr| %>
         <%= render 'option_field', f: fr %>
       <% end %>

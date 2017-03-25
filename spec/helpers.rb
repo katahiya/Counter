@@ -21,13 +21,23 @@ module Helpers
     expect(page).to have_css(selector)
   end
 
+  def wait_for_content(content)
+    until has_content?(content); end
+    expect(page).to have_content content
+  end
+
+  def wait_for_no_css(content)
+    until has_no_content?(content); end
+    expect(page).not_to have_content content
+  end
+
   def wait_for_css(selector)
     until has_css?(selector); end
     find(selector)
   end
 
-  def wait_for_no_css(selector)
-    until has_no_css?(selector); end
-    expect(page).not_to have_css selector
+  def wait_for_no_css(selector, hidden: false)
+    until has_no_css?(selector, visible: hidden); end
+    expect(page).not_to have_css selector, visible: hidden
   end
 end
