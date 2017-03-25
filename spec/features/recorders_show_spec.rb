@@ -70,12 +70,31 @@ RSpec.feature "RecordersShow", type: :feature do
       end
     end
 
-    specify 'graph表示', js: true do
+    specify 'モーダルウィンドウでgraph表示', js: true do
       expect(page).not_to have_css '.graph'
       expect(page).to have_css '.graph_path'
       find('.graph_path').click
       within ".modal-container" do
         expect(page).to have_css '.graph'
+      end
+    end
+
+    specify 'モーダルウィンドウで選択肢を追加する', js: true do
+      within ".modal-container" do
+        expect(page).not_to have_css 'form.edit_recorder'
+      end
+      within ".option-bar" do
+        find('.dropdown-toggle').click
+        click_on "選択肢を追加"
+      end
+      new_option_name = 'new_option'
+      within ".modal-container" do
+        expect(page).to have_css 'form.edit_recorder'
+        fill_in '名前', with: new_option_name
+        click_button '追加'
+      end
+      within ".option-bar" do
+        expect(page).to have_content new_option_name
       end
     end
   end

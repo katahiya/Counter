@@ -1,7 +1,7 @@
 <% if f.object.name == nil %>
   <div class="nested-fields form-inline">
     <div class="form-group">
-      <%= f.label :name %>
+      <%= f.label :name, "名前" %>
       <%= f.text_field :name, class: "form-control" %>
     </div>
     <%= link_to_remove_association "remove", f %>

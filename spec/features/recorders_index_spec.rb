@@ -52,11 +52,11 @@ RSpec.feature "RecordersIndexes", type: :feature do
         find('.dropdown-toggle').click
         click_on "削除"
       end
-      expect(page).to have_css '.modal-form'
+      wait_for_css '.modal-form'
       within ".modal-container" do
         click_on "はい"
       end
-      expect(page).not_to have_content recorder.title
+      wait_for_no_css "#recorder-#{recorder.id}"
     end
   end
 end

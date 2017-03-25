@@ -20,4 +20,14 @@ module Helpers
     expect(page).not_to have_css('form#sessions_new')
     expect(page).to have_css(selector)
   end
+
+  def wait_for_css(selector)
+    until has_css?(selector); end
+    find(selector)
+  end
+
+  def wait_for_no_css(selector)
+    until has_no_css?(selector); end
+    expect(page).not_to have_css selector
+  end
 end
