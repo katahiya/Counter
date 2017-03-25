@@ -20,6 +20,8 @@ gem "capybara-webkit"
 group :development, :test do
   gem 'sqlite3', '1.3.11'
   gem 'byebug',  '9.0.0', platform: :mri
+  gem 'rspec-rails'
+  gem "factory_girl_rails"
 end
 
 group :development do
@@ -27,6 +29,7 @@ group :development do
   gem 'listen',                '3.0.8'
   gem 'spring',                '1.7.2'
   gem 'spring-watcher-listen', '2.0.0'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
@@ -34,9 +37,11 @@ group :test do
   gem 'minitest-reporters',       '1.1.9'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
-  gem 'rspec-rails'
   gem 'capybara'
-  gem "factory_girl_rails"
+  gem 'poltergeist'
+  gem 'database_cleaner'
+  gem 'headless'
+  gem 'selenium-webdriver'
 end
 
 group :production do

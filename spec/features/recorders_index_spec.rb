@@ -39,5 +39,15 @@ RSpec.feature "RecordersIndexes", type: :feature do
       visit user_recorders_path(user)
       expect(page).not_to have_css('div.pagination')
     end
+
+    describe 'modal' do
+      before(:each){
+        log_in_as user
+        visit user_recorders_path(user)
+      }
+      scenario 'delete recorder', js: true do
+        click_on "削除"
+      end
+    end
   end
 end

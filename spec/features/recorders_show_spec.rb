@@ -69,5 +69,14 @@ RSpec.feature "RecordersShow", type: :feature do
         expect(page).to have_content record.count
       end
     end
+
+    specify 'graph表示', js: true do
+      expect(page).not_to have_css '.graph'
+      expect(page).to have_css '.graph_path'
+      find('.graph_path').click
+      within ".modal-container" do
+        expect(page).to have_css '.graph'
+      end
+    end
   end
 end
