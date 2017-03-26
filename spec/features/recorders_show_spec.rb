@@ -124,16 +124,20 @@ RSpec.feature "RecordersShow", type: :feature do
       end
 
       specify '複数の記録を追加する際に全ての数量が0ならエラー', js: true do
-        before_first_recordability = recorder.recordabilities.first
-        within ".modal-container", visible: false do
-          wait_for_css '.batch_registration-form'
-          recorder.options.each_with_index do |option, index|
-            select 0, from: option.name
+        expect {
+          before_first_recordability = recorder.recordabilities.first
+          within ".modal-container", visible: false do
+            wait_for_css '.batch_registration-form'
+            recorder.options.each_with_index do |option, index|
+              select 0, from: option.name
+            end
+            click_button '追加'
           end
-          click_button '追加'
-        end
-        wait_for_no_css '.batch_registration-form'
-        expect(before_first_recordability).to eq recorder.recordabilities.first
+          within "#error_explanation", visible: false do
+            wait_for_content '数量が全て0です'
+          end
+          expect(before_first_recordability).to eq recorder.recordabilities.first
+        }.not_to change { Recordability.count }
       end
     end
   end

@@ -19,16 +19,20 @@ class RecordabilitiesController < ApplicationController
   end
 
   def create
-    Recordability.transaction do
-      Record.transaction do
-        @recordability = @recorder.recordabilities.create
-        @recordability.update_attributes(recorder_params[:recordability])
-        update_recorder
+    @recordability = @recorder.recordabilities.build
+    if recorder_params[:recordability][:records_attributes].empty?
+      @recordability.unrecordable_error
+    elsif
+      Recordability.transaction do
+        Record.transaction do
+          @recordability.save
+          @recordability.update_attributes(recorder_params[:recordability])
+          update_recorder
+        end
       end
     end
     @recordabilities = @recorder.recordabilities
-    @recordability = @recorder.recordabilities.build
-    hide_modal_window @recorder,
+    hide_modal_window @recordability,
                       "recorders/records_table",
                       ".records-body"
   end
