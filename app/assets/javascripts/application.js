@@ -66,6 +66,7 @@ $(document).on('turbolinks:load', function(){
   //resize section by window height
   filter("recorders", "show", resize_windowful);
   filter("recorders", "edit", size_options_list);
+  size_modal_window();
 });
 
 $(window).resize(function() {
@@ -131,7 +132,8 @@ var size_modal_window = function() {
   var header_height = 41;
   var buttons_height = 50;
   var margin = window_height * 0.1;
-  var scroll_height = window_height_without_header*0.8 - header_height - buttons_height - margin*2
+  var scroll_height = window_height_without_header()*0.8 - header_height - buttons_height - margin*2
+  console.log(scroll_height);
   $('.modal-form').css("margin-top", margin + "px");
   $('.scroll-window').css("max-height", scroll_height + "px");
 };

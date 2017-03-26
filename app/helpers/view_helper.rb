@@ -5,7 +5,7 @@ module ViewHelper
   end
 
   def recordability_index(recordability)
-    Array(@recorder.recordabilities).reverse.index(recordability)
+    Array(@recorder.recordabilities.select{ |r| r.id }).reverse.index(recordability) + 1
   end
 
   def new_fields_for(f, model)

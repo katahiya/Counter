@@ -20,8 +20,7 @@ class OptionsController < ApplicationController
   end
 
   def update
-    @option.update_attributes(single_option_params)
-    update_recorder
+    update_recorder if @option.update_attributes(single_option_params)
     @options = @recorder.options
     hide_modal_window @option, 'option', "#option-#{@option.id}",
                                          option: @option

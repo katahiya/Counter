@@ -1,5 +1,7 @@
 <%= form_for(@recorder, url: yield(:submit_url), method: :post, remote: true) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+  <div class="error_messages">
+    <%= render 'shared/error_messages', object: f.object %>
+  </div>
 
   <div class="scroll-window">
     <div class="batch_registration-form">

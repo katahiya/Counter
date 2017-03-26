@@ -88,6 +88,7 @@ class RecordabilitiesController < ApplicationController
     end
 
     def recordability_params
+      params[:recordability][:records_attributes].select! { |index, attr| attr[:count].to_i > 0 }
       params.require(:recordability).permit(records_attributes: [:count, :option_id, :id])
     end
 end
