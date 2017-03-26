@@ -6,7 +6,7 @@ module Helpers
       fill_in 'session[password]', with: 'password'
       click_button 'ログイン'
     end
-    expect(page).not_to have_css('form#sessions_new')
+    wait_for_no_css 'form#sessions_new'
   end
 
   def test_friendly_forwarding(url, selector)

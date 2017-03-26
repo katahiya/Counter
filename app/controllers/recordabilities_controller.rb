@@ -20,13 +20,13 @@ class RecordabilitiesController < ApplicationController
 
   def create
     @recordability = @recorder.recordabilities.build
-    if recorder_params[:recordability][:records_attributes].empty?
+    if count_zero_all? recorder_params[:recordability][:records_attributes]
       @recordability.unrecordable_error
     elsif
       Recordability.transaction do
         Record.transaction do
-          @recordability.save
-          @recordability.update_attributes(recorder_params[:recordability])
+          @recordability.save!
+          @recordability.update_attributes!(recorder_params[:recordability])
           update_recorder
         end
       end
@@ -46,13 +46,18 @@ class RecordabilitiesController < ApplicationController
   end
 
   def update
-    Recordability.transaction do Record.transaction do
-        @recordability.update_attributes(recordability_params)
-        update_recorder
+    if count_zero_all? recordability_params[:records_attributes]
+      @recordability.unrecordable_error
+    elsif
+      Recordability.transaction do
+        Record.transaction do
+          @recordability.update_attributes!(recordability_params)
+          update_recorder
+        end
       end
     end
     @recordabilities = @recorder.recordabilities
-    hide_modal_window @recorder,
+    hide_modal_window @recordability,
                       "recorders/records_table",
                       ".records-body"
   end
@@ -87,12 +92,15 @@ class RecordabilitiesController < ApplicationController
     end
 
     def recorder_params
-      params[:recorder][:recordability][:records_attributes].select! { |index, attr| attr[:count].to_i > 0 }
       params.require(:recorder).permit(recordability: { records_attributes: [:count, :option_id] })
     end
 
     def recordability_params
-      params[:recordability][:records_attributes].select! { |index, attr| attr[:count].to_i > 0 }
       params.require(:recordability).permit(records_attributes: [:count, :option_id, :id])
+    end
+
+    def count_zero_all?(records_attributes)
+      records_attributes.each { |index, attr| return false if attr[:count].to_i > 0 }
+      return true
     end
 end

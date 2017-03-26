@@ -31,12 +31,7 @@ RSpec.describe Record, type: :model do
     expect(record).not_to be_valid
   end
 
-  specify "countは自然数でなければならない" do
-    record.count = 0
-    expect(record).not_to be_valid
-  end
-
-  specify "recordはorderの作成順でなければならない" do
+ specify "recordはorderの作成順でなければならない" do
     user_with_descendants = create(:user, :with_descendants)
     first_recorder = user_with_descendants.recorders.first
     first_recordability = first_recorder.recordabilities.first

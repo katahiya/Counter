@@ -4,5 +4,5 @@ class Record < ApplicationRecord
   default_scope -> { Record.joins(:option).order("options.created_at") }
   validates :recordability_id, presence: :true
   validates :option_id, presence: :true
-  validates :count, numericality: { only_integer: true, greater_than: 0 }
+  validates :count, numericality: { only_integer: true, greater_than_equal: 0 }
 end
