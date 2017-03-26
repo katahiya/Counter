@@ -6,7 +6,7 @@
       <% option = fr.object.option %>
       <div class="select-count">
         <div class="form-group">
-          <label class="label-xs"><%= option.name %></label>
+          <%= fr.label :count, option.name, class: "label-xs" %>
           <%= fr.select :count, options_for_select([*0..25], selected: fr.object.count.to_i), { class: "form-control" } %>
           <%= fr.hidden_field :option_id, value: option.id %>
         </div>
