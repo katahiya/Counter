@@ -7,7 +7,7 @@ class PluralActionsController < ApplicationController
     logged_in_user(edit_recorder_url(parent_of_options))
   }, only: [:delete_options, :destroy_options]
   before_action -> {
-    correct_user(ancestoral_user)
+    correct_user(ancestoral_user.id)
   }
 
   def delete_options
