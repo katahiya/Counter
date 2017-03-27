@@ -9,7 +9,7 @@ RSpec.feature "DeleteRecordabilities", type: :feature do
   let(:user ) { create(:user, :with_descendants) }
   let(:recorder) { user.recorders.first }
 
-  describe "記録を編集" do
+  describe "記録を削除" do
     before(:each) {
       log_in_as user
       visit recorder_path(recorder)

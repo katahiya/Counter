@@ -6,7 +6,9 @@
   <div class="scroll-window">
     <div id="options" class="form-group">
       <%= f.fields_for :options do |option_form| %>
-        <%= render 'option_fields', f: option_form %>
+        <% if option_form.object.name == nil %>
+          <%= render 'option_fields', f: option_form %>
+        <% end %>
       <% end %>
     </div>
   </div>
