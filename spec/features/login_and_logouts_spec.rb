@@ -21,6 +21,7 @@ RSpec.feature "LoginAndLogouts", type: :feature do
     expect(page).not_to have_css('form#sessions_new')
     expect(page).not_to have_link nil, href: login_path
     expect(page).to have_link nil, href: logout_path, visible: false
+    expect(logged_in?).to be true
   end
 
   specify 'ユーザー認証失敗時にエラーを出力する' do
@@ -38,15 +39,18 @@ RSpec.feature "LoginAndLogouts", type: :feature do
     expect(page).to have_css('form#sessions_new')
     expect(page).to have_link nil, href: login_path
     expect(page).not_to have_link nil, href: logout_path, visible: false
+    expect(logged_in?).to be false
   end
 
   specify 'ログアウト' do
     log_in_as user
+    visit root_path
     expect(page).not_to have_link nil, href: login_path
     expect(page).to have_link nil, href: logout_path, visible: false
     find('.dropdown-toggle').click
     click_on "ログアウト"
     expect(page).to have_link nil, href: login_path
     expect(page).not_to have_link nil, href: logout_path, visible: false
+    expect(logged_in?).to be false
   end
 end

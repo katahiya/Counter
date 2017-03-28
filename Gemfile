@@ -42,6 +42,7 @@ group :test do
   gem 'database_cleaner'
   gem 'headless'
   gem 'selenium-webdriver'
+  gem 'rack_session_access'
 end
 
 group :production do

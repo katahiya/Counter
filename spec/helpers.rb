@@ -1,12 +1,10 @@
 module Helpers
   def log_in_as(user)
-    visit login_path
-    within('form#sessions_new') do
-      fill_in 'session[email]', with: user.email
-      fill_in 'session[password]', with: 'password'
-      click_button 'ログイン'
-    end
-    wait_for_no_css 'form#sessions_new'
+    page.set_rack_session user_id: user.id
+  end
+
+  def logged_in?
+    !page.get_rack_session["user_id"].nil?
   end
 
   def test_friendly_forwarding(url, selector)
