@@ -125,8 +125,7 @@ RSpec.feature "RecorderEdits", type: :feature do
           end
           click_button '追加'
         end
-        #wait_for_css "#error_explanation"
-        expect(page).to have_css "#error_explanation"
+        wait_for_css "#error_explanation"
       }.not_to change { Option.count }
     end
 

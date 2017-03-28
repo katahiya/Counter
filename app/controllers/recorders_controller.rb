@@ -66,8 +66,12 @@ class RecordersController < ApplicationController
   end
 
   def update_options
-    @recorder.update_attributes(recorder_params)
-    update_recorder
+    if option_blank_all? recorder_params[:options_attributes]
+      @recorder.no_input_error
+    elsif
+      @recorder.update_attributes(recorder_params)
+      update_recorder
+    end
     @options = @recorder.options
     if from_edit?
       hide_modal_window @recorder,
@@ -104,9 +108,7 @@ class RecordersController < ApplicationController
     end
 
     def recorder_params
-      strong = params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
-      strong[:options_attributes] = strong[:options_attributes].select {|n, options_attribute| !options_attribute[:name].blank?}
-      return strong
+      params.require(:recorder).permit(:title, options_attributes: [:id, :name, :recorder_id, :_destroy])
     end
 
     def recorder_title
@@ -128,5 +130,10 @@ class RecordersController < ApplicationController
 
     def from_edit?
       before_actions[:controller] == "recorders" && before_actions[:action] == "edit"
+    end
+
+    def option_blank_all?(options_attributes)
+      options_attributes.each { |index, attr| return false unless attr[:name].blank? }
+      return true
     end
 end
