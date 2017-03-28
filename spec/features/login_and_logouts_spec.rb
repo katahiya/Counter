@@ -1,27 +1,52 @@
 require 'rails_helper'
+require 'rails_helper'
+require 'helpers'
+
+RSpec.configure do |c|
+  c.include Helpers
+end
 
 RSpec.feature "LoginAndLogouts", type: :feature do
   let(:user ) { create(:user, :with_descendants) }
-  let(:recorders) { user.recorders }
 
   specify 'ユーザー認証成功' do
-    visit root_path
-    within('form#new_session') do
-      fill_in 'username', with: 'taro'
-      fill_in 'password', with: 'correct_password'
+    visit login_path
+    expect(page).to have_link nil, href: login_path
+    expect(page).not_to have_link nil, href: logout_path, visible: false
+    within('form#sessions_new') do
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: 'password'
       click_button 'ログイン'
     end
-    expect(page).not_to have_css('form#new_session')
+    expect(page).not_to have_css('form#sessions_new')
+    expect(page).not_to have_link nil, href: login_path
+    expect(page).to have_link nil, href: logout_path, visible: false
   end
 
-  specify 'ユーザー認証失敗' do
-    visit signup_path
-    within('form#new_session') do
-      fill_in 'username', with: 'taro'
-      fill_in 'password', with: 'wrong_password'
+  specify 'ユーザー認証失敗時にエラーを出力する' do
+    visit login_path
+    wrong_email = "wrong@example.com"
+    expect(user.email).not_to eq wrong_email
+    within('form#sessions_new') do
+      fill_in 'session[email]', with: wrong_email
+      fill_in 'session[password]', with: 'wrong_password'
       click_button 'ログイン'
     end
-    expect(page).to have_css('p.alert', text: 'ユーザー名またはパスワードが正しくありません。')
-    expect(page).to have_css('form#new_session')
+    within "#flash_messages" do
+      expect(page).to have_css('div.alert')
+    end
+    expect(page).to have_css('form#sessions_new')
+    expect(page).to have_link nil, href: login_path
+    expect(page).not_to have_link nil, href: logout_path, visible: false
+  end
+
+  specify 'ログアウト' do
+    log_in_as user
+    expect(page).not_to have_link nil, href: login_path
+    expect(page).to have_link nil, href: logout_path, visible: false
+    find('.dropdown-toggle').click
+    click_on "ログアウト"
+    expect(page).to have_link nil, href: login_path
+    expect(page).not_to have_link nil, href: logout_path, visible: false
   end
 end
