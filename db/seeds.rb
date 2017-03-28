@@ -27,11 +27,10 @@ second.records.create!(option: ssr, count: 1)
 second.records.create!(option: sr, count: 3)
 third.records.create!(option: sr, count: 1)
 third.records.create!(option: ssr, count: 1)
-third.records.create!(option: sr, count: 1)
 wordful_recorder = user.recorders.create!(title: "a" * 255)
 9.times do |n|
   name = "b" * 39
-  wordful_recorder.options.create!(name: name << n)
+  wordful_recorder.options.create!(name: name + n.to_s)
 end
 
 49.times do |n|

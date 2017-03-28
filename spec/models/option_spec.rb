@@ -37,4 +37,17 @@ RSpec.describe Option, type: :model do
   specify "order should be most recent last" do
     expect(Option.all.to_sql).to eq Option.unscoped.order(:created_at).to_sql
   end
+
+  specify "nameはrecorder内でユニークである" do
+    recorder.save
+    option.save
+    expect{ recorder.options.create(name: option.name) }.not_to change{ Option.count }
+    other_recorder = create(:recorder, user: user)
+    other_recorder.options.each do |o|
+      expect(o.name).not_to eq option.name
+    end
+    expect{
+      other_recorder.options.create(name: option.name)
+    }.to change{ Option.count }.by(1)
+  end
 end
