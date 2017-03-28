@@ -2,19 +2,19 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="field">
-    <%= f.label :title %>
+    <%= f.label :title, "カウンター名" %>
     <%= f.text_field :title, class: "form-control" %>
   </div>
 
   <hr>
 
   <div id="options" class="form-group options-form">
-    <label>Options</label>
+    <label>選択肢</label>
     <%= f.fields_for :options do |option_form| %>
       <%= render 'option_fields', f: option_form %>
     <% end %>
     <div id="links">
-      <%= link_to_add_association "Add option", f, :options %>
+      <%= link_to_add_association "フォームを追加", f, :options %>
     </div>
   </div>
   <div class="actions">
