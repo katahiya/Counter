@@ -7,6 +7,11 @@ module Helpers
     !page.get_rack_session["user_id"].nil?
   end
 
+  def remember?
+    cookies = Capybara.current_session.driver.request.cookies
+    !cookies["user_id"].nil?
+  end
+
   def test_friendly_forwarding(url, selector)
     visit url
     expect(page).not_to have_css(selector)

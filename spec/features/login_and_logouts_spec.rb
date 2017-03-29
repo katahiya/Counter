@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'rails_helper'
 require 'helpers'
 
 RSpec.configure do |c|
@@ -21,6 +20,19 @@ RSpec.feature "LoginAndLogouts", type: :feature do
     expect(page).not_to have_css('form#sessions_new')
     expect(page).not_to have_link nil, href: login_path
     expect(page).to have_link nil, href: logout_path, visible: false
+    expect(logged_in?).to be true
+    expect(remember?).to be false
+  end
+
+  specify 'ユーザー認証成功時にユーザーをcookiesに記録する' do
+    visit login_path
+    within('form#sessions_new') do
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: 'password'
+      check 'session_remember_me'
+      click_button 'ログイン'
+    end
+    expect(remember?).to be true
     expect(logged_in?).to be true
   end
 
