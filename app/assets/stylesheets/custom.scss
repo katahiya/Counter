@@ -32,7 +32,7 @@ $gray-medium-light: #eaeaea;
     border-bottom: 3px double #eee;
     @include flex-inline-container;
     h2 {
-      font-size: 1.6em;
+      font-size: 1.2em;
       width: 95%;
       word-wrap: break-word;
     }
@@ -103,11 +103,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 1.6em;
+  font-size: 2.0em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
-  color: navy;
+  color: black;
 }
 
 h2 {
@@ -247,7 +247,6 @@ input:enabled.plural_action_button {
     tbody {
       display: block;
       width: 100%;
-      overflow: auto;
       tr {
         width: 100%;
       }
@@ -432,8 +431,6 @@ input:enabled.plural_action_button {
     }
   }
   .options-list {
-    overflow-y: auto;
-    overflow-x: hidden;
     margin-bottom: 20px;
     margin-top: 10px;
   }

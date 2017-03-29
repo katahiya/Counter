@@ -111,7 +111,9 @@ var resize_records_table = function(base) {
   var buttons_height = $('.records-buttons').height();
   var thead_height = $('.records-thead').height();
   var table_width = $('.records-tbody').width();
-  $('.records-tbody').css("max-height", base-head_height-buttons_height-thead_height + "px");
+  var tbody_height = base-head_height-buttons_height-thead_height
+  change_overflow('.records-tbody', tbody_height)
+  $('.records-tbody').css("max-height", tbody_height + "px");
   $('td.record-select').css("width", table_width*0.1 + "px");
   $('td.record-action').css("width", table_width*0.1 + "px");
   $('td.record-no').css("width", table_width*0.1 + "px");
@@ -133,7 +135,6 @@ var size_modal_window = function() {
   var buttons_height = 50;
   var margin = window_height * 0.1;
   var scroll_height = window_height_without_header()*0.8 - header_height - buttons_height - margin*2
-  console.log(scroll_height);
   $('.modal-form').css("margin-top", margin + "px");
   $('.scroll-window').css("max-height", scroll_height + "px");
 };
@@ -142,10 +143,9 @@ var size_options_list = function() {
   var body_height = window_height_without_header();
   var header_height = $('.options-head').height();
   var buttons_height = $('.options-buttons').height();
-  console.log(body_height);
-  console.log(header_height);
-  console.log(buttons_height);
   var scroll_height = body_height - header_height - buttons_height - 50
+  console.log(scroll_height);
+  change_overflow('.options-list', scroll_height)
   $('.options-list').css("max-height", scroll_height + "px");
 };
 
@@ -157,3 +157,11 @@ var hide_less_than_min_modal = function() {
     return;
   }
 };
+
+var change_overflow = function(selector, max_height) {
+  console.log($(selector).height());
+  if($(selector).height() < max_height)
+    $(selector).css("overflow", "visible");
+  else
+    $(selector).css("overflow", "auto");
+}

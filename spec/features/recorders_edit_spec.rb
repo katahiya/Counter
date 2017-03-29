@@ -26,11 +26,23 @@ RSpec.feature "RecorderEdits", type: :feature do
 
     specify '選択肢一覧と追加,編集,削除のリンクを持つ' do
       expect(page).to have_link nil, href: recorder_add_options_path(recorder)
+      within ".options-buttons" do
+        expect(page).to have_css '.plural_action_button'
+        expect(page).to have_css '.check_all'
+      end
       recorder.options.each do |option|
         expect(page).to have_content option.name
         expect(page).to have_link nil, href: edit_option_path(option), visible: false
         expect(page).to have_link nil, href: delete_option_path(option), visible: false
       end
+    end
+
+    specify '選択肢を持たない場合はその旨が表示される' do
+      r = create(:recorder, user: user)
+      visit edit_recorder_path(r)
+      expect(page).not_to have_css '.plural_action_button'
+      expect(page).not_to have_css '.check_all'
+      expect(page).to have_content '選択肢はありません'
     end
 
     specify 'カウンター削除のリンクを持つ' do
