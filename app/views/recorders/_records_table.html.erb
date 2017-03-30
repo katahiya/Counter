@@ -1,5 +1,5 @@
 <% if @recorder.recordabilities.count == 0 %>
-  <h2>記録はまだありません<br>フォームから新しく記録しましょう!</h2>
+  <p>記録はまだありません</p>
 <% else %>
   <%= form_tag({action: :delete_recordabilities, controller: :plural_actions } , { method: :get , remote: true}) do %>
     <div class="records-buttons">

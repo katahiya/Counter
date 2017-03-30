@@ -8,7 +8,8 @@ class GraphController < ApplicationController
 
   def show
     @data = @recorder.options.map do |option|
-      [option.name, option.records.count]
+      count = option.records.map{ |r| r.count }.inject(:+)
+      [option.name, count]
     end.sort{|a, b| b[1] <=> a[1]}
     get_modal_window
   end

@@ -401,7 +401,15 @@ input:enabled.plural_action_button {
     overflow-y: auto;
     width: 100%;
     text-align: center;
-    border-bottom: 1px double #eee;
+    border-bottom: 2px double #eee;
+    margin-bottom: 10px;
+    ul {
+      text-align: center;
+      list-style: none;
+      li {
+        margin-bottom: 10px;
+      }
+    }
     .recordability {
       border-bottom: 1px solid #eee;
       .inline {
