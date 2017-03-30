@@ -13,7 +13,6 @@ class GraphController < ApplicationController
       [option.name, count]
     end
     @data.sort!{|a, b| b[1] <=> a[1]}
-    get_modal_window
   end
 
   private

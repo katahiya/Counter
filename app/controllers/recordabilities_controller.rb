@@ -28,6 +28,7 @@ class RecordabilitiesController < ApplicationController
           @recordability.save!
           @recordability.update_attributes!(recorder_params[:recordability])
           update_recorder
+          flash[:success] = "記録が追加されました"
         end
       end
     end
@@ -53,6 +54,7 @@ class RecordabilitiesController < ApplicationController
         Record.transaction do
           @recordability.update_attributes!(recordability_params)
           update_recorder
+          flash[:success] = "記録が変更されました"
         end
       end
     end
@@ -69,6 +71,7 @@ class RecordabilitiesController < ApplicationController
   def destroy
     @recordability.destroy
     update_recorder
+    flash[:success] = "記録が削除されました"
     @recordabilities = @recorder.recordabilities.all
     hide_modal_window @recorder,
                       "recorders/records_table",

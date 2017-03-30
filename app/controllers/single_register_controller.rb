@@ -14,7 +14,7 @@ class SingleRegisterController < ApplicationController
         update_recorder
       end
     end
-    flash[:success] = "saved!"
+    flash[:success] = "記録が追加されました"
     redirect_to @recorder
   end
 

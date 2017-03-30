@@ -36,6 +36,7 @@ RSpec.feature "DeleteRecordabilities", type: :feature do
         #変更を待つ
         wait_for_no_css '.modal-form'
         #変更の確認
+        check_alert_seccess
         expect(page).not_to have_css "#record-#{first_record_id}"
         expect(recordability).not_to eq recorder.recordabilities.first
       }.to change { Recordability.count }.by(-1)
@@ -91,6 +92,7 @@ RSpec.feature "DeleteRecordabilities", type: :feature do
           #変更を待つ
           wait_for_no_css '.modal-form'
           #変更の確認
+          check_alert_seccess
           [first_id, second_id, third_id].each do |id|
             expect(page).not_to have_css "#record-#{id}"
           end

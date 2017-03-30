@@ -24,6 +24,12 @@ module Helpers
     expect(page).to have_css(selector)
   end
 
+  def check_alert_seccess
+    within('#flash_messages') do
+      expect(page).to have_css ".alert-success"
+    end
+  end
+
   def wait_for_content(content)
     until has_content?(content); end
     expect(page).to have_content content

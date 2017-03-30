@@ -20,7 +20,10 @@ class OptionsController < ApplicationController
   end
 
   def update
-    update_recorder if @option.update_attributes(single_option_params)
+    if @option.update_attributes(single_option_params)
+      flash[:success] = "選択肢を#{@option.name}に変更しました"
+      update_recorder
+    end
     @options = @recorder.options
     hide_modal_window @option, 'option', "#option-#{@option.id}",
                                          option: @option
@@ -31,9 +34,11 @@ class OptionsController < ApplicationController
   end
 
   def destroy
+    name = @option.name
     @option.destroy
     delete_empty_recordabilities
     update_recorder
+    flash[:success] = "選択肢#{name}を削除しました"
     @options = @recorder.options
     hide_modal_window @option,
                       "options/options_table",

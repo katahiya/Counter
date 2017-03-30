@@ -27,7 +27,7 @@ class RecordersController < ApplicationController
   def create
     @recorder = @user.recorders.build(recorder_params)
     if @recorder.save
-      flash[:success] = "new recorder successfully created!"
+      flash[:success] = "カウンター#{@recorder.title}が作成されました"
       redirect_to @recorder
     else
       render 'new'
@@ -52,7 +52,9 @@ class RecordersController < ApplicationController
   end
 
   def update_title
-    @recorder.update_attributes(recorder_title)
+    if @recorder.update_attributes(recorder_title)
+      flash[:success] = "カウンター名を #{@recorder.title}に変更しました"
+    end
     @recorders = @user.recorders.paginate(page: params[:page])
     hide_modal_window @recorder,
                       "recorder_title",
@@ -69,7 +71,10 @@ class RecordersController < ApplicationController
     if option_blank_all? recorder_params[:options_attributes]
       @recorder.no_input_error
     elsif
+      before_count = @recorder.options.count
       @recorder.update_attributes(recorder_params)
+      after_count = @recorder.options.count
+      flash[:success] = "#{after_count - before_count}個の選択肢を追加しました"
       update_recorder
     end
     @options = @recorder.options

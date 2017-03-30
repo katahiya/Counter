@@ -70,6 +70,7 @@ RSpec.feature "RecorderEdits", type: :feature do
         click_button '変更'
       end
       wait_for_no_css '.modal-form'
+      check_alert_seccess
       recorder.reload
       expect(recorder.title).to eq new_title
       expect(page).to have_content recorder.title
@@ -86,6 +87,53 @@ RSpec.feature "RecorderEdits", type: :feature do
       wait_for_css "#error_explanation"
       recorder.reload
       expect(recorder.title).not_to eq new_title
+    end
+  end
+
+  describe "カウンター名の編集" do
+    before(:each) {
+      log_in_as user
+      visit edit_recorder_path(recorder)
+    }
+
+    specify 'モーダルウィンドウを通して選択肢を編集する', js: true do
+      option = recorder.options.first
+      new_name = "yksrnr"
+      within "#option-#{option.id}" do
+        expect(page).not_to have_content new_name
+        find('.dropdown-toggle').click
+        click_on "編集"
+      end
+      within ".modal-container", visible: false do
+        wait_for_css '.modal-form'
+        fill_in '新しい名前', with: new_name
+        click_button '変更'
+      end
+      wait_for_no_css '.modal-form'
+      check_alert_seccess
+      option.reload
+      expect(option.name).to eq new_name
+      within "#option-#{option.id}" do
+        expect(page).to have_content new_name
+      end
+    end
+
+    specify 'バリデーション失敗時にエラーを出力する', js: true do
+      option = recorder.options.first
+      new_name = "a" * 256
+      within "#option-#{option.id}" do
+        expect(page).not_to have_content new_name
+        find('.dropdown-toggle').click
+        click_on "編集"
+      end
+      within ".modal-container", visible: false do
+        wait_for_css '.modal-form'
+        fill_in '新しい名前', with: new_name
+        click_button '変更'
+      end
+      wait_for_css "#error_explanation"
+      option.reload
+      expect(option.name).not_to eq new_name
     end
   end
 
@@ -140,7 +188,5 @@ RSpec.feature "RecorderEdits", type: :feature do
         wait_for_css "#error_explanation"
       }.not_to change { Option.count }
     end
-
   end
-
 end

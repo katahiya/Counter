@@ -33,6 +33,7 @@ RSpec.feature "DeleteOptions", type: :feature do
         #変更を待つ
         wait_for_no_css '.modal-form'
         #変更の確認
+        check_alert_seccess
         expect(page).not_to have_css "#option-#{option_id}"
         expect(option).not_to eq recorder.options.first
       }.to change { Option.count }.by(-1)
@@ -67,6 +68,7 @@ RSpec.feature "DeleteOptions", type: :feature do
 
           #変更を待つ
           wait_for_no_css '.modal-form'
+          check_alert_seccess
           #変更の確認
           options.each do |option|
             expect(page).not_to have_css "#option-#{option.id}"

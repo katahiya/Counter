@@ -17,7 +17,7 @@ class PluralActionsController < ApplicationController
 
   def destroy_options
     Option.transaction do
-      plural_destroy
+      plural_destroy '選択肢'
     end
     delete_empty_recordabilities
     @options = @recorder.options.all
@@ -33,7 +33,7 @@ class PluralActionsController < ApplicationController
 
   def destroy_recordabilities
     Recordability.transaction do
-      plural_destroy
+      plural_destroy '記録'
     end
     @recordabilities = @recorder.recordabilities.all
     @options = @recorder.options.all
@@ -62,10 +62,12 @@ class PluralActionsController < ApplicationController
       @user = @recorder.user
     end
 
-    def plural_destroy
+    def plural_destroy(name=nil)
+      count = @checked.count
       @checked.each do |c|
         c.destroy
       end
       update_recorder
+      flash[:success] = "#{count}個の#{name}を削除しました" if name
     end
 end

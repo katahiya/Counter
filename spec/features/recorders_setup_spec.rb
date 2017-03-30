@@ -27,6 +27,7 @@ RSpec.feature "RecordersSetup", type: :feature do
         user.reload
         recorder = user.recorders.first
         expect(recorder.title).to eq new_title
+        check_alert_seccess
       }.to change { Recorder.count }.by(1)
     end
 

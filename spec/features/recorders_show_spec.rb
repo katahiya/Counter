@@ -57,14 +57,6 @@ RSpec.feature "RecordersShow", type: :feature do
       log_in_as user
       visit recorder_path(recorder)
     }
-     specify 'モーダルウィンドウでgraph表示', js: true do
-      expect(page).not_to have_css '.graph'
-      expect(page).to have_css '.graph_path'
-      find('.graph_path').click
-      within ".modal-container", visible: false do
-        wait_for_css '.graph'
-      end
-    end
 
     specify 'モーダルウィンドウで選択肢を追加する', js: true do
       expect(page).not_to have_css 'form.edit_recorder'
@@ -78,6 +70,7 @@ RSpec.feature "RecordersShow", type: :feature do
         fill_in '名前', with: new_option_name
         click_button '追加'
       end
+      check_alert_seccess
       within ".option-bar" do
         wait_for_content new_option_name
       end

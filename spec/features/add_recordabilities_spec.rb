@@ -22,6 +22,7 @@ RSpec.feature "AddRecordabilities", type: :feature do
       record = recordability.records.first
       expect(record.count).to eq 1
       expect(record.option.name).to eq option.name
+      check_alert_seccess
       within "#record-#{record.id}" do
         expect(page).to have_content record.option.name
         expect(page).to have_content record.count
@@ -46,6 +47,7 @@ RSpec.feature "AddRecordabilities", type: :feature do
           click_button '追加'
         end
         wait_for_no_css '.batch_registration-form'
+        check_alert_seccess
         recordability = recorder.recordabilities.first
         i = 1
         recordability.records.zip(recorder.options).each do |record, option|
