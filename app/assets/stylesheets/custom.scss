@@ -209,8 +209,11 @@ input:enabled.plural_action_button {
 }
 
 .graph {
-  width: 100%;
+  width: 100% !important;
   height: 100%;
+  rect {
+    text-overflow: ellipsis;
+  }
 }
 
 /* record form */
@@ -442,6 +445,10 @@ input:enabled.plural_action_button {
     margin-bottom: 20px;
     margin-top: 10px;
   }
+}
+
+.close-flash-message {
+  cursor: pointer;
 }
 
 .checked {

@@ -35,6 +35,12 @@ $(function() {
     checked_any();
   });
 
+  //close flash message
+  $(document).on('click', '.close-flash-message', function(){
+    console.log($(this).parent())
+    $(this).parent().remove()
+  });
+
   //popover
   $('.hover_popover').popover({
     trigger: 'hover', // click,hover,focus,manualを選択出来る
@@ -149,6 +155,17 @@ var size_options_list = function() {
   $('.options-list').css("max-height", scroll_height + "px");
 };
 
+/*
+var size_graph = function() {
+  if('.modal-container'.length == 0) return;
+  if('.graph'.length == 0) return;
+  console.log("graph");
+  $('.graph').css("width", "100%");
+  $('.graph').css("height", "100%");
+  $('rect').css("text-overflow", "ellipsis");
+};
+*/
+
 var hide_less_than_min_modal = function() {
   if('.modal-container'.length == 0) return;
   var window_width = $(window).width();
@@ -158,8 +175,8 @@ var hide_less_than_min_modal = function() {
   }
 };
 
+//overflowをmax_heightまではvisible,以上ならautoにする
 var change_overflow = function(selector, max_height) {
-  console.log($(selector).height());
   if($(selector).height() < max_height)
     $(selector).css("overflow", "visible");
   else
