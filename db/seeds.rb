@@ -2,8 +2,8 @@ user = User.create!(email: "hoge@example.com",
              password: "hogehoge",
              password_confirmation: "hogehoge")
 User.create!(email: "Lenneth@example.com",
-             password: "valkyrie",
-             password_confirmation: "valkyrie",
+             password: "snmnkzmsng",
+             password_confirmation: "snmnkzmsng",
              admin: true)
 
 49.times do |n|
