@@ -105,6 +105,11 @@ ja:
       month: 月
       second: 秒
       year: 年
+  attributes:
+    email: メールアドレス
+    password: パスワード
+    title: カウンター名
+    name: 名前
   errors:
     format: "%{attribute}%{message}"
     messages:

@@ -1,4 +1,30 @@
-<h1>Counter</h1>
-<p>
-  This is the home page for the Counter.
-<p>
+<div class="jumbotron">
+  <div class="container">
+    <h1>ようこそ!</h1>
+    <p>こちらは選択肢を選んで記録を追加するカウンターサイトです。記録に用いる選択肢は自分で作成できます。</p>
+    <%= link_to "サインアップ", signup_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-4">
+      <h2>カウンターの作成</h2>
+      <p>記録をするためにまずカウンターを作成しましょう。作成したカウンターにお好きな選択肢を持たせれば準備完了です</p>
+      <%= link_to "カウンター作成へ", user_setup_path(current_user), class: "btn btn-primary" if logged_in?%>
+    </div>
+    <div class="col-md-4">
+      <h2>記録の追加</h2>
+      <p>カウンター一覧ページから記録を追加したいカウンターを選びましょう。選んだカウンターの選択肢一覧から記録に追加したい選択肢をクリックすると記録に追加されます．</p>
+      <%= link_to "カウンター一覧へ", user_recorders_path(current_user), class: "btn btn-primary" if logged_in?%>
+    </div>
+    <div class="col-md-4">
+      <h2>以下のような方々に</h2>
+      <ul>
+        <li>勝負の勝ち負けのような数種類の内容を繰り返し記録したい</li>
+        <li>記録した内容の出現率が知りたい</li>
+      </ul>
+    </div>
+  </div>
+</div>
