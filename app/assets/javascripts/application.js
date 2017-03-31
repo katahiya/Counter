@@ -18,8 +18,6 @@
 //= require_tree .
 
 $(function() {
-  console.log("ready");
-
   //checkbox
   $(document).on('click', '.check_all', function(){
     $('input[name="ids[]"]').prop('checked', true);
@@ -37,7 +35,6 @@ $(function() {
 
   //close flash message
   $(document).on('click', '.close-flash-message', function(){
-    console.log($(this).parent())
     $(this).parent().remove()
   });
 
@@ -76,7 +73,6 @@ $(document).on('turbolinks:load', function(){
 });
 
 $(window).resize(function() {
-  console.log("window");
   filter("recorders", "show", resize_windowful);
   filter("recorders", "edit", size_options_list);
   size_modal_window();
@@ -85,7 +81,7 @@ $(window).resize(function() {
 
 //コントローラーとアクションで呼び出しに制限をかける
 var filter = function(controller, action, callback) {
-  selector = `body[data-controller='${controller}'][data-action='${action}']`;
+  selector = "body[data-controller='" + controller + "'][data-action='" + action + "']";
   if($(selector).length > 0)
     callback();
 };
@@ -150,7 +146,6 @@ var size_options_list = function() {
   var header_height = $('.options-head').height();
   var buttons_height = $('.options-buttons').height();
   var scroll_height = body_height - header_height - buttons_height - 50
-  console.log(scroll_height);
   change_overflow('.options-list', scroll_height)
   $('.options-list').css("max-height", scroll_height + "px");
 };
