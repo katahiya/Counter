@@ -15,11 +15,11 @@ gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.4.1'
 gem 'cocoon'
 gem 'chartkick'
-gem "capybara-webkit"
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'
   gem 'byebug',  '9.0.0', platform: :mri
+  gem "capybara-webkit"
 end
 
 group :development do
