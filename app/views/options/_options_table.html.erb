@@ -1,9 +1,11 @@
 <% if @options.any? %>
   <%= form_tag({action: :delete_options, controller: :plural_actions } , { method: :get , remote: true}) do %>
-    <div class="options-buttons">
-      <%= submit_tag "削除", class: "plural_action_button", disabled: true %>
-      <%= button_tag "全選択", type: 'button', class: "check_all" %>
-      <span class="appear_checked"></span>
+    <div class="buttons-wrap">
+      <div class="options-buttons">
+        <%= submit_tag "削除", class: "plural_action_button", disabled: true %>
+        <%= button_tag "全選択", type: 'button', class: "check_all" %>
+        <span class="appear_checked"></span>
+      </div>
     </div>
 
     <div class="options-list">

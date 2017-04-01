@@ -4,6 +4,12 @@
 <div class="row recorder-items">
   <div class="col-md-8 col-md-offset-2">
     <div class="row">
+      <%= link_to "記録へ", recorder_path(@recorder), class: "btn btn-success" %>
+    </div>
+    <div class="row">
+      <%= link_to "カウンターを削除", delete_recorder_path(@recorder), remote: true, class: "btn btn-danger"  %>
+    </div>
+    <div class="row">
       <div class="heading">
         <h2>
           名前
@@ -30,16 +36,6 @@
     </div>
     <div class="row recorder-item options_table">
       <%= render 'options/options_table' %>
-    </div>
-    <div class="row">
-      <div class="pull-right">
-        <%= link_to "カウンターを削除", delete_recorder_path(@recorder), remote: true, class: "btn btn-default"  %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="pull-right">
-        <%= link_to "記録する", recorder_path(@recorder), class: "btn btn-default" %>
-      </div>
     </div>
   </div>
 </div>

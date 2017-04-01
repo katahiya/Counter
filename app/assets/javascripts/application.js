@@ -68,13 +68,13 @@ $(function() {
 $(document).on('turbolinks:load', function(){
   //resize section by window height
   filter("recorders", "show", resize_windowful);
-  filter("recorders", "edit", size_options_list);
+  filter("recorders", "edit", affix_change);
   size_modal_window();
 });
 
 $(window).resize(function() {
   filter("recorders", "show", resize_windowful);
-  filter("recorders", "edit", size_options_list);
+  filter("recorders", "edit", affix_change);
   size_modal_window();
   hide_less_than_min_modal();
 });
@@ -141,6 +141,7 @@ var size_modal_window = function() {
   $('.scroll-window').css("max-height", scroll_height + "px");
 };
 
+/*
 var size_options_list = function() {
   var body_height = window_height_without_header();
   var header_height = $('.options-head').height();
@@ -149,6 +150,23 @@ var size_options_list = function() {
   change_overflow('.options-list', scroll_height)
   $('.options-list').css("max-height", scroll_height + "px");
 };
+*/
+
+var affix_change = function() {
+  $('.options-buttons').affix({
+    offset: {
+      top: function() {
+        var options_head_offset = $('.recorder-item:first').offset().top + $('.recorder-item:first').height() + 10;
+        var buttons_height = $('.options-buttons').height();
+        //var options_buttons_offset = options_head_offset + buttons_height + 39;
+        var options_buttons_offset_top = options_head_offset + 15;
+        $('.buttons-wrap').css('height', buttons_height);
+        //console.log($('.custom-affix').offset().top);
+        return options_buttons_offset_top;
+      }
+    }
+  });
+}
 
 /*
 var size_graph = function() {

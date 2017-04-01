@@ -441,6 +441,10 @@ input:enabled.plural_action_button {
       }
     }
   }
+  .options-buttons.affix {
+    position: fixed;
+    top: 50px !important;
+  }
   .options-list {
     margin-bottom: 20px;
     margin-top: 10px;
@@ -454,3 +458,4 @@ input:enabled.plural_action_button {
 .checked {
   @include timestamp_color;
 }
+
