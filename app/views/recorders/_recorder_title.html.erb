@@ -1,3 +1,8 @@
 <p>
   <%= @recorder.title %>
+  <%= link_to sanitize('<span class="glyphicon glyphicon-pencil" aria-hidden="true"</sapn>'),
+              recorder_edit_title_path(@recorder),
+              class: "edit_title_path",
+              remote: true %>
+
 </p>

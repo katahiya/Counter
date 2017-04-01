@@ -38,13 +38,25 @@ $(function() {
     $(this).parent().remove()
   });
 
+  //scroll
+  $('.scroll-button').click(function(){
+    var speed = 500;
+    var href= $(this).attr("href");
+    console.log(href);
+    var position = $(href).offset().top - 60;
+    console.log(position);
+    console.log($(href).height());
+    $("html, body").animate({scrollTop:position}, speed, "swing");
+    return false;
+  });
+
   //popover
   $('.hover_popover').popover({
     trigger: 'hover', // click,hover,focus,manualを選択出来る
   });
 
   //private
-  var uncheck_all_button = '<button name="button" type="button" class="uncheck_all">全選択解除</button>'
+  var uncheck_all_button = '<button name="button" type="button" class="uncheck_all btn btn-default btn-sm">全選択解除</button>'
   var generate_buttons = function() {
     if($('.uncheck_all').length > 0) return;
     $('.appear_checked').append(uncheck_all_button);

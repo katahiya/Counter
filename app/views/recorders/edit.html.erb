@@ -1,41 +1,34 @@
 <% provide(:title, 'カウンターの編集') %>
-<h1>カウンターの編集</h1>
+<h1 id="top">カウンターの編集</h1>
+
 
 <div class="row recorder-items">
   <div class="col-md-8 col-md-offset-2">
-    <div class="row">
-      <%= link_to "記録へ", recorder_path(@recorder), class: "btn btn-success" %>
-    </div>
-    <div class="row">
-      <%= link_to "カウンターを削除", delete_recorder_path(@recorder), remote: true, class: "btn btn-danger"  %>
-    </div>
     <div class="row">
       <div class="heading">
         <h2>
           名前
         </h2>
-        <%= link_to sanitize('<span class="glyphicon glyphicon-pencil" aria-hidden="true"</sapn>'),
-                    recorder_edit_title_path(@recorder),
-                    class: "edit_title_path",
-                    remote: true %>
       </div>
     </div>
     <div class="row recorder-item  recorder-<%= @recorder.id %>_title">
       <%= render "recorder_title" %>
     </div>
-    <div class="row">
+    <div id="options-top" class="row">
       <div class="heading options-head">
         <h2>
           選択肢
         </h2>
-        <%= link_to sanitize('<span class="glyphicon glyphicon-plus" aria-hidden="true"</sapn>'),
-                    recorder_add_options_path(@recorder),
-                    class: "add_options_path",
-                    remote: true %>
       </div>
     </div>
     <div class="row recorder-item options_table">
       <%= render 'options/options_table' %>
+    </div>
+    <div id="options-bottom" class="row">
+      <%= link_to "カウンターを削除", delete_recorder_path(@recorder), remote: true, class: "btn btn-danger"  %>
+    </div>
+    <div class="row">
+      <%= link_to "記録へ", recorder_path(@recorder), class: "btn btn-success" %>
     </div>
   </div>
 </div>

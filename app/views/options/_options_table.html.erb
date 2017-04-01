@@ -2,8 +2,14 @@
   <%= form_tag({action: :delete_options, controller: :plural_actions } , { method: :get , remote: true}) do %>
     <div class="buttons-wrap">
       <div class="options-buttons">
-        <%= submit_tag "削除", class: "plural_action_button", disabled: true %>
-        <%= button_tag "全選択", type: 'button', class: "check_all" %>
+        <%= link_to "最初へ", "#options-top", class: "scroll-button btn btn-sm btn-warning" %>
+        <%= link_to "最後へ", "#options-bottom", class: "scroll-button btn btn-sm btn-warning" %>
+        <%= link_to '追加',
+                    recorder_add_options_path(@recorder),
+                    class: "add_options_path btn btn-primary btn-sm",
+                    remote: true %>
+        <%= submit_tag "削除", class: "plural_action_button btn btn-danger btn-sm", disabled: true %>
+        <%= button_tag "全選択", type: 'button', class: "check_all btn btn-default btn-sm" %>
         <span class="appear_checked"></span>
       </div>
     </div>
