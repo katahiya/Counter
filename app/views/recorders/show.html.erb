@@ -11,10 +11,12 @@
         <h2>
           <%= @recorder.title %>
         </h2>
-        <%= link_to sanitize('<span class="glyphicon glyphicon-stats" aria-hidden="true"</sapn>'),
-                    graph_path(@recorder), class: "graph_path" %>
-        <%= link_to sanitize('<span class="glyphicon glyphicon-cog" aria-hidden="true"</sapn>'),
-                    edit_recorder_path(@recorder) %>
+        <div>
+          <%= link_to sanitize('<span class="glyphicon glyphicon-stats" aria-hidden="true"</sapn>'),
+                      graph_path(@recorder), class: "graph_path" %>
+          <%= link_to sanitize('<span class="glyphicon glyphicon-cog" aria-hidden="true"</sapn>'),
+                      edit_recorder_path(@recorder) %>
+        </div>
       </div>
     </div>
     <div class="row records-body">
