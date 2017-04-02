@@ -142,9 +142,8 @@ var resize_records_table = function(base) {
   var head_height = $('.records-head').height();
   var buttons_height = $('.records-buttons').height();
   var thead_height = $('.records-thead').height();
-  var table_width = $('.records-thead').width() - 20;
+  var table_width = $('.records-table').width();
   var tbody_height = base-head_height-buttons_height-thead_height
-  change_overflow('.records-tbody', tbody_height)
   $('.records-tbody').css("max-height", tbody_height + "px");
   $('.record-select').css("width", table_width*0.1 + "px");
   $('.record-action').css("width", table_width*0.1 + "px");
@@ -214,14 +213,6 @@ var hide_less_than_min_modal = function() {
     $('.modal-container').modal("hide");
     return;
   }
-};
-
-//overflowをmax_heightまではvisible,以上ならautoにする
-var change_overflow = function(selector, max_height) {
-  if($(selector).height() < max_height)
-    $(selector).css("overflow", "visible");
-  else
-    $(selector).css("overflow", "auto");
 };
 
 //スマートフォン以下のウィンドウサイズでoptions-barをスライドさせるボタンを用意
