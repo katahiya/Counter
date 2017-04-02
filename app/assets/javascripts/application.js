@@ -50,6 +50,27 @@ $(function() {
     return false;
   });
 
+  //slide options bar
+  var duration = 500;
+  var sidebar = '.options-col';
+  var button = '.slide-button';
+  $(document).on('click', '.slide-button', function(){
+    $(button).toggleClass('slide-close');
+    $(button).removeClass('slide-open');
+    if ($(button).hasClass('slide-close')) {
+      console.log("close");
+      $(sidebar).stop().animate({
+        left: '0'
+      }, duration);
+    } else {
+      console.log("open");
+      $(sidebar).stop().animate({
+        left: '-300px'
+      }, duration);
+      $(button).addClass('slide-open');
+    };
+  });
+
   //popover
   $('.hover_popover').popover({
     trigger: 'hover', // click,hover,focus,manualを選択出来る
@@ -80,12 +101,14 @@ $(function() {
 $(document).on('turbolinks:load', function(){
   //resize section by window height
   filter("recorders", "show", resize_windowful);
+  filter("recorders", "show", slide_options);
   filter("recorders", "edit", affix_change);
   size_modal_window();
 });
 
 $(window).resize(function() {
   filter("recorders", "show", resize_windowful);
+  filter("recorders", "show", slide_options);
   filter("recorders", "edit", affix_change);
   size_modal_window();
   hide_less_than_min_modal();
@@ -112,11 +135,13 @@ var resize_windowful = function() {
   resize_records_table(resize + 30);
 };
 var resize_option_bar = function(base) {
+  /*
   if($('.option-bar').width() < 125){
     $('.options-col').css("visibility", "hidden");
     return;
   }
   $('.options-col').css("visibility", "visible");
+  */
   var side_height = $('.option-bar-head').height();
   $('.record_form').css("max-height", base-side_height + "px");
 }
@@ -142,8 +167,8 @@ var resize_records_table = function(base) {
 }
 
 var size_modal_window = function() {
-  if('.modal-container'.length == 0) return;
-  if('.scroll-window'.length == 0) return;
+  if($('.modal-container').length == 0) return;
+  if($('.scroll-window').length == 0) return;
   var window_height = $(window).height();
   var header_height = 41;
   var buttons_height = 50;
@@ -192,7 +217,7 @@ var size_graph = function() {
 */
 
 var hide_less_than_min_modal = function() {
-  if('.modal-container'.length == 0) return;
+  if($('.modal-container').length == 0) return;
   var window_width = $(window).width();
   if(window_width < 480){
     $('.modal-container').modal("hide");
@@ -206,4 +231,32 @@ var change_overflow = function(selector, max_height) {
     $(selector).css("overflow", "visible");
   else
     $(selector).css("overflow", "auto");
-}
+};
+
+//スマートフォン以下のウィンドウサイズでoptions-barをスライドさせるボタンを用意
+var slide_options = function() {
+  var container = '.slide-button-container';
+  var options = '.options-col';
+  var grid = 'col-sm-3';
+  if($(window).width() < 768){
+    $(options).css('margin-bottom', -window_height_without_header());
+    if($(options).hasClass(grid)){
+      $(options).removeClass(grid);
+      $(options).attr(grid);
+    }
+    if($('div.slide-button').length == 0){
+      $(container).append('<div class="slide-button slide-open"></div>');
+      console.log("add");
+    }
+    console.log("hide");
+  }
+  else{
+    $(options).css('margin-bottom', '');
+    if(!$(options).hasClass(grid)) {
+      $(options).addClass(grid);
+      $(options).css('left', '');
+    }
+    $(container).empty();
+    console.log("visible");
+  }
+};
