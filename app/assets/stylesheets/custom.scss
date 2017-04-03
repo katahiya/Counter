@@ -33,7 +33,7 @@ $gray-medium-light: #eaeaea;
     @include flex-inline-container;
     h2 {
       font-size: 1.6em;
-      width: 90%;
+      width: 80%;
       word-wrap: break-word;
     }
   }
@@ -244,6 +244,14 @@ input:enabled.plural_action_button {
 .records-table {
   @include heading;
   @include timestamp_color;
+  .heading {
+    div {
+      padding-right: 10px;
+    }
+    a {
+      font-size: 1.6em;
+    }
+  }
   table {
     thead {
       border-bottom: 3px double black;
@@ -414,19 +422,6 @@ input:enabled.plural_action_button {
     text-align: right;
   }
   .scroll-window {
-    overflow-x: hidden;
-    overflow-y: auto;
-    width: 100%;
-    text-align: center;
-    border-bottom: 2px double #eee;
-    margin-bottom: 10px;
-    ul {
-      text-align: center;
-      list-style: none;
-      li {
-        margin-bottom: 10px;
-      }
-    }
     .recordability {
       border-bottom: 1px solid #eee;
       .inline {
@@ -436,6 +431,22 @@ input:enabled.plural_action_button {
           @include ellipsis;
         }
       }
+    }
+  }
+}
+
+.scroll-window {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px double #eee;
+  margin-bottom: 10px;
+  ul {
+    text-align: center;
+    list-style: none;
+    li {
+      margin-bottom: 10px;
     }
   }
 }

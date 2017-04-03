@@ -3,8 +3,8 @@
 <% else %>
   <%= form_tag({action: :delete_recordabilities, controller: :plural_actions } , { method: :get , remote: true}) do %>
     <div class="records-buttons">
-      <%= submit_tag "削除", class: "plural_action_button", disabled: true %>
-      <%= button_tag "全選択", type: 'button', class: "check_all" %>
+      <%= submit_tag "削除", class: "plural_action_button btn btn-danger btn-sm", disabled: true %>
+      <%= button_tag "全選択", type: 'button', class: "check_all btn btn-default btn-sm" %>
       <span class="appear_checked"></span>
     </div>
 
