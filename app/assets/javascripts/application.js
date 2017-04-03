@@ -42,10 +42,7 @@ $(function() {
   $(document).on('click', '.scroll-button', function(){
     var speed = 500;
     var href= $(this).attr("href");
-    console.log(href);
     var position = $(href).offset().top - 60;
-    console.log(position);
-    console.log($(href).height());
     $("html, body").animate({scrollTop:position}, speed, "swing");
     return false;
   });
@@ -93,6 +90,7 @@ $(function() {
 
 $(document).on('turbolinks:load', function(){
   //resize section by window height
+  filter("recorders", "new", size_setup_form);
   filter("recorders", "show", resize_windowful);
   filter("recorders", "show", slide_options);
   filter("recorders", "edit", affix_change);
@@ -100,6 +98,7 @@ $(document).on('turbolinks:load', function(){
 });
 
 $(window).resize(function() {
+  filter("recorders", "new", size_setup_form);
   filter("recorders", "show", resize_windowful);
   filter("recorders", "show", slide_options);
   filter("recorders", "edit", affix_change);
@@ -193,6 +192,14 @@ var affix_change = function() {
       }
     }
   });
+}
+
+var size_setup_form = function() {
+  var window_height = window_height_without_header();
+  var form_height = window_height * 0.8;
+  var options_height = form_height - 300;
+  $('.setup-form').css('max-height', form_height);
+  $('.scroll-window').css('max-height', options_height);
 }
 
 /*

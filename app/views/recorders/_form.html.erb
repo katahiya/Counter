@@ -8,20 +8,24 @@
 
   <hr>
 
-  <div id="options" class="form-group options-form">
+  <div class="form-group">
     <label>選択肢</label>
-    <div class="scroll-window">
+    <div id="options" class="scroll-window">
     <%= f.fields_for :options do |option_form| %>
       <%= render 'option_fields', f: option_form %>
     <% end %>
     </div>
   </div>
-  <%= link_to_add_association "フォームを追加", f, :options,
-                                                class: "btn btn-default",
-                                                data: {
-                                                association_insertion_node: '#options',
-                                                association_insertion_method: 'append' } %>
   <div class="actions">
-    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <div class="pull-left">
+    <%= link_to_add_association "フォームを追加", f, :options,
+                                                  class: "btn btn-default",
+                                                  data: {
+                                                  association_insertion_node: '#options',
+                                                  association_insertion_method: 'append' } %>
+    </div>
+    <div class="pull-right">
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

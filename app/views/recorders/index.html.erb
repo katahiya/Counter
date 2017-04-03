@@ -1,7 +1,7 @@
 <% provide(:title, 'カウンター一覧') %>
-<h1>カウンター一覧</h1>
+<h1>カウンターの一覧</h1>
 
-<div class="setup-button"><%= link_to "create new", user_setup_path(@user), class: "btn btn-primary" %></div>
+<div class="setup-button"><%= link_to "新規作成", user_setup_path(@user), class: "btn btn-primary" %></div>
 
 <div id="recorders_index" class="recorders">
   <%= render "recorders" %>

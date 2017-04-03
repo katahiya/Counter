@@ -70,10 +70,10 @@ RSpec.feature "RecordersShow", type: :feature do
         fill_in '名前', with: new_option_name
         click_button '追加'
       end
-      check_alert_seccess
       within ".option-bar" do
         wait_for_content new_option_name
       end
+      check_alert_seccess
     end
 
   end

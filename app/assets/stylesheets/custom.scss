@@ -226,9 +226,14 @@ input:enabled.plural_action_button {
     height: 50px;
     display: block;
     text-align: center;
-    font-size: 1.2em;
     white-space: nowrap;
     border-bottom: 1px solid #eee;
+  }
+  div.side-item {
+    font-size: 1.4em;
+  }
+  a.side-item {
+    font-size: 2.0em;
   }
   .record_form {
     width: 100%;
@@ -291,25 +296,20 @@ input:enabled.plural_action_button {
 
 .recorder-form {
   @include form_standard;
+  position: relative;
+  padding-bottom: 50px;
   h1 {
     text-align: center;
     font-size: 2.2em;
   }
-  input, textarea, select, .uneditable-input {
+  textarea, select, .uneditable-input {
     border: 1px, solid #bbb;
     width: 100%;
-    margin-bottom: 15px;
     @include box_sizing;
   }
-
   input {
     height: auto !important;
   }
-}
-
-/* options form */
-.options-form {
-  @include form_standard;
 }
 
 /* users/sessioin form */

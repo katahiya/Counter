@@ -1,5 +1,5 @@
 <% @recorder.options.each do |option| %>
-  <li class="side-item">
+  <li>
     <%= link_to option.name, single_register_path(option), method: :post, class: "side-item" %>
   </li>
 <% end %>
