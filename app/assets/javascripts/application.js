@@ -66,6 +66,17 @@ $(function() {
     };
   });
 
+  //loading animation
+  $(document).on('ajaxSend', function(){
+    console.log('send')
+    $('#loading').show();
+  });
+  $(document).on('ajaxComplete', function(){
+    console.log('conplete')
+    $('#loading').hide();
+  });
+
+
   //private
   var uncheck_all_button = '<button name="button" type="button" class="uncheck_all btn btn-default btn-sm">全選択解除</button>'
   var generate_buttons = function() {
@@ -94,6 +105,7 @@ $(document).on('turbolinks:load', function(){
   filter("recorders", "show", resize_windowful);
   filter("recorders", "show", slide_options);
   filter("recorders", "edit", affix_change);
+  deploy_loading();
   size_modal_window();
 });
 
@@ -102,9 +114,19 @@ $(window).resize(function() {
   filter("recorders", "show", resize_windowful);
   filter("recorders", "show", slide_options);
   filter("recorders", "edit", affix_change);
+  deploy_loading();
   size_modal_window();
-  hide_less_than_min_modal();
 });
+
+var deploy_loading = function() {
+  var selector = '#loading-image';
+  var window_height = $(window).height();
+  var image_height = $(selector).height();
+  var window_width = $(window).width();
+  var image_width = $(selector).width();
+  $(selector).css("margin-top", (window_height - image_height) / 2 + "px");
+  $(selector).css("margin-left", (window_width - image_width) / 2 + "px");
+}
 
 //コントローラーとアクションで呼び出しに制限をかける
 var filter = function(controller, action, callback) {

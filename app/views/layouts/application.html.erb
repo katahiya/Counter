@@ -13,6 +13,9 @@
         <%= render "shared/flash_messages" %>
       </div>
       <%= yield %>
+      <div id='loading'>
+        <%= render "shared/loading.html.erb" %>
+      </div>
       <%= render 'layouts/footer' %>
       <%= debug(params) if Rails.env.development? %>
     </div>

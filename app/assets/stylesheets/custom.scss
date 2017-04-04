@@ -171,6 +171,13 @@ footer {
   }
 }
 
+#loading {
+  display: none;
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+}
+
 ul.unstyled {
   list-style: none;
 }
@@ -242,6 +249,7 @@ input:enabled.plural_action_button {
       text-align: center;
       a.side-item {
         font-size: 2.0em;
+        color: royalblue;
         padding-bottom: 5px;
         border-bottom: 1px solid #eee;
       }
