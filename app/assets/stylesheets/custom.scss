@@ -247,6 +247,7 @@ input:enabled.plural_action_button {
     display: block;
     li {
       text-align: center;
+      border-bottom: 1px solid #eee;
       a.side-item {
         font-size: 2.0em;
         color: royalblue;
@@ -503,6 +504,7 @@ input:enabled.plural_action_button {
     left: -300px;
     width: 300px;
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
     z-index: 500;
   }
   .slide-button {
@@ -510,8 +512,8 @@ input:enabled.plural_action_button {
     top: 70px;
     left: 300px;
     display: block;
-    width: 30px;
-    height: 70px;
+    width: 40px;
+    height: 80px;
     color: #FFF;
     background-color: rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -522,8 +524,8 @@ input:enabled.plural_action_button {
       content: "";
       display: block;
       position: absolute;
-      top: 30px;
-      right: 10px;
+      top: 35px;
+      right: 15px;
       width: 10px;
       height: 10px;
       border-top: 1px solid #CCC;
@@ -538,8 +540,8 @@ input:enabled.plural_action_button {
       content: "";
       display: block;
       position: absolute;
-      top: 30px;
-      right: 10px;
+      top: 35px;
+      right: 15px;
       width: 10px;
       height: 10px;
       border-top: 1px solid #CCC;
