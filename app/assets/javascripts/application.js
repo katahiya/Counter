@@ -121,11 +121,25 @@ $(window).resize(function() {
 var deploy_loading = function() {
   var selector = '#loading-image';
   var window_height = $(window).height();
-  var image_height = $(selector).height();
+  var image_height = 80;
   var window_width = $(window).width();
-  var image_width = $(selector).width();
-  $(selector).css("margin-top", (window_height - image_height) / 2 + "px");
-  $(selector).css("margin-left", (window_width - image_width) / 2 + "px");
+  var image_width = 80;
+  var margin_top = (window_height - image_height) / 2;
+  var margin_left =  (window_width - image_width) / 2;
+  console.log('window_height');
+  console.log(window_height);
+  console.log('image_height');
+  console.log(image_height);
+  console.log('window_width');
+  console.log(window_width);
+  console.log('image_width');
+  console.log(image_width);
+  console.log('margin_top');
+  console.log(margin_top);
+  console.log('margin_left');
+  console.log(margin_left);
+  $(selector).css("margin-top", margin_top + "px");
+  $(selector).css("margin-left", margin_left + "px");
 }
 
 //コントローラーとアクションで呼び出しに制限をかける
@@ -238,15 +252,6 @@ var size_graph = function() {
 };
 */
 
-var hide_less_than_min_modal = function() {
-  if($('.modal-container').length == 0) return;
-  var window_width = $(window).width();
-  if(window_width < 480){
-    $('.modal-container').modal("hide");
-    return;
-  }
-};
-
 //スマートフォン以下のウィンドウサイズでoptions-barをスライドさせるボタンを用意
 var slide_options = function() {
   var container = '.slide-button-container';
@@ -255,7 +260,6 @@ var slide_options = function() {
   if($(window).width() < 768){
     if($(options).hasClass(grid)){
       $(options).removeClass(grid);
-      $(options).attr(grid);
     }
     if($('div.slide-button').length == 0){
       $(container).append('<div class="slide-button slide-open"></div>');
