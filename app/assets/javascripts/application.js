@@ -143,7 +143,10 @@ var window_height_without_header = function() {
 
 //resize windowful by window height
 var resize_windowful = function() {
-  var resize = window_height_without_header() - 50;
+  if($(window).width() < 768)
+    var resize = window_height_without_header() - 30;
+  else
+    var resize = window_height_without_header() - 50;
   $('.windowful').css("max-height", resize + "px");
   resize_option_bar(resize);
   resize_records_table(resize + 30);
@@ -250,7 +253,6 @@ var slide_options = function() {
   var options = '.options-col';
   var grid = 'col-sm-3';
   if($(window).width() < 768){
-    $(options).css('margin-bottom', -window_height_without_header());
     if($(options).hasClass(grid)){
       $(options).removeClass(grid);
       $(options).attr(grid);
@@ -260,7 +262,6 @@ var slide_options = function() {
     }
   }
   else{
-    $(options).css('margin-bottom', '');
     if(!$(options).hasClass(grid)) {
       $(options).addClass(grid);
       $(options).css('left', '');

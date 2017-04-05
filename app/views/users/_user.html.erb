@@ -1,6 +1,13 @@
 <li id="user-<%= user.id %>">
   <div class="row">
     <div class="email col-md-6"><%= link_to user.email, user %></div>
+    <% if user.admin %>
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    <% end %>
     <div class="col-md-2"><%= link_to "edit", edit_user_path(user) %></div>
     <div class="col-md-2"><%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" } %></div>
+  </div>
+  <div class="row">
+    <%= user.created_at %>
+  </div>
 <li>

@@ -2,8 +2,6 @@
   <%= form_tag({action: :delete_options, controller: :plural_actions } , { method: :get , remote: true}) do %>
     <div class="buttons-wrap">
       <div class="options-buttons">
-        <%= link_to "最初へ", "#options-top", class: "scroll-button btn btn-sm btn-warning" %>
-        <%= link_to "最後へ", "#options-bottom", class: "scroll-button btn btn-sm btn-warning" %>
         <%= link_to '追加',
                     recorder_add_options_path(@recorder),
                     class: "add_options_path btn btn-primary btn-sm",
