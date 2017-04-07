@@ -22,4 +22,10 @@
   <% end %>
 <% else %>
   <p>選択肢はありません</p>
+  <p>
+    <%= link_to '選択肢を追加',
+                recorder_add_options_path(@recorder),
+                class: "add_options_path",
+                remote: true %>
+  </p>
 <% end %>

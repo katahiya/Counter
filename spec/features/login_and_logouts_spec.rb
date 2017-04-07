@@ -59,7 +59,7 @@ RSpec.feature "LoginAndLogouts", type: :feature do
     visit root_path
     expect(page).not_to have_link nil, href: login_path
     expect(page).to have_link nil, href: logout_path, visible: false
-    find('.dropdown-toggle').click
+    all('.dropdown-toggle')[1].click
     click_on "ログアウト"
     expect(page).to have_link nil, href: login_path
     expect(page).not_to have_link nil, href: logout_path, visible: false

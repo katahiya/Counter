@@ -68,11 +68,9 @@ $(function() {
 
   //loading animation
   $(document).on('ajaxSend', function(){
-    console.log('send')
     $('#loading').show();
   });
   $(document).on('ajaxComplete', function(){
-    console.log('conplete')
     $('#loading').hide();
   });
 
@@ -126,6 +124,12 @@ var deploy_loading = function() {
   var image_width = 80;
   var margin_top = (window_height - image_height) / 2;
   var margin_left =  (window_width - image_width) / 2;
+  console.log(window_height)
+  console.log(image_height)
+  console.log(window_width)
+  console.log(image_width)
+  console.log(margin_top)
+  console.log(margin_left)
   $(selector).css("margin-top", margin_top + "px");
   $(selector).css("margin-left", margin_left + "px");
 }

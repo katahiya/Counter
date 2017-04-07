@@ -131,10 +131,6 @@ p {
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
-  &:hover {
-    color: white;
-    text-decoration: none;
-  }
 }
 
 .nested-fields {
@@ -176,6 +172,7 @@ footer {
   z-index: 10000;
   position: fixed;
   top: 0;
+  left: 0;
 }
 
 ul.unstyled {

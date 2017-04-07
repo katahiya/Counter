@@ -55,10 +55,10 @@ RSpec.feature "RecordersShow", type: :feature do
   describe "ボタン及びリンク" do
     before(:each) {
       log_in_as user
-      visit recorder_path(recorder)
     }
 
     specify 'モーダルウィンドウで選択肢を追加する', js: true do
+      visit recorder_path(recorder)
       expect(page).not_to have_css 'form.edit_recorder'
       within ".option-bar" do
         find('.dropdown-toggle').click
@@ -76,5 +76,24 @@ RSpec.feature "RecordersShow", type: :feature do
       check_alert_seccess
     end
 
+    specify '選択肢を持たない状態から追加する', js: true do
+      recorder = create(:recorder, user: user)
+      visit recorder_path(recorder)
+      expect(page).not_to have_css 'form.edit_recorder'
+      within ".option-bar" do
+        find('.dropdown-toggle').click
+        click_on "選択肢を追加"
+      end
+      new_option_name = 'new_option'
+      within ".modal-container", visible: false do
+        wait_for_css 'form.edit_recorder'
+        fill_in '名前', with: new_option_name
+        click_button '追加'
+      end
+      within ".option-bar" do
+        wait_for_content new_option_name
+      end
+      check_alert_seccess
+    end
   end
 end
