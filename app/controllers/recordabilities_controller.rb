@@ -5,7 +5,7 @@ class RecordabilitiesController < ApplicationController
   }, only: [:new, :create]
   before_action -> {
     logged_in_user(recorder_url(parent_recorder))
-  }, only: [:edit, :update, :delete, :destroy]
+  }, only: [:duplicate, :edit, :update, :delete, :destroy]
   before_action -> {
     correct_user(parent_user.id)
   }
@@ -36,6 +36,22 @@ class RecordabilitiesController < ApplicationController
     hide_modal_window @recordability,
                       "recorders/records_table",
                       ".records-body"
+  end
+
+  def duplicate
+    @new = @recorder.recordabilities.build
+    Recordability.transaction do
+      Record.transaction do
+        @new.save!
+        @recordability.records.each do |record|
+          @new.records.create!(option: record.option, count: record.count)
+        end
+        update_recorder
+        flash[:success] = "記録が複製されました"
+      end
+    end
+    @recordability = @new
+    redirect_to @recorder
   end
 
   def edit
