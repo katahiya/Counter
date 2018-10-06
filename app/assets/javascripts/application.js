@@ -13,9 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require cocoon
-//= require bootstrap
+//= require remodal
 //= require turbolinks
 //= require_tree .
+//= require materialize
+//= require materialize-sprockets
 
 $(function() {
   //checkbox
