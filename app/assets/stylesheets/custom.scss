@@ -1,5 +1,6 @@
 @import "materialize/components/color-variables";
-$primary-color: color("blue", "lighten-2") !default;
+$primary-color: color("light-blue", "lighten-2") !default;
+$secondary-color: color("indigo", "accent-3") !default;
 @import "materialize";
 @import "material_icons";
 @import "remodal-default-theme";
@@ -127,21 +128,26 @@ p {
 }
 
 /* header */
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: aqua;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-}
-
-.nested-fields {
-  .field-group {
-    margin-bottom: 20px;
-    .remove_fields {
-      font-size: 1em;
+header {
+  nav {
+    position: fixed;
+    top: 0;
+  }
+  #logo {
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: aqua;
+    letter-spacing: -1px;
+    padding-top: 9px;
+    font-weight: bold;
+  }
+  .nested-fields {
+    .field-group {
+      margin-bottom: 20px;
+      .remove_fields {
+        font-size: 1em;
+      }
     }
   }
 }

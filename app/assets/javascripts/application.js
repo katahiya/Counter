@@ -15,11 +15,18 @@
 //= require cocoon
 //= require remodal
 //= require turbolinks
-//= require_tree .
 //= require materialize
-//= require materialize-sprockets
+//= require_tree .
 
 $(function() {
+  //materialize sidenav
+  documen.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
   //checkbox
   $(document).on('click', '.check_all', function(){
     $('input[name="ids[]"]').prop('checked', true);
@@ -136,7 +143,7 @@ var deploy_loading = function() {
   $(selector).css("margin-left", margin_left + "px");
 }
 
-//コントローラーとアクションで呼び出しに制限をかける
+//restrict calling controllers and actions
 var filter = function(controller, action, callback) {
   selector = "body[data-controller='" + controller + "'][data-action='" + action + "']";
   if($(selector).length > 0)
@@ -246,7 +253,7 @@ var size_graph = function() {
 };
 */
 
-//スマートフォン以下のウィンドウサイズでoptions-barをスライドさせるボタンを用意
+//slide button of options-bar for smart phone
 var slide_options = function() {
   var container = '.slide-button-container';
   var options = '.options-col';
