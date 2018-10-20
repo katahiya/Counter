@@ -19,14 +19,7 @@
 //= require_tree .
 
 $(function() {
-  //materialize sidenav
-  documen.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
-  $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
+  initialize_materialize();
   //checkbox
   $(document).on('click', '.check_all', function(){
     $('input[name="ids[]"]').prop('checked', true);
@@ -77,12 +70,24 @@ $(function() {
 
   //loading animation
   $(document).on('ajaxSend', function(){
-    $('#loading').show();
+    //$('#loading').show();
   });
   $(document).on('ajaxComplete', function(){
-    $('#loading').hide();
+    //$('#loading').hide();
   });
 
+  //ajax cover click
+  $(document).on('click', '.ajax-cover-open', function(){
+    console.log('test activate');
+    $('body').addClass('cover-open');
+    $('.cover-view.first-focus').focus();
+    $('.cover-view').css("bottom", "0px");
+  });
+  $(document).on('click', '.ajax-cover-close', function(){
+    console.log('test close');
+    $('body').removeClass('cover-open');
+    //$('.cover-view').css("bottom", window_height + "px");
+  });
 
   //private
   var uncheck_all_button = '<button name="button" type="button" class="uncheck_all btn btn-default btn-sm">全選択解除</button>'
@@ -106,20 +111,28 @@ $(function() {
 
 });
 
+// to save window size
+var window_height;
+var window_height;
+
 $(document).on('turbolinks:load', function(){
+  window_height = $(window).height();
+  window_width = $(window).width();
   //resize section by window height
   filter("recorders", "new", size_setup_form);
   filter("recorders", "show", resize_windowful);
-  filter("recorders", "show", slide_options);
+  filter("recorders", "show", size_cover_view);
   filter("recorders", "edit", affix_change);
   deploy_loading();
   size_modal_window();
 });
 
 $(window).resize(function() {
+  window_height = $(window).height();
+  window_width = $(window).width();
   filter("recorders", "new", size_setup_form);
   filter("recorders", "show", resize_windowful);
-  filter("recorders", "show", slide_options);
+  filter("recorders", "show", size_cover_view);
   filter("recorders", "edit", affix_change);
   deploy_loading();
   size_modal_window();
@@ -133,12 +146,6 @@ var deploy_loading = function() {
   var image_width = 80;
   var margin_top = (window_height - image_height) / 2;
   var margin_left =  (window_width - image_width) / 2;
-  console.log(window_height)
-  console.log(image_height)
-  console.log(window_width)
-  console.log(image_width)
-  console.log(margin_top)
-  console.log(margin_left)
   $(selector).css("margin-top", margin_top + "px");
   $(selector).css("margin-left", margin_left + "px");
 }
@@ -152,8 +159,18 @@ var filter = function(controller, action, callback) {
 
 var window_height_without_header = function() {
   var window_height = $(window).height();
-  var header_height = $('.navbar-fixed-top').height();
+  var header_height = $('#nav-header').height();
   return window_height - header_height;
+};
+
+var size_cover_view = function() {
+    var hheight = $('#nav-header').height();
+    console.log(window_height);
+    console.log(hheight);
+    var height = window_height - hheight;
+    var width = $(window).width();
+    $('.cover-view').css("height", height + "px");
+    $('.cover-view').css("width", width + "px");
 };
 
 //resize windowful by window height
@@ -195,6 +212,17 @@ var resize_records_table = function(base) {
   $('.record-data').css("max-width", table_width*0.6 + "px");
   $('.record-count').css("max-width", table_width*0.1 + "px");
 }
+
+var initialize_materialize = function() {
+  //materialize sidenav
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+};
 
 var size_modal_window = function() {
   if($('.modal-container').length == 0) return;

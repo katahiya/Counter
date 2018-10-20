@@ -15,7 +15,7 @@ class RecordabilitiesController < ApplicationController
     @recorder.options.count.times do
       @recordability.records.build
     end
-    get_modal_window
+    get_ajax_view(".cover-view")
   end
 
   def create

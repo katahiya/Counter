@@ -7,6 +7,8 @@ $secondary-color: color("indigo", "accent-3") !default;
 @import "remodal";
 
 /*universal*/
+$fab-background-size: 56px;
+$fab-icon-size: 24px;
 $gray-medium-light: #eaeaea;
 
 @mixin box_sizing {
@@ -130,6 +132,7 @@ p {
 /* header */
 header {
   nav {
+    z-index: 10000;
     position: fixed;
     top: 0;
   }
@@ -561,5 +564,99 @@ input:enabled.plural_action_button {
       -webkit-transform: rotate(-45deg);
       -ms-transform: rotate(-45deg);
       -o-tansform: rotate(-45deg);
+  }
+}
+
+//cvover view
+/* Close Icon */
+.cover-close {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  color: #000;
+  cursor: default;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: rotate(0);
+  }
+}
+.cover-view {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  left: 0px;
+  bottom: 0px;
+  width: 100vh;
+  transition: all 0.3s ease-in-out;
+}
+.cover-activate {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+/* Active */
+.cover-open {
+  //overflow: hidden;
+  .cover-view {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    z-index: 1002;
+  }
+  .cover-close {
+    opacity: 1;
+    cursor: pointer;
+    transform: rotate(-90deg);
+  }
+  .fab-expand {
+    transform: scale(70);
+    pointer-events: none;
+  }
+  .fab-icon {
+    opacity: 0;
+  }
+  //.ajax-cover-open {
+    //cursor: default;
+    //opacity: 0;
+    //transition: all 0.7s ease-in-out;
+  //}
+}
+
+.btn-floating {
+  z-index: 9999;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+}
+
+.fab {
+  cursor: pointer;
+  z-index: 1000;
+  .fab-background {
+    position: fixed;
+    width: $fab-background-size;
+    height: $fab-background-size;
+    right: $fab-background-size/2;
+    bottom: $fab-background-size/2;
+    border-radius: 100%;
+    box-sizing: border-box;
+    background: $secondary-color;
+    outline: 0;
+    transform-origin: 50%;
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fab-expand {
+    transform-origin: 50%;
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fab-icon {
+    z-index: 1001;
+    pointer-events: none;
+    color: #FFF;
+    position: fixed;
+    height: $fab-icon-size;
+    width: $fab-icon-size;
+    right: $fab-background-size - $fab-icon-size/2;
+    bottom: $fab-background-size - $fab-icon-size/2;
+    transition: opacity 0.3s ease-in-out;
   }
 }
