@@ -81,7 +81,7 @@ $(function() {
     console.log('test activate');
     $('body').addClass('cover-open');
     $('.cover-view.first-focus').focus();
-    $('.cover-view').css("bottom", "0px");
+    //$('.cover-view').css("bottom", "0px");
   });
   $(document).on('click', '.ajax-cover-close', function(){
     console.log('test close');
@@ -121,7 +121,7 @@ $(document).on('turbolinks:load', function(){
   //resize section by window height
   filter("recorders", "new", size_setup_form);
   filter("recorders", "show", resize_windowful);
-  filter("recorders", "show", size_cover_view);
+  //filter("recorders", "show", size_cover_view);
   filter("recorders", "edit", affix_change);
   deploy_loading();
   size_modal_window();
@@ -132,7 +132,7 @@ $(window).resize(function() {
   window_width = $(window).width();
   filter("recorders", "new", size_setup_form);
   filter("recorders", "show", resize_windowful);
-  filter("recorders", "show", size_cover_view);
+  //filter("recorders", "show", size_cover_view);
   filter("recorders", "edit", affix_change);
   deploy_loading();
   size_modal_window();

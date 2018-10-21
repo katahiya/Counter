@@ -12,9 +12,9 @@
           <%= @recorder.title %>
         </h2>
         <div>
-          <%= link_to sanitize('<span class="glyphicon glyphicon-stats" aria-hidden="true"</sapn>'),
+          <%= link_to sanitize('<i class="material-icons fab-icon">pie_chart</i>'),
                       graph_path(@recorder), class: "graph_path" %>
-          <%= link_to sanitize('<span class="glyphicon glyphicon-cog" aria-hidden="true"</sapn>'),
+          <%= link_to sanitize('<i class="material-icons fab-icon">settings</i>'),
                       edit_recorder_path(@recorder) %>
         </div>
       </div>
@@ -31,10 +31,35 @@
 </a>
 -->
 
+<!--
 <div class="fab">
   <%= link_to "", new_recorder_recordability_path(@recorder),
     class: "fab-background ajax-cover-open fab-expand z-depth-2 hoverable", remote: true %>
   <i class="material-icons fab-icon">add</i>
 </div>
+-->
 
+<div class="toolbar-container">
+  <div class="container">
+    <div class="row">
+      <div class="toolbar-fixed">
+      <ul>
+        <li><%= link_to sanitize('<i class="material-icons fab-icon">add_circle</i>'),
+                "#" %></li>
+        <li><%= link_to sanitize('<i class="material-icons fab-icon">edit</i>'),
+                "#" %></li>
+        <li><%= link_to sanitize('<i class="material-icons fab-icon">delete</i>'),
+                "#" %></li>
+        <li><%= link_to sanitize('<i class="material-icons fab-icon">check_all</i>'),
+                "#" %></li>
+        <li><%= link_to sanitize('<i class="material-icons fab-icon">clear_all</i>'),
+                "#" %></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <div class="cover-view"></div>
+-->
