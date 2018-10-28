@@ -215,12 +215,13 @@ var resize_records_table = function(base) {
 
 var initialize_materialize = function() {
   //materialize sidenav
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
   $(document).ready(function(){
     $('.sidenav').sidenav();
+  });
+
+  //materialize modal
+  $(document).ready(function(){
+    $('.modal').modal();
   });
 };
 

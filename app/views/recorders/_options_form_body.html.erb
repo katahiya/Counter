@@ -1,0 +1,15 @@
+<div class="modal-content">
+  <% @recorder.options.zip(new_fields_for(f, :records)).each do |option, fr| %>
+    <div class="select-count">
+      <div class="form-group">
+        <%= fr.label :count, option.name, class: "label-xs" %>
+        <%= fr.select :count, options_for_select([*0..25]) %>
+        <%= fr.hidden_field :option_id, value: option.id %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="modal-footer">
+  <div class="modal-close waves-effect btn-flat">キャンセル</div>
+  <%= f.submit recorder_recordabilities_path(@recorder), class: "modal-close waves-effect btn-flat" %>
+</div>

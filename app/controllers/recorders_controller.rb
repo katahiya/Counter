@@ -22,6 +22,9 @@ class RecordersController < ApplicationController
   def show
     @recordabilities = @recorder.recordabilities.all
     @recordability = @recorder.recordabilities.build
+    @recorder.options.count.times do
+      @recordability.records.build
+    end
   end
 
   def create

@@ -42,24 +42,25 @@
 <div class="toolbar-container">
   <div class="container">
     <div class="row">
-      <div class="toolbar-fixed">
+      <div class="toolbar-fixed z-depth-2">
       <ul>
-        <li><%= link_to sanitize('<i class="material-icons fab-icon">add_circle</i>'),
-                "#" %></li>
-        <li><%= link_to sanitize('<i class="material-icons fab-icon">edit</i>'),
-                "#" %></li>
-        <li><%= link_to sanitize('<i class="material-icons fab-icon">delete</i>'),
-                "#" %></li>
-        <li><%= link_to sanitize('<i class="material-icons fab-icon">check_all</i>'),
-                "#" %></li>
-        <li><%= link_to sanitize('<i class="material-icons fab-icon">clear_all</i>'),
-                "#" %></li>
+        <li >
+          <%= link_to sanitize('<i class="material-icons toolbar-icon">add</i>'),
+                      "#modal-options-form", class: "modal-trigger waves-effect waves-light" %>
+        </li>
+        <li class="waves-effect waves-light"><i class="material-icons toolbar-icon">edit</i></li>
+        <li class="waves-effect waves-light"><i class="material-icons toolbar-icon">delete</i></li>
+        <li class="waves-effect waves-light"><i class="material-icons toolbar-icon">check_all</i></li>
+        <li class="waves-effect waves-light"><i class="material-icons toolbar-icon">clear_all</i></li>
       </ul>
       </div>
     </div>
   </div>
 </div>
 
+<div id="modal-options-form" class="modal">
+  <%= render 'options_form' %>
+</div>
 <!--
 <div class="cover-view"></div>
 -->
