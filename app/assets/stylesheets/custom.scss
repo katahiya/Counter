@@ -3,8 +3,8 @@ $primary-color: color("light-blue", "lighten-2") !default;
 $secondary-color: color("indigo", "accent-3") !default;
 @import "materialize";
 @import "material_icons";
-@import "remodal-default-theme";
-@import "remodal";
+@import "owl/owl.carousel";
+@import 'owl/owl.theme.default';
 
 /*universal*/
 $fab-background-size: 56px;

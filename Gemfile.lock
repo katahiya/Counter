@@ -146,6 +146,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    owlcarousel2-rails (2.2.1)
     pg (0.18.4)
     poltergeist (1.14.0)
       capybara (~> 2.1)
@@ -194,7 +195,6 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
-    remodal-rails (1.1.1)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -288,13 +288,13 @@ DEPENDENCIES
   material_icons
   materialize-sass (~> 1.0.0)
   minitest-reporters (= 1.1.9)
+  owlcarousel2-rails
   pg (= 0.18.4)
   poltergeist
   puma (= 3.4.0)
   rack_session_access
   rails (= 5.0.0.1)
   rails-controller-testing (= 0.1.1)
-  remodal-rails
   rspec-rails
   sass-rails (= 5.0.6)
   selenium-webdriver

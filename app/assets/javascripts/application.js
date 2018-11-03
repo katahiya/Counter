@@ -13,13 +13,23 @@
 //= require jquery
 //= require jquery_ujs
 //= require cocoon
-//= require remodal
+//= require owl/owl.carousel
+//= require owl/owl.navigation
 //= require turbolinks
 //= require materialize
 //= require_tree .
 
 $(function() {
   initialize_materialize();
+
+  $(document).ready(function(){
+    $(".owl-carousel").owlCarousel({
+      loop: true,
+      nav: true,
+      items: 1
+    });
+  });
+
   //checkbox
   $(document).on('click', '.check_all', function(){
     $('input[name="ids[]"]').prop('checked', true);

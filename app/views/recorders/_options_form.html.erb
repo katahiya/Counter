@@ -1,7 +1,21 @@
+<div class="owl-carousel owl-theme">
+  <div> Your Content1 </div>
+  <div> Your Content2 </div>
+  <div> Your Content3 </div>
+  <div> Your Content4 </div>
+  <div> Your Content5 </div>
+</div>
+<!--
 <%= form_for(@recorder, url: recorder_recordabilities_path(@recorder),
   method: :post, remote: true) do |f| %>
   <%= f.fields_for @recordability do |fr| %>
-    <%= render 'options_form_body', f: fr %>
+    <div class="owl-carousel">
+      <% (@recorder.options.count / 6).ceil.times do |i| %>
+        <div>
+          <%= render 'options_form_body', f: fr %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 <% end %>
-
+-->
