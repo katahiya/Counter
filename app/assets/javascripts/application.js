@@ -20,16 +20,6 @@
 //= require_tree .
 
 $(function() {
-  initialize_materialize();
-
-  $(document).ready(function(){
-    $(".owl-carousel").owlCarousel({
-      loop: true,
-      nav: true,
-      items: 1
-    });
-  });
-
   //checkbox
   $(document).on('click', '.check_all', function(){
     $('input[name="ids[]"]').prop('checked', true);
@@ -88,13 +78,11 @@ $(function() {
 
   //ajax cover click
   $(document).on('click', '.ajax-cover-open', function(){
-    console.log('test activate');
     $('body').addClass('cover-open');
     $('.cover-view.first-focus').focus();
     //$('.cover-view').css("bottom", "0px");
   });
   $(document).on('click', '.ajax-cover-close', function(){
-    console.log('test close');
     $('body').removeClass('cover-open');
     //$('.cover-view').css("bottom", window_height + "px");
   });
@@ -126,6 +114,8 @@ var window_height;
 var window_height;
 
 $(document).on('turbolinks:load', function(){
+  initialize_vendors();
+
   window_height = $(window).height();
   window_width = $(window).width();
   //resize section by window height
@@ -135,6 +125,10 @@ $(document).on('turbolinks:load', function(){
   filter("recorders", "edit", affix_change);
   deploy_loading();
   size_modal_window();
+});
+
+$(document).on('turbolinks:visit', function(){
+  reload_vendors();
 });
 
 $(window).resize(function() {
@@ -223,16 +217,47 @@ var resize_records_table = function(base) {
   $('.record-count').css("max-width", table_width*0.1 + "px");
 }
 
-var initialize_materialize = function() {
+var initialize_vendors = function() {
+  console.log('initialize vendors');
   //materialize sidenav
-  $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
+  elem = document.querySelector('.sidenav');
+  instance = new M.Sidenav(elem, {});
 
   //materialize modal
-  $(document).ready(function(){
-    $('.modal').modal();
+  modal_open_end = function() {
+    $('button.owl-dot.active').trigger('click');
+    $('.modal-focused').focus();
+  };
+  modal_options = {
+    onOpenEnd: modal_open_end
+  }
+  elem = document.querySelector('.modal');
+  instance = new M.Modal(elem, modal_options);
+
+  //owl carousel2
+  $(".owl-carousel").owlCarousel({
+    loop: true,
+    nav: true,
+    items: 1
   });
+};
+
+var reload_vendors = function() {
+  console.log('reload vendors');
+  //materialize sidenav
+  elem = document.querySelector('.sidenav');
+  instance = M.Sidenav.getInstance(elem);
+  if(instance){
+    console.log('.sidenav');
+    instance.destroy();
+  }
+  //materialize modal
+  elem = document.querySelector('.modal');
+  instance = M.Modal.getInstance(elem);
+  if(instance){
+    console.log('.modal');
+    instance.destroy();
+  }
 };
 
 var size_modal_window = function() {
