@@ -2,16 +2,16 @@
   method: :post, remote: true) do |f| %>
   <%= f.fields_for @recordability do |fr| %>
     <div class="modal-content">
-      <ul class="owl-carousel owl-theme modal-focused">
+      <div class="modal-close modal-close-icon"><i class="material-icons toolbar-icon">close</i></div>
+      <ul class="owl-carousel owl-theme modal-main">
         <% @recorder.options.zip(new_fields_for(fr, :records)).each_slice(6) do |items| %>
           <li>
-            <%= render 'options_form_body', items: items %>
+            <%= render 'options_form_main', items: items %>
           </li>
         <% end %>
       </ul>
     </div>
     <div class="modal-footer">
-      <div class="modal-close waves-effect btn-flat">キャンセル</div>
       <%= f.submit recorder_recordabilities_path(@recorder), class: "modal-close waves-effect btn-flat" %>
     </div>
   <% end %>

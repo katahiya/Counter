@@ -8,7 +8,7 @@ $secondary-color: color("indigo", "accent-3") !default;
 
 /*universal*/
 $fab-background-size: 56px;
-$fab-icon-size: 24px;
+$icon-size: 24px;
 $gray-medium-light: #eaeaea;
 
 @mixin box_sizing {
@@ -657,10 +657,10 @@ input:enabled.plural_action_button {
     pointer-events: none;
     color: #FFF;
     position: fixed;
-    height: $fab-icon-size;
-    width: $fab-icon-size;
-    right: $fab-background-size - $fab-icon-size/2;
-    bottom: $fab-background-size - $fab-icon-size/2;
+    height: $icon-size;
+    width: $icon-size;
+    right: $fab-background-size - $icon-size/2;
+    bottom: $fab-background-size - $icon-size/2;
     transition: opacity 0.3s ease-in-out;
   }
 }
@@ -703,4 +703,39 @@ input:enabled.plural_action_button {
 
 .toolbar-fixed.active > a i {
   opacity: 0;
+}
+
+
+//modal window
+.modal-content {
+  .modal-close-icon  {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .modal-main {
+    padding-top: 30px;
+  }
+}
+
+
+//options form
+$count-btn-size: 52px;
+#modal-options-form {
+  .count-buttons {
+    display: inline-block;
+    text-align: center;
+    .side-btn {
+      height: $count-btn-size;
+      cursor: pointer;
+      .material-icons {
+        pointer-events: none;
+        padding-top: ($count-btn-size - $icon-size) / 2;
+      }
+    }
+    .count-btn {
+      height: $count-btn-size;
+      width: $count-btn-size;
+    }
+  }
 }

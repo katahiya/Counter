@@ -1,9 +1,0 @@
-<% items.each do |option, fr| %>
-  <div class="select-count">
-    <div class="form-group">
-      <%= fr.label :count, option.name, class: "label-xs" %>
-      <%= fr.select :count, options_for_select([*0..25]) %>
-      <%= fr.hidden_field :option_id, value: option.id %>
-    </div>
-  </div>
-<% end %>

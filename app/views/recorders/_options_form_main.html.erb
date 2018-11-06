@@ -1,0 +1,8 @@
+<% items.each do |option, fr| %>
+  <div class="input-field count-select">
+    <%= fr.label :count, option.name, class: "label-xs" %>
+    <%= render 'count_buttons', option: option %>
+    <%= fr.hidden_field :count, value: 0 %>
+    <%= fr.hidden_field :option_id, value: option.id %>
+  </div>
+<% end %>

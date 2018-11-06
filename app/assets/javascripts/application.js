@@ -251,6 +251,7 @@ var reload_vendors = function() {
     console.log('.sidenav');
     instance.destroy();
   }
+
   //materialize modal
   elem = document.querySelector('.modal');
   instance = M.Modal.getInstance(elem);
