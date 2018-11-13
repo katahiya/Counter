@@ -20,6 +20,15 @@
 //= require_tree .
 
 $(function() {
+  //options-form
+  $(document).on('click', '.options-form-trigger', function(){
+    $('[class^=form-option-]').each(function(i, elem) {
+      console.log(i + $(elem).attr("class"));
+      hidden_count = $(elem).find(".hidden-count").val();
+      $(elem).find(".count").text(hidden_count);
+    });
+  });
+
   //checkbox
   $(document).on('click', '.check_all', function(){
     $('input[name="ids[]"]').prop('checked', true);

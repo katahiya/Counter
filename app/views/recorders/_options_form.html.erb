@@ -4,9 +4,9 @@
     <div class="modal-content">
       <div class="modal-close modal-close-icon"><i class="material-icons toolbar-icon">close</i></div>
       <ul class="owl-carousel owl-theme modal-main">
-        <% @recorder.options.zip(new_fields_for(fr, :records)).each_slice(6) do |items| %>
+        <% @recorder.options.zip(new_fields_for(fr, :records)).each_slice(6).with_index do |items, i| %>
           <li>
-            <%= render 'options_form_main', items: items %>
+            <%= render 'options_form_main', items: items, i: i %>
           </li>
         <% end %>
       </ul>
